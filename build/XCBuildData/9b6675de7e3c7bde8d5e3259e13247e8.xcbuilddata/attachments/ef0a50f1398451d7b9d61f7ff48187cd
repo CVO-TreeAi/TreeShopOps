@@ -1,0 +1,108 @@
+{
+  "" : {
+    "diagnostics" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/TreeShopOps-master.dia",
+    "emit-module-dependencies" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/TreeShopOps-master-emit-module.d",
+    "emit-module-diagnostics" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/TreeShopOps-master-emit-module.dia",
+    "swift-dependencies" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/TreeShopOps-master.swiftdeps"
+  },
+  "/Users/ain/TreeShopOps/TreeShopOps/AddEditCustomerView.swift" : {
+    "const-values" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/AddEditCustomerView.swiftconstvalues",
+    "dependencies" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/AddEditCustomerView.d",
+    "diagnostics" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/AddEditCustomerView.dia",
+    "index-unit-output-path" : "/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/AddEditCustomerView.o",
+    "llvm-bc" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/AddEditCustomerView.bc",
+    "object" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/AddEditCustomerView.o",
+    "swift-dependencies" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/AddEditCustomerView.swiftdeps",
+    "swiftmodule" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/AddEditCustomerView~partial.swiftmodule"
+  },
+  "/Users/ain/TreeShopOps/TreeShopOps/ContentView.swift" : {
+    "const-values" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/ContentView.swiftconstvalues",
+    "dependencies" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/ContentView.d",
+    "diagnostics" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/ContentView.dia",
+    "index-unit-output-path" : "/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/ContentView.o",
+    "llvm-bc" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/ContentView.bc",
+    "object" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/ContentView.o",
+    "swift-dependencies" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/ContentView.swiftdeps",
+    "swiftmodule" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/ContentView~partial.swiftmodule"
+  },
+  "/Users/ain/TreeShopOps/TreeShopOps/CustomerDetailView.swift" : {
+    "const-values" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/CustomerDetailView.swiftconstvalues",
+    "dependencies" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/CustomerDetailView.d",
+    "diagnostics" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/CustomerDetailView.dia",
+    "index-unit-output-path" : "/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/CustomerDetailView.o",
+    "llvm-bc" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/CustomerDetailView.bc",
+    "object" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/CustomerDetailView.o",
+    "swift-dependencies" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/CustomerDetailView.swiftdeps",
+    "swiftmodule" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/CustomerDetailView~partial.swiftmodule"
+  },
+  "/Users/ain/TreeShopOps/TreeShopOps/CustomerListView.swift" : {
+    "const-values" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/CustomerListView.swiftconstvalues",
+    "dependencies" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/CustomerListView.d",
+    "diagnostics" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/CustomerListView.dia",
+    "index-unit-output-path" : "/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/CustomerListView.o",
+    "llvm-bc" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/CustomerListView.bc",
+    "object" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/CustomerListView.o",
+    "swift-dependencies" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/CustomerListView.swiftdeps",
+    "swiftmodule" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/CustomerListView~partial.swiftmodule"
+  },
+  "/Users/ain/TreeShopOps/TreeShopOps/CustomerModel.swift" : {
+    "const-values" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/CustomerModel.swiftconstvalues",
+    "dependencies" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/CustomerModel.d",
+    "diagnostics" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/CustomerModel.dia",
+    "index-unit-output-path" : "/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/CustomerModel.o",
+    "llvm-bc" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/CustomerModel.bc",
+    "object" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/CustomerModel.o",
+    "swift-dependencies" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/CustomerModel.swiftdeps",
+    "swiftmodule" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/CustomerModel~partial.swiftmodule"
+  },
+  "/Users/ain/TreeShopOps/TreeShopOps/MainTabView.swift" : {
+    "const-values" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/MainTabView.swiftconstvalues",
+    "dependencies" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/MainTabView.d",
+    "diagnostics" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/MainTabView.dia",
+    "index-unit-output-path" : "/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/MainTabView.o",
+    "llvm-bc" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/MainTabView.bc",
+    "object" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/MainTabView.o",
+    "swift-dependencies" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/MainTabView.swiftdeps",
+    "swiftmodule" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/MainTabView~partial.swiftmodule"
+  },
+  "/Users/ain/TreeShopOps/TreeShopOps/PricingModel.swift" : {
+    "const-values" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/PricingModel.swiftconstvalues",
+    "dependencies" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/PricingModel.d",
+    "diagnostics" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/PricingModel.dia",
+    "index-unit-output-path" : "/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/PricingModel.o",
+    "llvm-bc" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/PricingModel.bc",
+    "object" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/PricingModel.o",
+    "swift-dependencies" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/PricingModel.swiftdeps",
+    "swiftmodule" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/PricingModel~partial.swiftmodule"
+  },
+  "/Users/ain/TreeShopOps/TreeShopOps/SettingsView.swift" : {
+    "const-values" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/SettingsView.swiftconstvalues",
+    "dependencies" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/SettingsView.d",
+    "diagnostics" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/SettingsView.dia",
+    "index-unit-output-path" : "/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/SettingsView.o",
+    "llvm-bc" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/SettingsView.bc",
+    "object" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/SettingsView.o",
+    "swift-dependencies" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/SettingsView.swiftdeps",
+    "swiftmodule" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/SettingsView~partial.swiftmodule"
+  },
+  "/Users/ain/TreeShopOps/TreeShopOps/TreeShopOpsApp.swift" : {
+    "const-values" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/TreeShopOpsApp.swiftconstvalues",
+    "dependencies" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/TreeShopOpsApp.d",
+    "diagnostics" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/TreeShopOpsApp.dia",
+    "index-unit-output-path" : "/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/TreeShopOpsApp.o",
+    "llvm-bc" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/TreeShopOpsApp.bc",
+    "object" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/TreeShopOpsApp.o",
+    "swift-dependencies" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/TreeShopOpsApp.swiftdeps",
+    "swiftmodule" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/TreeShopOpsApp~partial.swiftmodule"
+  },
+  "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/DerivedSources/GeneratedAssetSymbols.swift" : {
+    "const-values" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/GeneratedAssetSymbols.swiftconstvalues",
+    "dependencies" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/GeneratedAssetSymbols.d",
+    "diagnostics" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/GeneratedAssetSymbols.dia",
+    "index-unit-output-path" : "/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "llvm-bc" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/GeneratedAssetSymbols.bc",
+    "object" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "swift-dependencies" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/GeneratedAssetSymbols.swiftdeps",
+    "swiftmodule" : "/Users/ain/TreeShopOps/build/TreeShopOps.build/Debug-iphoneos/TreeShopOps.build/Objects-normal/arm64/GeneratedAssetSymbols~partial.swiftmodule"
+  }
+}
