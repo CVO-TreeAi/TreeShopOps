@@ -10,8 +10,8 @@ struct BusinessConfig: Codable {
     var logoIcon: String = "tree.fill"
     
     // Convex Integration Settings
-    var convexEnabled: Bool = false
-    var convexURL: String = ""
+    var convexEnabled: Bool = true
+    var convexURL: String = "https://content-lynx-725.convex.cloud"
     var convexEnvironment: ConvexEnvironment = .development
 }
 

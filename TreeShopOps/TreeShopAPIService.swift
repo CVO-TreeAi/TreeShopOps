@@ -53,13 +53,20 @@ class TreeShopAPIService: ObservableObject {
             "args": [:]
         ]
         
+        print("🌐 Fetching from: \(url.absoluteString)")
+        print("📤 Request body: \(queryBody)")
+        
         request.httpMethod = "POST"
         request.httpBody = try JSONSerialization.data(withJSONObject: queryBody)
         
         let (data, response) = try await session.data(for: request)
         
+        print("📥 Response status: \((response as? HTTPURLResponse)?.statusCode ?? -1)")
+        print("📥 Response data: \(String(data: data, encoding: .utf8) ?? "nil")")
+        
         guard let httpResponse = response as? HTTPURLResponse,
               httpResponse.statusCode == 200 else {
+            print("❌ Invalid response: \(response)")
             throw APIError.invalidResponse
         }
         
@@ -67,6 +74,7 @@ class TreeShopAPIService: ObservableObject {
         lastSyncTime = Date()
         isConnected = true
         
+        print("✅ Decoded \(apiResponse.result.count) leads successfully")
         return apiResponse.result
     }
     
@@ -322,13 +330,22 @@ class WebsiteLeadSyncManager: ObservableObject {
     }
     
     func startSync() {
+        // Immediate sync on startup
+        Task {
+            await manualSync()
+        }
+        
+        // Only start periodic sync if Convex is enabled
+        guard businessConfig.config.convexEnabled else {
+            syncError = "Website integration disabled. Enable in Business Configuration."
+            return
+        }
+        
         syncCancellable = apiService.startLeadSync()
             .sink(receiveValue: { [weak self] leads in
-                DispatchQueue.main.async {
-                    self?.websiteLeads = leads
-                    self?.isSyncing = false
-                    self?.syncError = nil
-                }
+                self?.websiteLeads = leads
+                self?.isSyncing = false
+                self?.syncError = nil
             })
     }
     
@@ -338,14 +355,24 @@ class WebsiteLeadSyncManager: ObservableObject {
     }
     
     func manualSync() async {
+        // Only sync if Convex is enabled
+        guard businessConfig.config.convexEnabled else {
+            syncError = "Website integration disabled. Enable in Business Configuration."
+            return
+        }
+        
         isSyncing = true
         syncError = nil
         
+        print("🔄 Starting manual sync from: \(businessConfig.config.convexURL)")
+        
         do {
             let leads = try await apiService.fetchLeads()
+            print("✅ Fetched \(leads.count) website leads")
             self.websiteLeads = leads
             self.isSyncing = false
         } catch {
+            print("❌ Sync error: \(error)")
             self.syncError = error.localizedDescription
             self.isSyncing = false
         }
