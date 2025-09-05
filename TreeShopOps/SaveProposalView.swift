@@ -93,7 +93,7 @@ struct SaveProposalView: View {
                 Text("Save Proposal")
             }
             .font(.headline)
-            .foregroundColor(.white)
+            .foregroundColor(.black)
             .frame(maxWidth: .infinity)
             .padding()
             .background(Color("TreeShopGreen"))

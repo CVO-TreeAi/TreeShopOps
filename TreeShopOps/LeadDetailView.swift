@@ -250,7 +250,7 @@ struct LeadDetailView: View {
                         Text("Convert to Proposal")
                     }
                     .font(.headline)
-                    .foregroundColor(.white)
+                    .foregroundColor(.black)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 16)
                     .background(Color("TreeShopGreen"))

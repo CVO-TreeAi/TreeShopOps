@@ -281,7 +281,7 @@ struct WorkOrderDetailView: View {
                         Text("Start Work")
                     }
                     .font(.headline)
-                    .foregroundColor(.white)
+                    .foregroundColor(.black)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 16)
                     .background(Color("TreeShopGreen"))
@@ -296,7 +296,7 @@ struct WorkOrderDetailView: View {
                         Text("Mark Complete")
                     }
                     .font(.headline)
-                    .foregroundColor(.white)
+                    .foregroundColor(.black)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 16)
                     .background(Color("TreeShopGreen"))
@@ -311,7 +311,7 @@ struct WorkOrderDetailView: View {
                         Text("Create Invoice")
                     }
                     .font(.headline)
-                    .foregroundColor(.white)
+                    .foregroundColor(.black)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 16)
                     .background(Color("TreeShopGreen"))

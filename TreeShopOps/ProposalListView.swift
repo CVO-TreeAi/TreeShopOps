@@ -174,7 +174,7 @@ struct ProposalListView: View {
                         Text("Create Proposal")
                     }
                     .font(.headline)
-                    .foregroundColor(.white)
+                    .foregroundColor(.black)
                     .padding(.horizontal, 24)
                     .padding(.vertical, 12)
                     .background(Color("TreeShopGreen"))

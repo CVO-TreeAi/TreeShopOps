@@ -337,7 +337,7 @@ struct InvoiceDetailView: View {
                         Text("Record Payment")
                     }
                     .font(.headline)
-                    .foregroundColor(.white)
+                    .foregroundColor(.black)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 16)
                     .background(Color("TreeShopGreen"))
@@ -549,7 +549,7 @@ struct RecordPaymentView: View {
                     Button(action: recordPayment) {
                         Text("Record Payment")
                             .font(.headline)
-                            .foregroundColor(.white)
+                            .foregroundColor(.black)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 16)
                             .background(Color("TreeShopGreen"))

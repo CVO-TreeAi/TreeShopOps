@@ -283,7 +283,7 @@ struct ProposalDetailView: View {
                         Text("Send Proposal")
                     }
                     .font(.headline)
-                    .foregroundColor(.white)
+                    .foregroundColor(.black)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 16)
                     .background(Color("TreeShopGreen"))
