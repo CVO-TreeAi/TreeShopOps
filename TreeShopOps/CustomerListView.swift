@@ -2,10 +2,10 @@ import SwiftUI
 
 struct CustomerListView: View {
     @EnvironmentObject var customerManager: CustomerManager
+    @State private var searchText = ""
     @State private var showingAddCustomer = false
     @State private var selectedCustomer: Customer? = nil
     @State private var showingCustomerDetail = false
-    @State private var showingFilters = false
     
     var onCustomerSelected: ((Customer) -> Void)? = nil
     @Environment(\.presentationMode) var presentationMode
@@ -14,180 +14,273 @@ struct CustomerListView: View {
         self.onCustomerSelected = onCustomerSelected
     }
     
+    var filteredCustomers: [Customer] {
+        let customers = customerManager.searchCustomers(searchText)
+        return customers.sorted { $0.lastUpdated > $1.lastUpdated }
+    }
+    
     var body: some View {
-        GeometryReader { geometry in
-            ZStack {
-                // Dynamic gradient background (reusing existing pattern)
-                backgroundGradient
+        ZStack {
+            Color("TreeShopBlack").ignoresSafeArea()
+            
+            VStack(spacing: 0) {
+                // Header with stats
+                headerSection
                 
-                ScrollView(showsIndicators: false) {
-                    LazyVStack(spacing: 0) {
-                        // Floating header
-                        floatingHeader
-                        
-                        // Main content
-                        VStack(spacing: 20) {
-                            searchAndFiltersCard
-                            customerStatsCard
-                            customersListCard
-                        }
-                        .padding(.horizontal, 16)
-                        .padding(.bottom, 30)
-                    }
-                }
-                .onTapGesture {
-                    hideKeyboard()
-                }
+                // Customers list
+                customersList
             }
         }
-        .ignoresSafeArea(.container, edges: .top)
+        .navigationTitle("Customers")
+        .navigationBarTitleDisplayMode(.large)
+        .navigationBarItems(
+            trailing: Button(action: {
+                showingAddCustomer = true
+            }) {
+                Image(systemName: "plus.circle.fill")
+                    .font(.title2)
+                    .foregroundColor(Color("TreeShopGreen"))
+            }
+        )
         .sheet(isPresented: $showingAddCustomer) {
             AddEditCustomerView(customerManager: customerManager)
                 .environmentObject(customerManager)
         }
-        .sheet(item: $selectedCustomer) { customer in
-            CustomerDetailView(customer: customer, customerManager: customerManager)
+        .sheet(isPresented: $showingCustomerDetail) {
+            if let customer = selectedCustomer {
+                CustomerDetailView(customer: customer, customerManager: customerManager)
+            }
         }
-        .actionSheet(isPresented: $showingFilters) {
-            ActionSheet(
-                title: Text("Filter Customers"),
-                buttons: filterActionButtons()
-            )
-        }
+        .searchable(text: $searchText, prompt: "Search customers...")
     }
     
-    // MARK: - Background (reusing existing pattern)
-    private var backgroundGradient: some View {
-        ZStack {
-            LinearGradient(
-                colors: [
-                    Color.black,
-                    Color(red: 0.05, green: 0.05, blue: 0.1),
-                    Color(red: 0.1, green: 0.15, blue: 0.05),
-                    Color.black
-                ],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-            
-            Circle()
-                .fill(Color(red: 0.2, green: 0.5, blue: 0.2).opacity(0.1))
-                .frame(width: 200, height: 200)
-                .offset(x: -100, y: -150)
-                .blur(radius: 60)
-            
-            Circle()
-                .fill(Color(red: 0.1, green: 0.7, blue: 0.3).opacity(0.08))
-                .frame(width: 300, height: 300)
-                .offset(x: 150, y: 300)
-                .blur(radius: 80)
-        }
-    }
-    
-    // MARK: - Floating Header (reusing existing pattern)
-    private var floatingHeader: some View {
-        HStack {
-            HStack(spacing: 8) {
-                ZStack {
-                    Circle()
-                        .fill(
-                            LinearGradient(
-                                colors: [Color("TreeShopGreen"), Color(red: 0.1, green: 0.5, blue: 0.2)],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            )
-                        )
-                        .frame(width: 32, height: 32)
-                    
-                    Image(systemName: "person.2.fill")
-                        .font(.system(size: 14, weight: .semibold))
-                        .foregroundColor(.white)
-                }
-                
-                Text(onCustomerSelected != nil ? "Select Customer" : "Customers")
-                    .font(.system(size: 16, weight: .semibold, design: .rounded))
-                    .foregroundColor(.white)
-            }
-            
-            Spacer()
-            
-            // Filter button
-            Button(action: {
-                showingFilters = true
-                let impactFeedback = UIImpactFeedbackGenerator(style: .light)
-                impactFeedback.impactOccurred()
-            }) {
-                ZStack {
-                    Circle()
-                        .fill(Color.white.opacity(0.1))
-                        .frame(width: 40, height: 40)
-                        .background(.ultraThinMaterial, in: Circle())
-                    
-                    Image(systemName: "line.3.horizontal.decrease.circle")
-                        .font(.system(size: 16, weight: .medium))
-                        .foregroundColor(.white)
-                }
-            }
-            .buttonStyle(ScaleButtonStyle())
-            
-            // Add customer button
-            Button(action: {
-                showingAddCustomer = true
-                let impactFeedback = UIImpactFeedbackGenerator(style: .light)
-                impactFeedback.impactOccurred()
-            }) {
-                ZStack {
-                    Circle()
-                        .fill(Color("TreeShopGreen"))
-                        .frame(width: 40, height: 40)
-                    
-                    Image(systemName: "plus")
-                        .font(.system(size: 16, weight: .medium))
-                        .foregroundColor(.white)
-                }
-            }
-            .buttonStyle(ScaleButtonStyle())
-        }
-        .padding(.horizontal, 20)
-        .padding(.top, 60)
-        .padding(.bottom, 20)
-    }
-    
-    // MARK: - Search and Filters Card
-    private var searchAndFiltersCard: some View {
+    private var headerSection: some View {
         VStack(spacing: 16) {
-            HStack {
-                HStack(spacing: 10) {
-                    Image(systemName: "magnifyingglass")
-                        .font(.system(size: 16, weight: .medium))
-                        .foregroundColor(Color("TreeShopGreen"))
-                    
-                    Text("Search & Filter")
-                        .font(.system(size: 18, weight: .semibold, design: .rounded))
-                        .foregroundColor(.white)
+            // Stats cards
+            HStack(spacing: 12) {
+                CustomerStatCard(
+                    title: "Total",
+                    value: "\(customerManager.customers.count)",
+                    icon: "person.2.fill",
+                    color: .gray
+                )
+                
+                CustomerStatCard(
+                    title: "Active",
+                    value: "\(customerManager.getCustomersByType(.residential).count)",
+                    icon: "house.fill",
+                    color: Color("TreeShopBlue")
+                )
+                
+                CustomerStatCard(
+                    title: "Commercial",
+                    value: "\(customerManager.getCustomersByType(.commercial).count)",
+                    icon: "building.2.fill",
+                    color: Color("TreeShopGreen")
+                )
+                
+                CustomerStatCard(
+                    title: "Projects",
+                    value: "\(customerManager.customers.reduce(0) { $0 + $1.projects.count })",
+                    icon: "hammer.fill",
+                    color: .orange
+                )
+            }
+            .padding(.horizontal, 20)
+        }
+        .padding(.top, 20)
+    }
+    
+    private var customersList: some View {
+        ScrollView {
+            LazyVStack(spacing: 12) {
+                if filteredCustomers.isEmpty {
+                    emptyStateView
+                } else {
+                    ForEach(filteredCustomers) { customer in
+                        CustomerRowView(customer: customer) {
+                            if let onSelect = onCustomerSelected {
+                                onSelect(customer)
+                                presentationMode.wrappedValue.dismiss()
+                            } else {
+                                selectedCustomer = customer
+                                showingCustomerDetail = true
+                            }
+                        }
+                        .contextMenu {
+                            Button(action: {
+                                selectedCustomer = customer
+                                showingAddCustomer = true
+                            }) {
+                                Label("Edit", systemImage: "pencil")
+                            }
+                            
+                            Button(role: .destructive, action: {
+                                withAnimation(.spring()) {
+                                    customerManager.deleteCustomer(customer)
+                                }
+                            }) {
+                                Label("Delete", systemImage: "trash")
+                            }
+                        }
+                    }
                 }
+            }
+            .padding(.horizontal, 20)
+            .padding(.bottom, 100)
+        }
+    }
+    
+    private var emptyStateView: some View {
+        VStack(spacing: 20) {
+            Image(systemName: "person.2.badge.plus")
+                .font(.system(size: 60))
+                .foregroundColor(.gray)
+            
+            VStack(spacing: 8) {
+                Text("No Customers Found")
+                    .font(.title2)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.white)
+                
+                Text(searchText.isEmpty ? "Add your first customer to get started" : "No customers match your search")
+                    .font(.body)
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.center)
+            }
+            
+            if searchText.isEmpty {
+                Button(action: {
+                    showingAddCustomer = true
+                }) {
+                    HStack {
+                        Image(systemName: "plus.circle.fill")
+                        Text("Add Customer")
+                    }
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .padding(.horizontal, 24)
+                    .padding(.vertical, 12)
+                    .background(Color("TreeShopGreen"))
+                    .cornerRadius(12)
+                }
+            }
+        }
+        .padding(.vertical, 60)
+    }
+}
+
+struct CustomerStatCard: View {
+    let title: String
+    let value: String
+    let icon: String
+    let color: Color
+    
+    var body: some View {
+        VStack(spacing: 8) {
+            HStack {
+                Image(systemName: icon)
+                    .font(.title3)
+                    .foregroundColor(color)
+                
                 Spacer()
             }
             
-            // Search field
-            HStack(spacing: 12) {
-                Image(systemName: "magnifyingglass")
-                    .font(.system(size: 14, weight: .medium))
-                    .foregroundColor(Color.white.opacity(0.6))
-                    .frame(width: 20)
-                
-                TextField("Search customers...", text: $customerManager.searchText)
-                    .font(.system(size: 16, weight: .medium))
+            VStack(alignment: .leading, spacing: 2) {
+                Text(value)
+                    .font(.title3)
+                    .fontWeight(.bold)
                     .foregroundColor(.white)
                 
-                if !customerManager.searchText.isEmpty {
-                    Button(action: {
-                        customerManager.searchText = ""
-                    }) {
-                        Image(systemName: "xmark.circle.fill")
-                            .font(.system(size: 14, weight: .medium))
-                            .foregroundColor(Color.white.opacity(0.6))
+                Text(title)
+                    .font(.caption)
+                    .foregroundColor(.gray)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        .padding(12)
+        .background(
+            RoundedRectangle(cornerRadius: 12)
+                .fill(Color.white.opacity(0.05))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 12)
+                        .stroke(Color.white.opacity(0.1), lineWidth: 1)
+                )
+        )
+    }
+}
+
+struct CustomerRowView: View {
+    let customer: Customer
+    let onTap: () -> Void
+    
+    var body: some View {
+        Button(action: onTap) {
+            VStack(alignment: .leading, spacing: 12) {
+                // Header row
+                HStack {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(customer.fullName.isEmpty ? "New Customer" : customer.fullName)
+                            .font(.headline)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.white)
+                            .lineLimit(1)
+                        
+                        if !customer.email.isEmpty {
+                            Text(customer.email)
+                                .font(.subheadline)
+                                .foregroundColor(.gray)
+                        }
                     }
+                    
+                    Spacer()
+                    
+                    VStack(alignment: .trailing, spacing: 4) {
+                        // Customer type badge
+                        HStack(spacing: 4) {
+                            Image(systemName: customer.customerType == .residential ? "house.fill" : "building.2.fill")
+                                .font(.caption)
+                            Text(customer.customerType.rawValue)
+                                .font(.caption)
+                                .fontWeight(.medium)
+                        }
+                        .foregroundColor(customer.customerType == .residential ? Color("TreeShopBlue") : Color("TreeShopGreen"))
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 4)
+                        .background(
+                            RoundedRectangle(cornerRadius: 6)
+                                .fill((customer.customerType == .residential ? Color("TreeShopBlue") : Color("TreeShopGreen")).opacity(0.2))
+                        )
+                        
+                        // Project count
+                        if customer.projects.count > 0 {
+                            Text("\(customer.projects.count) project\(customer.projects.count == 1 ? "" : "s")")
+                                .font(.caption)
+                                .foregroundColor(.gray)
+                        }
+                    }
+                }
+                
+                // Details row
+                HStack {
+                    if !customer.phone.isEmpty {
+                        Label(customer.phone, systemImage: "phone.fill")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                    }
+                    
+                    if !customer.city.isEmpty && !customer.state.isEmpty {
+                        Label("\(customer.city), \(customer.state)", systemImage: "location.fill")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                    }
+                    
+                    Spacer()
+                    
+                    Label(customer.dateCreated.formatted(date: .abbreviated, time: .omitted), 
+                          systemImage: "calendar")
+                        .font(.caption)
+                        .foregroundColor(.gray)
                 }
             }
             .padding(16)
@@ -199,351 +292,33 @@ struct CustomerListView: View {
                             .stroke(Color.white.opacity(0.1), lineWidth: 1)
                     )
             )
-            
-            // Active filters display
-            if customerManager.selectedCustomerType != nil {
-                HStack {
-                    Text("Active Filters:")
-                        .font(.system(size: 12, weight: .medium))
-                        .foregroundColor(Color.white.opacity(0.7))
-                    
-                    if let selectedType = customerManager.selectedCustomerType {
-                        HStack(spacing: 4) {
-                            Text(selectedType.displayName)
-                                .font(.system(size: 12, weight: .medium))
-                                .foregroundColor(.white)
-                            
-                            Button(action: {
-                                customerManager.selectedCustomerType = nil
-                            }) {
-                                Image(systemName: "xmark")
-                                    .font(.system(size: 10, weight: .medium))
-                                    .foregroundColor(.white)
-                            }
-                        }
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 4)
-                        .background(
-                            RoundedRectangle(cornerRadius: 6)
-                                .fill(Color("TreeShopGreen").opacity(0.3))
-                        )
-                    }
-                    
-                    Spacer()
-                }
-            }
-        }
-        .padding(24)
-        .background(glassMorphismBackground)
-        .clipShape(RoundedRectangle(cornerRadius: 20))
-    }
-    
-    // MARK: - Customer Stats Card
-    private var customerStatsCard: some View {
-        VStack(spacing: 16) {
-            HStack {
-                HStack(spacing: 10) {
-                    Image(systemName: "chart.bar.fill")
-                        .font(.system(size: 16, weight: .medium))
-                        .foregroundColor(Color(red: 1.0, green: 0.76, blue: 0.03))
-                    
-                    Text("Customer Overview")
-                        .font(.system(size: 18, weight: .semibold, design: .rounded))
-                        .foregroundColor(.white)
-                }
-                Spacer()
-            }
-            
-            // Stats grid
-            HStack(spacing: 12) {
-                statBox(
-                    title: "Total",
-                    value: "\(customerManager.customers.count)",
-                    icon: "person.2.fill",
-                    color: Color("TreeShopGreen")
-                )
-                
-                statBox(
-                    title: "Projects",
-                    value: "\(customerManager.customers.reduce(0) { $0 + $1.totalProjects })",
-                    icon: "hammer.fill",
-                    color: Color(red: 1.0, green: 0.76, blue: 0.03)
-                )
-                
-                statBox(
-                    title: "Revenue",
-                    value: formatCurrency(customerManager.customers.reduce(0) { $0 + $1.totalRevenue }),
-                    icon: "dollarsign.circle.fill",
-                    color: Color(red: 0.0, green: 0.5, blue: 1.0)
-                )
-            }
-        }
-        .padding(24)
-        .background(glassMorphismBackground)
-        .clipShape(RoundedRectangle(cornerRadius: 20))
-    }
-    
-    // MARK: - Customers List Card
-    private var customersListCard: some View {
-        VStack(spacing: 16) {
-            HStack {
-                HStack(spacing: 10) {
-                    Image(systemName: "list.bullet")
-                        .font(.system(size: 16, weight: .medium))
-                        .foregroundColor(Color("TreeShopGreen"))
-                    
-                    Text("Customer List")
-                        .font(.system(size: 18, weight: .semibold, design: .rounded))
-                        .foregroundColor(.white)
-                }
-                
-                Spacer()
-                
-                Text("\(customerManager.filteredCustomers.count)")
-                    .font(.system(size: 14, weight: .semibold))
-                    .foregroundColor(Color.white.opacity(0.7))
-            }
-            
-            if customerManager.filteredCustomers.isEmpty {
-                emptyStateView
-            } else {
-                LazyVStack(spacing: 12) {
-                    ForEach(customerManager.filteredCustomers) { customer in
-                        customerRow(customer)
-                    }
-                }
-            }
-        }
-        .padding(24)
-        .background(glassMorphismBackground)
-        .clipShape(RoundedRectangle(cornerRadius: 20))
-    }
-    
-    // MARK: - Customer Row
-    private func customerRow(_ customer: Customer) -> some View {
-        Button(action: {
-            if let onCustomerSelected = onCustomerSelected {
-                // If we have a callback, use it and dismiss
-                onCustomerSelected(customer)
-                presentationMode.wrappedValue.dismiss()
-            } else {
-                // Otherwise, show customer detail
-                selectedCustomer = customer
-            }
-            let impactFeedback = UIImpactFeedbackGenerator(style: .light)
-            impactFeedback.impactOccurred()
-        }) {
-            HStack(spacing: 12) {
-                // Customer type icon
-                ZStack {
-                    Circle()
-                        .fill(customer.customerType.iconName == "house.fill" ? 
-                              Color("TreeShopGreen") : 
-                              Color(red: 1.0, green: 0.76, blue: 0.03))
-                        .frame(width: 40, height: 40)
-                    
-                    Image(systemName: customer.customerType.iconName)
-                        .font(.system(size: 16, weight: .medium))
-                        .foregroundColor(.white)
-                }
-                
-                VStack(alignment: .leading, spacing: 4) {
-                    HStack {
-                        Text(customer.fullName.isEmpty ? "No Name" : customer.fullName)
-                            .font(.system(size: 16, weight: .semibold))
-                            .foregroundColor(.white)
-                        
-                        Spacer()
-                        
-                        if customer.totalProjects > 0 {
-                            HStack(spacing: 4) {
-                                Image(systemName: "hammer.fill")
-                                    .font(.system(size: 10, weight: .medium))
-                                    .foregroundColor(Color(red: 1.0, green: 0.76, blue: 0.03))
-                                
-                                Text("\(customer.totalProjects)")
-                                    .font(.system(size: 12, weight: .semibold))
-                                    .foregroundColor(Color(red: 1.0, green: 0.76, blue: 0.03))
-                            }
-                        }
-                    }
-                    
-                    if !customer.email.isEmpty {
-                        Text(customer.email)
-                            .font(.system(size: 14, weight: .medium))
-                            .foregroundColor(Color.white.opacity(0.7))
-                    }
-                    
-                    HStack {
-                        if !customer.phone.isEmpty {
-                            Text(customer.phone)
-                                .font(.system(size: 12, weight: .medium))
-                                .foregroundColor(Color.white.opacity(0.6))
-                        }
-                        
-                        Spacer()
-                        
-                        if customer.totalRevenue > 0 {
-                            Text(formatCurrency(customer.totalRevenue))
-                                .font(.system(size: 12, weight: .semibold))
-                                .foregroundColor(Color("TreeShopGreen"))
-                        }
-                    }
-                }
-                
-                Image(systemName: "chevron.right")
-                    .font(.system(size: 12, weight: .medium))
-                    .foregroundColor(Color.white.opacity(0.4))
-            }
-            .padding(16)
-            .background(
-                RoundedRectangle(cornerRadius: 12)
-                    .fill(Color.white.opacity(0.03))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 12)
-                            .stroke(Color.white.opacity(0.1), lineWidth: 1)
-                    )
-            )
         }
         .buttonStyle(PlainButtonStyle())
     }
-    
-    // MARK: - Helper Views
-    private func statBox(title: String, value: String, icon: String, color: Color) -> some View {
-        VStack(spacing: 8) {
-            Image(systemName: icon)
-                .font(.system(size: 16, weight: .medium))
-                .foregroundColor(color)
-            
-            Text(value)
-                .font(.system(size: 16, weight: .bold, design: .rounded))
-                .foregroundColor(.white)
-            
-            Text(title)
-                .font(.system(size: 11, weight: .medium))
-                .foregroundColor(Color.white.opacity(0.7))
-        }
-        .frame(maxWidth: .infinity)
-        .padding(.vertical, 12)
-        .background(
-            RoundedRectangle(cornerRadius: 8)
-                .fill(Color.white.opacity(0.03))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(color.opacity(0.3), lineWidth: 1)
-                )
-        )
-    }
-    
-    private var emptyStateView: some View {
-        VStack(spacing: 16) {
-            Image(systemName: "person.2.slash")
-                .font(.system(size: 40, weight: .medium))
-                .foregroundColor(Color.white.opacity(0.4))
-            
-            Text("No customers found")
-                .font(.system(size: 16, weight: .semibold))
-                .foregroundColor(Color.white.opacity(0.7))
-            
-            if customerManager.customers.isEmpty {
-                Button(action: {
-                    showingAddCustomer = true
-                }) {
-                    HStack(spacing: 8) {
-                        Image(systemName: "plus.circle.fill")
-                        Text("Add Your First Customer")
-                    }
-                    .font(.system(size: 14, weight: .semibold))
-                    .foregroundColor(Color("TreeShopGreen"))
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 10)
-                    .background(
-                        RoundedRectangle(cornerRadius: 8)
-                            .fill(Color("TreeShopGreen").opacity(0.1))
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color("TreeShopGreen").opacity(0.3), lineWidth: 1)
-                            )
-                    )
-                }
-            }
-        }
-        .padding(.vertical, 32)
-    }
-    
-    // MARK: - Glassmorphism Background (reusing existing pattern)
-    private var glassMorphismBackground: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 20)
-                .fill(.ultraThinMaterial)
-            
-            RoundedRectangle(cornerRadius: 20)
-                .fill(
-                    LinearGradient(
-                        colors: [
-                            Color.white.opacity(0.05),
-                            Color.white.opacity(0.02),
-                            Color.black.opacity(0.05)
-                        ],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                )
-            
-            RoundedRectangle(cornerRadius: 20)
-                .stroke(
-                    LinearGradient(
-                        colors: [Color.white.opacity(0.2), Color.white.opacity(0.05)],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    ),
-                    lineWidth: 1
-                )
-        }
-    }
-    
-    // MARK: - Helper Functions
-    private func filterActionButtons() -> [ActionSheet.Button] {
-        var buttons: [ActionSheet.Button] = []
-        
-        buttons.append(.default(Text("All Customers")) {
-            customerManager.selectedCustomerType = nil
-        })
-        
-        for customerType in CustomerType.allCases {
-            buttons.append(.default(Text(customerType.displayName)) {
-                customerManager.selectedCustomerType = customerType
-            })
-        }
-        
-        buttons.append(.cancel())
-        return buttons
-    }
-    
-    private func formatCurrency(_ amount: Double) -> String {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
-        formatter.locale = Locale(identifier: "en_US")
-        formatter.maximumFractionDigits = 0
-        return formatter.string(from: NSNumber(value: amount)) ?? "$0"
-    }
-    
-    private func hideKeyboard() {
-        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-    }
 }
 
-// MARK: - Scale Button Style (reusing existing pattern)
-struct ScaleButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
-            .animation(.easeInOut(duration: 0.1), value: configuration.isPressed)
+// Extension for CustomerManager to support type filtering
+extension CustomerManager {
+    func searchCustomers(_ searchText: String) -> [Customer] {
+        if searchText.isEmpty {
+            return customers
+        }
+        return customers.filter { customer in
+            customer.fullName.localizedCaseInsensitiveContains(searchText) ||
+            customer.email.localizedCaseInsensitiveContains(searchText) ||
+            customer.phone.localizedCaseInsensitiveContains(searchText) ||
+            customer.city.localizedCaseInsensitiveContains(searchText)
+        }
+    }
+    
+    func getCustomersByType(_ type: CustomerType) -> [Customer] {
+        return customers.filter { $0.customerType == type }
     }
 }
 
 #Preview {
-    CustomerListView()
-        .environmentObject(CustomerManager())
-        .preferredColorScheme(.dark)
+    NavigationView {
+        CustomerListView()
+            .environmentObject(CustomerManager())
+    }
 }

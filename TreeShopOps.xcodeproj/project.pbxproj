@@ -29,6 +29,15 @@
 		2A039 /* LeadDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A040 /* LeadDetailView.swift */; };
 		2A041 /* WorkOrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A042 /* WorkOrderModel.swift */; };
 		2A043 /* InvoiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A044 /* InvoiceModel.swift */; };
+		2A045 /* WorkOrderListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A046 /* WorkOrderListView.swift */; };
+		2A047 /* AddEditWorkOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A048 /* AddEditWorkOrderView.swift */; };
+		2A049 /* WorkOrderDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A050 /* WorkOrderDetailView.swift */; };
+		2A051 /* InvoiceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A052 /* InvoiceListView.swift */; };
+		2A053 /* AddEditInvoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A054 /* AddEditInvoiceView.swift */; };
+		2A055 /* InvoiceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A056 /* InvoiceDetailView.swift */; };
+		2A057 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A058 /* UserProfileView.swift */; };
+		2A059 /* BusinessProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A060 /* BusinessProfileView.swift */; };
+		2A061 /* SettingsMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A062 /* SettingsMainView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +64,15 @@
 		2A040 /* LeadDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeadDetailView.swift; sourceTree = "<group>"; };
 		2A042 /* WorkOrderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkOrderModel.swift; sourceTree = "<group>"; };
 		2A044 /* InvoiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceModel.swift; sourceTree = "<group>"; };
+		2A046 /* WorkOrderListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkOrderListView.swift; sourceTree = "<group>"; };
+		2A048 /* AddEditWorkOrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditWorkOrderView.swift; sourceTree = "<group>"; };
+		2A050 /* WorkOrderDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkOrderDetailView.swift; sourceTree = "<group>"; };
+		2A052 /* InvoiceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceListView.swift; sourceTree = "<group>"; };
+		2A054 /* AddEditInvoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditInvoiceView.swift; sourceTree = "<group>"; };
+		2A056 /* InvoiceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceDetailView.swift; sourceTree = "<group>"; };
+		2A058 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
+		2A060 /* BusinessProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessProfileView.swift; sourceTree = "<group>"; };
+		2A062 /* SettingsMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMainView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +125,15 @@
 				2A040 /* LeadDetailView.swift */,
 				2A042 /* WorkOrderModel.swift */,
 				2A044 /* InvoiceModel.swift */,
+				2A046 /* WorkOrderListView.swift */,
+				2A048 /* AddEditWorkOrderView.swift */,
+				2A050 /* WorkOrderDetailView.swift */,
+				2A052 /* InvoiceListView.swift */,
+				2A054 /* AddEditInvoiceView.swift */,
+				2A056 /* InvoiceDetailView.swift */,
+				2A058 /* UserProfileView.swift */,
+				2A060 /* BusinessProfileView.swift */,
+				2A062 /* SettingsMainView.swift */,
 				2A006 /* Assets.xcassets */,
 				2A995 /* Preview Content */,
 			);
@@ -211,6 +238,15 @@
 				2A039 /* LeadDetailView.swift in Sources */,
 				2A041 /* WorkOrderModel.swift in Sources */,
 				2A043 /* InvoiceModel.swift in Sources */,
+				2A045 /* WorkOrderListView.swift in Sources */,
+				2A047 /* AddEditWorkOrderView.swift in Sources */,
+				2A049 /* WorkOrderDetailView.swift in Sources */,
+				2A051 /* InvoiceListView.swift in Sources */,
+				2A053 /* AddEditInvoiceView.swift in Sources */,
+				2A055 /* InvoiceDetailView.swift in Sources */,
+				2A057 /* UserProfileView.swift in Sources */,
+				2A059 /* BusinessProfileView.swift in Sources */,
+				2A061 /* SettingsMainView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

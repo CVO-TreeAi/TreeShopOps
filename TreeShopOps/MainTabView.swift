@@ -6,6 +6,7 @@ struct MainTabView: View {
     @StateObject private var workOrderManager = WorkOrderManager()
     @StateObject private var invoiceManager = InvoiceManager()
     @StateObject private var customerManager = CustomerManager()
+    @StateObject private var pricingModel = PricingModel()
     
     var body: some View {
         TabView {
@@ -53,6 +54,14 @@ struct MainTabView: View {
             }
             .tabItem {
                 Label("Customers", systemImage: "person.2.fill")
+            }
+            
+            // Settings Tab
+            NavigationView {
+                SettingsMainView(pricingModel: pricingModel)
+            }
+            .tabItem {
+                Label("Settings", systemImage: "gearshape.fill")
             }
         }
         .accentColor(Color("TreeShopGreen"))
