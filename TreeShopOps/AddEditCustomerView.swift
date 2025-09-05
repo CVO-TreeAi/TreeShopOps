@@ -387,7 +387,7 @@ struct AddEditCustomerView: View {
                                 )
                         )
                     }
-                    .buttonStyle(ScaleButtonStyle())
+                    .buttonStyle(PlainButtonStyle())
                 }
             }
         }
@@ -440,7 +440,7 @@ struct AddEditCustomerView: View {
                                 )
                         )
                     }
-                    .buttonStyle(ScaleButtonStyle())
+                    .buttonStyle(PlainButtonStyle())
                 }
             }
         }

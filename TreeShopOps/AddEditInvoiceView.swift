@@ -265,10 +265,10 @@ struct AddEditInvoiceView: View {
                                 .fill(Color.white.opacity(0.1))
                                 .stroke(Color.white.opacity(0.2), lineWidth: 1)
                         )
-                        .onChange(of: invoice.depositPaid) { isPaid in
-                            if isPaid && invoice.depositPaidDate == nil {
+                        .onChange(of: invoice.depositPaid) {
+                            if invoice.depositPaid && invoice.depositPaidDate == nil {
                                 invoice.depositPaidDate = Date()
-                            } else if !isPaid {
+                            } else if !invoice.depositPaid {
                                 invoice.depositPaidDate = nil
                             }
                         }
@@ -281,10 +281,10 @@ struct AddEditInvoiceView: View {
                                 .fill(Color.white.opacity(0.1))
                                 .stroke(Color.white.opacity(0.2), lineWidth: 1)
                         )
-                        .onChange(of: invoice.balancePaid) { isPaid in
-                            if isPaid && invoice.balancePaidDate == nil {
+                        .onChange(of: invoice.balancePaid) {
+                            if invoice.balancePaid && invoice.balancePaidDate == nil {
                                 invoice.balancePaidDate = Date()
-                            } else if !isPaid {
+                            } else if !invoice.balancePaid {
                                 invoice.balancePaidDate = nil
                             }
                         }
