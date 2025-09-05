@@ -61,24 +61,24 @@ struct WorkOrderListView: View {
         VStack(spacing: 16) {
             // Stats cards
             LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 12), count: 3), spacing: 12) {
-                WorkOrderStatCard(
+                StandardStatCard(
                     title: "Scheduled",
                     value: "\(workOrderManager.getWorkOrdersByStatus(.scheduled).count)",
-                    icon: "calendar.badge.clock",
+                    icon: "calendar",
                     color: Color("TreeShopBlue")
                 )
                 
-                WorkOrderStatCard(
+                StandardStatCard(
                     title: "In Progress",
                     value: "\(workOrderManager.getWorkOrdersByStatus(.inProgress).count)",
-                    icon: "gearshape.2.fill",
+                    icon: "gearshape.2",
                     color: .orange
                 )
                 
-                WorkOrderStatCard(
+                StandardStatCard(
                     title: "Completed",
                     value: "\(workOrderManager.getWorkOrdersByStatus(.completed).count)",
-                    icon: "checkmark.circle.fill",
+                    icon: "checkmark.circle",
                     color: Color("TreeShopGreen")
                 )
             }

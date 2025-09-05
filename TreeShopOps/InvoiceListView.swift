@@ -61,24 +61,24 @@ struct InvoiceListView: View {
         VStack(spacing: 16) {
             // Financial stats cards
             LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 12), count: 3), spacing: 12) {
-                InvoiceStatCard(
+                StandardStatCard(
                     title: "Revenue",
                     value: "$\(String(format: "%.0f", invoiceManager.getTotalRevenue()))",
-                    icon: "dollarsign.circle.fill",
+                    icon: "dollarsign.circle",
                     color: Color("TreeShopGreen")
                 )
                 
-                InvoiceStatCard(
+                StandardStatCard(
                     title: "Outstanding",
                     value: "$\(String(format: "%.0f", invoiceManager.getOutstandingAmount()))",
-                    icon: "clock.badge.exclamationmark.fill",
+                    icon: "clock.badge.exclamationmark",
                     color: .orange
                 )
                 
-                InvoiceStatCard(
+                StandardStatCard(
                     title: "Overdue",
                     value: "\(invoiceManager.getInvoicesByStatus(.overdue).count)",
-                    icon: "exclamationmark.triangle.fill",
+                    icon: "exclamationmark.triangle",
                     color: .red
                 )
             }

@@ -61,24 +61,24 @@ struct ProposalListView: View {
         VStack(spacing: 16) {
             // Stats cards
             LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 12), count: 3), spacing: 12) {
-                StatCard(
+                StandardStatCard(
                     title: "Total",
                     value: "\(proposalManager.proposals.count)",
-                    icon: "doc.text.fill",
+                    icon: "doc.text",
                     color: .gray
                 )
                 
-                StatCard(
+                StandardStatCard(
                     title: "Sent",
                     value: "\(proposalManager.getProposalsByStatus(.sent).count)",
-                    icon: "paperplane.fill",
+                    icon: "paperplane",
                     color: Color("TreeShopBlue")
                 )
                 
-                StatCard(
+                StandardStatCard(
                     title: "Accepted",
                     value: "\(proposalManager.getProposalsByStatus(.accepted).count)",
-                    icon: "checkmark.circle.fill",
+                    icon: "checkmark.circle",
                     color: Color("TreeShopGreen")
                 )
             }

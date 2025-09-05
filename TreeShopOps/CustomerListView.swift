@@ -58,31 +58,31 @@ struct CustomerListView: View {
         VStack(spacing: 16) {
             // Stats cards
             LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 12), count: 2), spacing: 12) {
-                CustomerStatCard(
+                StandardStatCard(
                     title: "Total Customers",
                     value: "\(customerManager.customers.count)",
-                    icon: "person.2.fill",
+                    icon: "person.2",
                     color: .gray
                 )
                 
-                CustomerStatCard(
+                StandardStatCard(
                     title: "Residential",
                     value: "\(customerManager.getCustomersByType(.residential).count)",
-                    icon: "house.fill",
+                    icon: "house",
                     color: Color("TreeShopBlue")
                 )
                 
-                CustomerStatCard(
+                StandardStatCard(
                     title: "Commercial",
                     value: "\(customerManager.getCustomersByType(.commercial).count)",
-                    icon: "building.2.fill",
+                    icon: "building.2",
                     color: Color("TreeShopGreen")
                 )
                 
-                CustomerStatCard(
+                StandardStatCard(
                     title: "Total Projects",
                     value: "\(customerManager.customers.reduce(0) { $0 + $1.projects.count })",
-                    icon: "hammer.fill",
+                    icon: "hammer",
                     color: .orange
                 )
             }

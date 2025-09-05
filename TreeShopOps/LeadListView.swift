@@ -61,24 +61,24 @@ struct LeadListView: View {
         VStack(spacing: 16) {
             // Stats cards
             LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 12), count: 3), spacing: 12) {
-                LeadStatCard(
+                StandardStatCard(
                     title: "Total",
                     value: "\(leadManager.leads.count)",
-                    icon: "person.fill",
+                    icon: "person",
                     color: .gray
                 )
                 
-                LeadStatCard(
+                StandardStatCard(
                     title: "New",
                     value: "\(leadManager.getLeadsByStatus(.new).count)",
-                    icon: "star.fill",
+                    icon: "star",
                     color: Color("TreeShopBlue")
                 )
                 
-                LeadStatCard(
+                StandardStatCard(
                     title: "Qualified",
                     value: "\(leadManager.getLeadsByStatus(.qualified).count)",
-                    icon: "checkmark.circle.fill",
+                    icon: "checkmark.circle",
                     color: Color("TreeShopGreen")
                 )
             }

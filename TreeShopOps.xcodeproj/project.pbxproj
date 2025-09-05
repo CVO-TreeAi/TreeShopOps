@@ -39,6 +39,7 @@
 		2A059 /* BusinessProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A060 /* BusinessProfileView.swift */; };
 		2A061 /* SettingsMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A062 /* SettingsMainView.swift */; };
 		2A063 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A064 /* MenuView.swift */; };
+		2A065 /* StandardStatCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A066 /* StandardStatCard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +76,7 @@
 		2A060 /* BusinessProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessProfileView.swift; sourceTree = "<group>"; };
 		2A062 /* SettingsMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMainView.swift; sourceTree = "<group>"; };
 		2A064 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		2A066 /* StandardStatCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardStatCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +139,7 @@
 				2A060 /* BusinessProfileView.swift */,
 				2A062 /* SettingsMainView.swift */,
 				2A064 /* MenuView.swift */,
+				2A066 /* StandardStatCard.swift */,
 				2A006 /* Assets.xcassets */,
 				2A995 /* Preview Content */,
 			);
@@ -251,6 +254,7 @@
 				2A059 /* BusinessProfileView.swift in Sources */,
 				2A061 /* SettingsMainView.swift in Sources */,
 				2A063 /* MenuView.swift in Sources */,
+				2A065 /* StandardStatCard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
