@@ -1,0 +1,104 @@
+{
+  "source": "/Users/ain/TreeShopOps/TreeShopOps/AddEditProposalView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Edit Proposal",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 59
+        }
+      },
+      {
+        "comment": "",
+        "key": "New Proposal",
+        "location": {
+          "startingColumn": 60,
+          "startingLine": 59
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 33,
+          "startingLine": 62
+        }
+      },
+      {
+        "comment": "",
+        "key": "Save",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 67
+        }
+      },
+      {
+        "comment": "",
+        "key": "Status",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 127
+        }
+      },
+      {
+        "comment": "",
+        "key": "Status",
+        "location": {
+          "startingColumn": 36,
+          "startingLine": 132
+        }
+      },
+      {
+        "comment": "",
+        "key": "Total Amount",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 184
+        }
+      },
+      {
+        "comment": "",
+        "key": "$%.2f",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 191
+        }
+      },
+      {
+        "comment": "",
+        "key": "Valid Until",
+        "location": {
+          "startingColumn": 32,
+          "startingLine": 213
+        }
+      },
+      {
+        "comment": "",
+        "key": "Terms Accepted",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 224
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 339
+        }
+      },
+      {
+        "comment": "",
+        "key": "0.00",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 374
+        }
+      }
+    ]
+  },
+  "version": 1
+}

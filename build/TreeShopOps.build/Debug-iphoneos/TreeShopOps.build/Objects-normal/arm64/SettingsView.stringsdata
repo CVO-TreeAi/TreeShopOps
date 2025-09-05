@@ -1,0 +1,88 @@
+{
+  "source": "/Users/ain/TreeShopOps/TreeShopOps/SettingsView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Pricing Settings",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 40
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 33,
+          "startingLine": 43
+        }
+      },
+      {
+        "comment": "",
+        "key": "Done",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 46
+        }
+      },
+      {
+        "comment": "",
+        "key": "Save Settings",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 173
+        }
+      },
+      {
+        "comment": "",
+        "key": "$",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 223
+        }
+      },
+      {
+        "comment": "",
+        "key": "0",
+        "location": {
+          "startingColumn": 27,
+          "startingLine": 228
+        }
+      },
+      {
+        "comment": "",
+        "key": "BASE RATE",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 399
+        }
+      },
+      {
+        "comment": "",
+        "key": "CUSTOM",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 405
+        }
+      },
+      {
+        "comment": "",
+        "key": "$",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 421
+        }
+      },
+      {
+        "comment": "",
+        "key": "0",
+        "location": {
+          "startingColumn": 27,
+          "startingLine": 425
+        }
+      }
+    ]
+  },
+  "version": 1
+}

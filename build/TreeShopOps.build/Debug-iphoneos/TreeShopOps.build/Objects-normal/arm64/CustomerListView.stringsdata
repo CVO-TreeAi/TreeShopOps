@@ -1,0 +1,112 @@
+{
+  "source": "/Users/ain/TreeShopOps/TreeShopOps/CustomerListView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Filter Customers",
+        "location": {
+          "startingColumn": 29,
+          "startingLine": 53
+        }
+      },
+      {
+        "comment": "",
+        "key": "All Customers",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 509
+        }
+      },
+      {
+        "comment": "",
+        "key": "Select Customer",
+        "location": {
+          "startingColumn": 50,
+          "startingLine": 107
+        }
+      },
+      {
+        "comment": "",
+        "key": "Customers",
+        "location": {
+          "startingColumn": 70,
+          "startingLine": 107
+        }
+      },
+      {
+        "comment": "",
+        "key": "Search & Filter",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 165
+        }
+      },
+      {
+        "comment": "",
+        "key": "Search customers...",
+        "location": {
+          "startingColumn": 27,
+          "startingLine": 179
+        }
+      },
+      {
+        "comment": "",
+        "key": "Active Filters:",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 206
+        }
+      },
+      {
+        "comment": "",
+        "key": "Customer Overview",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 250
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 302
+        }
+      },
+      {
+        "comment": "",
+        "key": "Customer List",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 295
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 364
+        }
+      },
+      {
+        "comment": "",
+        "key": "No customers found",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 444
+        }
+      },
+      {
+        "comment": "",
+        "key": "Add Your First Customer",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 454
+        }
+      }
+    ]
+  },
+  "version": 1
+}

@@ -18,12 +18,12 @@ struct Customer: Identifiable, Codable {
     var projects: [CustomerProject] = []
     var tags: [String] = []
     var preferredContactMethod: ContactMethod = .phone
-    var customerType: CustomerType = .residential
-    var referralSource: String = ""
     
     var fullName: String {
-        "\(firstName) \(lastName)".trimmingCharacters(in: .whitespaces)
+        "\(firstName) \(lastName)".trimmingCharacters(in: .whitespacesAndNewlines)
     }
+    var customerType: CustomerType = .residential
+    var referralSource: String = ""
     
     var fullAddress: String {
         let components = [address, city, state, zipCode].filter { !$0.isEmpty }

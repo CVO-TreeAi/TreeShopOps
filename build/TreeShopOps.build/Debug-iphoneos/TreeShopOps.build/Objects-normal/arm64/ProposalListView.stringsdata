@@ -1,0 +1,88 @@
+{
+  "source": "/Users/ain/TreeShopOps/TreeShopOps/ProposalListView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Proposals",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 36
+        }
+      },
+      {
+        "comment": "",
+        "key": "Search proposals...",
+        "location": {
+          "startingColumn": 48,
+          "startingLine": 57
+        }
+      },
+      {
+        "comment": "",
+        "key": "Edit",
+        "location": {
+          "startingColumn": 39,
+          "startingLine": 131
+        }
+      },
+      {
+        "comment": "",
+        "key": "Delete",
+        "location": {
+          "startingColumn": 39,
+          "startingLine": 139
+        }
+      },
+      {
+        "comment": "",
+        "key": "No Proposals Found",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 157
+        }
+      },
+      {
+        "comment": "",
+        "key": "Create your first proposal to get started",
+        "location": {
+          "startingColumn": 43,
+          "startingLine": 162
+        }
+      },
+      {
+        "comment": "",
+        "key": "No proposals match your search",
+        "location": {
+          "startingColumn": 89,
+          "startingLine": 162
+        }
+      },
+      {
+        "comment": "",
+        "key": "Create Proposal",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 174
+        }
+      },
+      {
+        "comment": "",
+        "key": "$%.2f",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 309
+        }
+      },
+      {
+        "comment": "",
+        "key": "Expires Soon",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 326
+        }
+      }
+    ]
+  },
+  "version": 1
+}

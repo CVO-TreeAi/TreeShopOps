@@ -57,10 +57,10 @@ struct SaveProposalView: View {
                             
                             if let customer = selectedCustomer {
                                 VStack(alignment: .leading, spacing: 12) {
-                                    DetailRow(title: "Name", value: customer.name)
-                                    DetailRow(title: "Email", value: customer.email)
-                                    DetailRow(title: "Phone", value: customer.phone)
-                                    DetailRow(title: "Address", value: customer.address)
+                                    SaveDetailRow(title: "Name", value: customer.name)
+                                    SaveDetailRow(title: "Email", value: customer.email)
+                                    SaveDetailRow(title: "Phone", value: customer.phone)
+                                    SaveDetailRow(title: "Address", value: customer.address)
                                 }
                             } else {
                                 VStack(spacing: 16) {
@@ -87,13 +87,13 @@ struct SaveProposalView: View {
                                 .foregroundColor(.white)
                             
                             VStack(spacing: 8) {
-                                PricingRow(title: "Subtotal", amount: pricingModel.subtotal)
-                                PricingRow(title: "Tax", amount: pricingModel.tax)
+                                SavePricingRow(title: "Subtotal", amount: pricingModel.subtotal)
+                                SavePricingRow(title: "Tax", amount: pricingModel.tax)
                                 
                                 Divider()
                                     .background(Color.white.opacity(0.3))
                                 
-                                PricingRow(title: "Total", amount: pricingModel.total, isTotal: true)
+                                SavePricingRow(title: "Total", amount: pricingModel.total, isTotal: true)
                             }
                         }
                         .padding(20)
@@ -154,7 +154,7 @@ struct SaveProposalView: View {
     }
 }
 
-struct DetailRow: View {
+struct SaveDetailRow: View {
     let title: String
     let value: String
     
@@ -171,7 +171,7 @@ struct DetailRow: View {
     }
 }
 
-struct PricingRow: View {
+struct SavePricingRow: View {
     let title: String
     let amount: Double
     let isTotal: Bool

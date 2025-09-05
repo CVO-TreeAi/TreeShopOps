@@ -1,0 +1,136 @@
+{
+  "source": "/Users/ain/TreeShopOps/TreeShopOps/CustomerDetailView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Customer Details",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 32
+        }
+      },
+      {
+        "comment": "",
+        "key": "Close",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 35
+        }
+      },
+      {
+        "comment": "",
+        "key": "Edit",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 40
+        }
+      },
+      {
+        "comment": "",
+        "key": "Project Actions",
+        "location": {
+          "startingColumn": 29,
+          "startingLine": 53
+        }
+      },
+      {
+        "comment": "",
+        "key": "Edit Project",
+        "location": {
+          "startingColumn": 35,
+          "startingLine": 56
+        }
+      },
+      {
+        "comment": "",
+        "key": "Duplicate Project",
+        "location": {
+          "startingColumn": 35,
+          "startingLine": 59
+        }
+      },
+      {
+        "comment": "",
+        "key": "Change Status",
+        "location": {
+          "startingColumn": 35,
+          "startingLine": 62
+        }
+      },
+      {
+        "comment": "",
+        "key": "Delete Project",
+        "location": {
+          "startingColumn": 39,
+          "startingLine": 65
+        }
+      },
+      {
+        "comment": "",
+        "key": "Delete Project",
+        "location": {
+          "startingColumn": 29,
+          "startingLine": 75
+        }
+      },
+      {
+        "comment": "",
+        "key": "Are you sure you want to delete '%@'? This action cannot be undone.",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 76
+        }
+      },
+      {
+        "comment": "",
+        "key": "Delete",
+        "location": {
+          "startingColumn": 50,
+          "startingLine": 77
+        }
+      },
+      {
+        "comment": "",
+        "key": "Change Project Status",
+        "location": {
+          "startingColumn": 29,
+          "startingLine": 85
+        }
+      },
+      {
+        "comment": "",
+        "key": "Customer Information",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 105
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 150
+        }
+      },
+      {
+        "comment": "",
+        "key": "Projects",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 143
+        }
+      },
+      {
+        "comment": "",
+        "key": "No projects yet",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 161
+        }
+      }
+    ]
+  },
+  "version": 1
+}

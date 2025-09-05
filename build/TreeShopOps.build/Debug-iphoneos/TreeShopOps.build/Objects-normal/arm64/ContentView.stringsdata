@@ -1,0 +1,240 @@
+{
+  "source": "/Users/ain/TreeShopOps/TreeShopOps/ContentView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Save Quote",
+        "location": {
+          "startingColumn": 29,
+          "startingLine": 65
+        }
+      },
+      {
+        "comment": "",
+        "key": "How would you like to save this quote?",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 66
+        }
+      },
+      {
+        "comment": "",
+        "key": "Save as Proposal",
+        "location": {
+          "startingColumn": 35,
+          "startingLine": 68
+        }
+      },
+      {
+        "comment": "",
+        "key": "Select Existing Customer",
+        "location": {
+          "startingColumn": 35,
+          "startingLine": 71
+        }
+      },
+      {
+        "comment": "",
+        "key": "Create New Customer",
+        "location": {
+          "startingColumn": 35,
+          "startingLine": 74
+        }
+      },
+      {
+        "comment": "",
+        "key": "Quote Saved!",
+        "location": {
+          "startingColumn": 29,
+          "startingLine": 97
+        }
+      },
+      {
+        "comment": "",
+        "key": "The quote has been added to %@'s projects.",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 98
+        }
+      },
+      {
+        "comment": "",
+        "key": "OK",
+        "location": {
+          "startingColumn": 46,
+          "startingLine": 99
+        }
+      },
+      {
+        "comment": "",
+        "key": "TreeShop",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 154
+        }
+      },
+      {
+        "comment": "",
+        "key": "Project Details",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 214
+        }
+      },
+      {
+        "comment": "",
+        "key": "Package Type",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 260
+        }
+      },
+      {
+        "comment": "",
+        "key": "Package Type",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 265
+        }
+      },
+      {
+        "comment": "",
+        "key": "Deposit Required (%lld%%)",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 387
+        }
+      },
+      {
+        "comment": "",
+        "key": "Total Project Cost",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 409
+        }
+      },
+      {
+        "comment": "",
+        "key": "Project Zip Code",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 435
+        }
+      },
+      {
+        "comment": "",
+        "key": "Enter project zip code",
+        "location": {
+          "startingColumn": 27,
+          "startingLine": 441
+        }
+      },
+      {
+        "comment": "",
+        "key": "Hours",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 496
+        }
+      },
+      {
+        "comment": "",
+        "key": "Transport Hours",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 482
+        }
+      },
+      {
+        "comment": "",
+        "key": "Auto-calculated",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 490
+        }
+      },
+      {
+        "comment": "",
+        "key": "Instant Quote",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 553
+        }
+      },
+      {
+        "comment": "",
+        "key": "LIVE",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 567
+        }
+      },
+      {
+        "comment": "",
+        "key": "Deposit Required (25%)",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 605
+        }
+      },
+      {
+        "comment": "",
+        "key": "Balance at Completion",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 654
+        }
+      },
+      {
+        "comment": "",
+        "key": "Project Zip",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 762
+        }
+      },
+      {
+        "comment": "",
+        "key": "12345",
+        "location": {
+          "startingColumn": 27,
+          "startingLine": 776
+        }
+      },
+      {
+        "comment": "",
+        "key": "Customer",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 830
+        }
+      },
+      {
+        "comment": "",
+        "key": "Add Quote",
+        "location": {
+          "startingColumn": 60,
+          "startingLine": 860
+        }
+      },
+      {
+        "comment": "",
+        "key": "Save",
+        "location": {
+          "startingColumn": 74,
+          "startingLine": 860
+        }
+      },
+      {
+        "comment": "",
+        "key": "Select or Add Customer",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 935
+        }
+      }
+    ]
+  },
+  "version": 1
+}

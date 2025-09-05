@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 
 struct Proposal: Identifiable, Codable {
-    let id = UUID()
+    var id = UUID()
     var customerName: String
     var customerEmail: String
     var customerPhone: String
@@ -185,22 +185,22 @@ class ProposalManager: ObservableObject {
     // Helper method to create proposal from pricing model
     func createProposalFromPricing(pricingModel: PricingModel, customer: Customer?, projectTitle: String, projectDescription: String) -> Proposal {
         return Proposal(
-            customerName: customer?.name ?? "",
+            customerName: customer?.fullName ?? "",
             customerEmail: customer?.email ?? "",
             customerPhone: customer?.phone ?? "",
-            customerAddress: customer?.address ?? "",
+            customerAddress: customer?.fullAddress ?? "",
             projectZipCode: pricingModel.projectZipCode,
             projectTitle: projectTitle,
             projectDescription: projectDescription,
-            treeRemovalCount: pricingModel.treeRemovalCount,
-            stumpRemovalCount: pricingModel.stumpRemovalCount,
-            treePruningCount: pricingModel.treePruningCount,
-            emergencyServiceCount: pricingModel.emergencyServiceCount,
-            consultationCount: pricingModel.consultationCount,
+            treeRemovalCount: 0,
+            stumpRemovalCount: 0,
+            treePruningCount: 0,
+            emergencyServiceCount: 0,
+            consultationCount: 0,
             subtotal: pricingModel.subtotal,
-            taxAmount: pricingModel.tax,
-            totalAmount: pricingModel.total,
-            discount: pricingModel.discount
+            taxAmount: 0.0,
+            totalAmount: pricingModel.finalPrice,
+            discount: 0.0
         )
     }
 }

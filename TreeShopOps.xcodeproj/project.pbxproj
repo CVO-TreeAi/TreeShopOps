@@ -18,6 +18,11 @@
 		2A017 /* AddEditCustomerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A018 /* AddEditCustomerView.swift */; };
 		2A019 /* CustomerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A020 /* CustomerDetailView.swift */; };
 		2A021 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A022 /* SettingsView.swift */; };
+		2A023 /* ProposalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A024 /* ProposalModel.swift */; };
+		2A025 /* ProposalListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A026 /* ProposalListView.swift */; };
+		2A027 /* AddEditProposalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A028 /* AddEditProposalView.swift */; };
+		2A029 /* ProposalDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A030 /* ProposalDetailView.swift */; };
+		2A031 /* SaveProposalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A032 /* SaveProposalView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +38,11 @@
 		2A018 /* AddEditCustomerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditCustomerView.swift; sourceTree = "<group>"; };
 		2A020 /* CustomerDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerDetailView.swift; sourceTree = "<group>"; };
 		2A022 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		2A024 /* ProposalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProposalModel.swift; sourceTree = "<group>"; };
+		2A026 /* ProposalListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProposalListView.swift; sourceTree = "<group>"; };
+		2A028 /* AddEditProposalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditProposalView.swift; sourceTree = "<group>"; };
+		2A030 /* ProposalDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProposalDetailView.swift; sourceTree = "<group>"; };
+		2A032 /* SaveProposalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveProposalView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +84,11 @@
 				2A016 /* CustomerListView.swift */,
 				2A018 /* AddEditCustomerView.swift */,
 				2A020 /* CustomerDetailView.swift */,
+				2A024 /* ProposalModel.swift */,
+				2A026 /* ProposalListView.swift */,
+				2A028 /* AddEditProposalView.swift */,
+				2A030 /* ProposalDetailView.swift */,
+				2A032 /* SaveProposalView.swift */,
 				2A006 /* Assets.xcassets */,
 				2A995 /* Preview Content */,
 			);
@@ -167,6 +182,11 @@
 				2A019 /* CustomerDetailView.swift in Sources */,
 				2A021 /* SettingsView.swift in Sources */,
 				2A001 /* TreeShopOpsApp.swift in Sources */,
+				2A023 /* ProposalModel.swift in Sources */,
+				2A025 /* ProposalListView.swift in Sources */,
+				2A027 /* AddEditProposalView.swift in Sources */,
+				2A029 /* ProposalDetailView.swift in Sources */,
+				2A031 /* SaveProposalView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

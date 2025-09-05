@@ -1,0 +1,32 @@
+{
+  "source": "/Users/ain/TreeShopOps/TreeShopOps/MainTabView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Pricing",
+        "location": {
+          "startingColumn": 27,
+          "startingLine": 14
+        }
+      },
+      {
+        "comment": "",
+        "key": "Proposals",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 23
+        }
+      },
+      {
+        "comment": "",
+        "key": "Customers",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 32
+        }
+      }
+    ]
+  },
+  "version": 1
+}
