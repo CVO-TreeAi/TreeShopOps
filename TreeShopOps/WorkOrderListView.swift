@@ -60,9 +60,9 @@ struct WorkOrderListView: View {
     private var headerSection: some View {
         VStack(spacing: 16) {
             // Stats cards
-            HStack(spacing: 12) {
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 12), count: 2), spacing: 12) {
                 WorkOrderStatCard(
-                    title: "Total",
+                    title: "Total Orders",
                     value: "\(workOrderManager.workOrders.count)",
                     icon: "hammer.fill",
                     color: .gray
@@ -208,34 +208,32 @@ struct WorkOrderStatCard: View {
     let color: Color
     
     var body: some View {
-        VStack(spacing: 8) {
-            HStack {
-                Image(systemName: icon)
-                    .font(.title3)
-                    .foregroundColor(color)
-                
-                Spacer()
-            }
+        VStack(spacing: 12) {
+            Image(systemName: icon)
+                .font(.title)
+                .foregroundColor(color)
             
-            VStack(alignment: .leading, spacing: 2) {
+            VStack(spacing: 4) {
                 Text(value)
-                    .font(.title3)
+                    .font(.title2)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
                 
                 Text(title)
                     .font(.caption)
                     .foregroundColor(.gray)
+                    .multilineTextAlignment(.center)
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .padding(12)
+        .frame(maxWidth: .infinity)
+        .frame(height: 100)
+        .padding(16)
         .background(
             RoundedRectangle(cornerRadius: 12)
                 .fill(Color.white.opacity(0.05))
                 .overlay(
                     RoundedRectangle(cornerRadius: 12)
-                        .stroke(Color.white.opacity(0.1), lineWidth: 1)
+                        .stroke(color.opacity(0.2), lineWidth: 1)
                 )
         )
     }

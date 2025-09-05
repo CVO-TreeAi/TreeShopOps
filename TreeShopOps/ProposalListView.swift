@@ -60,7 +60,7 @@ struct ProposalListView: View {
     private var headerSection: some View {
         VStack(spacing: 16) {
             // Stats cards
-            HStack(spacing: 12) {
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 12), count: 3), spacing: 12) {
                 StatCard(
                     title: "Total",
                     value: "\(proposalManager.proposals.count)",
@@ -193,16 +193,12 @@ struct StatCard: View {
     let color: Color
     
     var body: some View {
-        VStack(spacing: 8) {
-            HStack {
-                Image(systemName: icon)
-                    .font(.title2)
-                    .foregroundColor(color)
-                
-                Spacer()
-            }
+        VStack(spacing: 10) {
+            Image(systemName: icon)
+                .font(.title)
+                .foregroundColor(color)
             
-            VStack(alignment: .leading, spacing: 2) {
+            VStack(spacing: 4) {
                 Text(value)
                     .font(.title2)
                     .fontWeight(.bold)
@@ -211,16 +207,18 @@ struct StatCard: View {
                 Text(title)
                     .font(.caption)
                     .foregroundColor(.gray)
+                    .multilineTextAlignment(.center)
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .padding(16)
+        .frame(maxWidth: .infinity)
+        .frame(height: 80)
+        .padding(12)
         .background(
             RoundedRectangle(cornerRadius: 12)
                 .fill(Color.white.opacity(0.05))
                 .overlay(
                     RoundedRectangle(cornerRadius: 12)
-                        .stroke(Color.white.opacity(0.1), lineWidth: 1)
+                        .stroke(color.opacity(0.2), lineWidth: 1)
                 )
         )
     }
