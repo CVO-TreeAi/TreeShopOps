@@ -60,14 +60,7 @@ struct WorkOrderListView: View {
     private var headerSection: some View {
         VStack(spacing: 16) {
             // Stats cards
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 12), count: 2), spacing: 12) {
-                WorkOrderStatCard(
-                    title: "Total Orders",
-                    value: "\(workOrderManager.workOrders.count)",
-                    icon: "hammer.fill",
-                    color: .gray
-                )
-                
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 12), count: 3), spacing: 12) {
                 WorkOrderStatCard(
                     title: "Scheduled",
                     value: "\(workOrderManager.getWorkOrdersByStatus(.scheduled).count)",
