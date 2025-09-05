@@ -6,11 +6,13 @@ struct MenuView: View {
     @EnvironmentObject var proposalManager: ProposalManager
     @EnvironmentObject var workOrderManager: WorkOrderManager
     @EnvironmentObject var invoiceManager: InvoiceManager
+    @StateObject private var serviceItemManager = ServiceItemManager()
     @StateObject private var userProfile = UserProfileManager()
     
     @State private var showingUserProfile = false
     @State private var showingBusinessProfile = false
     @State private var showingPricingSettings = false
+    @State private var showingServiceItems = false
     
     var body: some View {
         ZStack {
@@ -47,6 +49,12 @@ struct MenuView: View {
         }
         .sheet(isPresented: $showingPricingSettings) {
             SettingsView(pricingModel: pricingModel)
+        }
+        .sheet(isPresented: $showingServiceItems) {
+            NavigationView {
+                ServiceItemListView()
+                    .environmentObject(serviceItemManager)
+            }
         }
     }
     
@@ -233,10 +241,19 @@ struct MenuView: View {
                 }
                 
                 MenuRowButton(
+                    title: "Service Items",
+                    subtitle: "Manage forestry mulching and land clearing services",
+                    icon: "list.bullet.rectangle.fill",
+                    color: Color("TreeShopGreen")
+                ) {
+                    showingServiceItems = true
+                }
+                
+                MenuRowButton(
                     title: "Pricing Settings", 
                     subtitle: "Package rates, costs, markup",
                     icon: "dollarsign.circle.fill",
-                    color: Color("TreeShopGreen")
+                    color: Color("TreeShopBlue")
                 ) {
                     showingPricingSettings = true
                 }

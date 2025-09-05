@@ -40,6 +40,9 @@
 		2A061 /* SettingsMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A062 /* SettingsMainView.swift */; };
 		2A063 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A064 /* MenuView.swift */; };
 		2A065 /* StandardStatCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A066 /* StandardStatCard.swift */; };
+		2A067 /* ServiceItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A068 /* ServiceItemModel.swift */; };
+		2A069 /* ServiceItemListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A070 /* ServiceItemListView.swift */; };
+		2A071 /* AddEditServiceItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A072 /* AddEditServiceItemView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +80,9 @@
 		2A062 /* SettingsMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMainView.swift; sourceTree = "<group>"; };
 		2A064 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		2A066 /* StandardStatCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardStatCard.swift; sourceTree = "<group>"; };
+		2A068 /* ServiceItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceItemModel.swift; sourceTree = "<group>"; };
+		2A070 /* ServiceItemListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceItemListView.swift; sourceTree = "<group>"; };
+		2A072 /* AddEditServiceItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditServiceItemView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +146,9 @@
 				2A062 /* SettingsMainView.swift */,
 				2A064 /* MenuView.swift */,
 				2A066 /* StandardStatCard.swift */,
+				2A068 /* ServiceItemModel.swift */,
+				2A070 /* ServiceItemListView.swift */,
+				2A072 /* AddEditServiceItemView.swift */,
 				2A006 /* Assets.xcassets */,
 				2A995 /* Preview Content */,
 			);
@@ -255,6 +264,9 @@
 				2A061 /* SettingsMainView.swift in Sources */,
 				2A063 /* MenuView.swift in Sources */,
 				2A065 /* StandardStatCard.swift in Sources */,
+				2A067 /* ServiceItemModel.swift in Sources */,
+				2A069 /* ServiceItemListView.swift in Sources */,
+				2A071 /* AddEditServiceItemView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
