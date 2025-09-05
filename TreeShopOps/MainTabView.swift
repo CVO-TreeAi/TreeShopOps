@@ -56,12 +56,16 @@ struct MainTabView: View {
                 Label("Customers", systemImage: "person.2.fill")
             }
             
-            // Settings Tab
+            // Menu Tab
             NavigationView {
-                SettingsMainView(pricingModel: pricingModel)
+                MenuView(pricingModel: pricingModel)
+                    .environmentObject(leadManager)
+                    .environmentObject(proposalManager)
+                    .environmentObject(workOrderManager)
+                    .environmentObject(invoiceManager)
             }
             .tabItem {
-                Label("Settings", systemImage: "gearshape.fill")
+                Label("Menu", systemImage: "line.3.horizontal.circle.fill")
             }
         }
         .accentColor(Color("TreeShopGreen"))

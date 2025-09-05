@@ -477,8 +477,8 @@ struct RecordPaymentView: View {
                             }
                         }
                         .pickerStyle(SegmentedPickerStyle())
-                        .onChange(of: paymentType) { type in
-                            switch type {
+                        .onChange(of: paymentType) {
+                            switch paymentType {
                             case .deposit:
                                 paymentAmount = invoice.depositAmount
                             case .balance:
