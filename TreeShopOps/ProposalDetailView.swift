@@ -2,12 +2,14 @@ import SwiftUI
 
 struct ProposalDetailView: View {
     @EnvironmentObject var proposalManager: ProposalManager
+    @EnvironmentObject var workOrderManager: WorkOrderManager
     @Environment(\.presentationMode) var presentationMode
     
     @State var proposal: Proposal
     @State private var showingEditProposal = false
     @State private var showingDeleteAlert = false
     @State private var showingStatusUpdate = false
+    @State private var showingConvertToWorkOrder = false
     
     var body: some View {
         NavigationView {
@@ -101,6 +103,14 @@ struct ProposalDetailView: View {
             }
         } message: {
             Text("Are you sure you want to delete this proposal? This action cannot be undone.")
+        }
+        .alert("Create Work Order", isPresented: $showingConvertToWorkOrder) {
+            Button("Cancel", role: .cancel) { }
+            Button("Create") {
+                convertToWorkOrder()
+            }
+        } message: {
+            Text("This will create a new work order from this accepted proposal and schedule the project.")
         }
     }
     
@@ -289,6 +299,21 @@ struct ProposalDetailView: View {
                     .background(Color("TreeShopGreen"))
                     .cornerRadius(12)
                 }
+            } else if proposal.status == .accepted {
+                Button(action: {
+                    showingConvertToWorkOrder = true
+                }) {
+                    HStack {
+                        Image(systemName: "hammer.fill")
+                        Text("Create Work Order")
+                    }
+                    .font(.headline)
+                    .foregroundColor(.black)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 16)
+                    .background(Color("TreeShopGreen"))
+                    .cornerRadius(12)
+                }
             }
             
             Button(action: {
@@ -315,6 +340,31 @@ struct ProposalDetailView: View {
         proposal.status = status
         proposal.dateUpdated = Date()
         proposalManager.updateProposal(proposal)
+    }
+    
+    private func convertToWorkOrder() {
+        // Create work order from accepted proposal
+        let workOrder = WorkOrder(
+            proposalId: proposal.id,
+            customerName: proposal.customerName,
+            customerEmail: proposal.customerEmail,
+            customerPhone: proposal.customerPhone,
+            customerAddress: proposal.customerAddress,
+            projectLocation: proposal.customerAddress,
+            projectTitle: proposal.projectTitle,
+            projectDescription: proposal.projectDescription,
+            landSize: proposal.landSize,
+            packageType: proposal.packageType,
+            originalAmount: proposal.totalAmount
+        )
+        workOrderManager.addWorkOrder(workOrder)
+        
+        // Update proposal to reflect it's been converted
+        proposal.status = .accepted
+        proposal.dateUpdated = Date()
+        proposalManager.updateProposal(proposal)
+        
+        presentationMode.wrappedValue.dismiss()
     }
 }
 

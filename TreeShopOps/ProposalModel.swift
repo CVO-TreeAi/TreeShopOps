@@ -3,6 +3,8 @@ import SwiftUI
 
 struct Proposal: Identifiable, Codable {
     var id = UUID()
+    var leadId: UUID?
+    var customerId: UUID?
     var customerName: String
     var customerEmail: String
     var customerPhone: String
@@ -34,6 +36,8 @@ struct Proposal: Identifiable, Codable {
     var validUntil: Date
     
     init(
+        leadId: UUID? = nil,
+        customerId: UUID? = nil,
         customerName: String = "",
         customerEmail: String = "",
         customerPhone: String = "",
@@ -52,6 +56,8 @@ struct Proposal: Identifiable, Codable {
         notes: String = "",
         termsAccepted: Bool = false
     ) {
+        self.leadId = leadId
+        self.customerId = customerId
         self.customerName = customerName
         self.customerEmail = customerEmail
         self.customerPhone = customerPhone

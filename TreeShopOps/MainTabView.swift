@@ -14,6 +14,8 @@ struct MainTabView: View {
             NavigationView {
                 LeadListView()
                     .environmentObject(leadManager)
+                    .environmentObject(proposalManager)
+                    .environmentObject(customerManager)
             }
             .tabItem {
                 Label("Leads", systemImage: "person.crop.circle.badge.plus")
@@ -24,6 +26,8 @@ struct MainTabView: View {
                 ProposalListView()
                     .environmentObject(proposalManager)
                     .environmentObject(leadManager)
+                    .environmentObject(workOrderManager)
+                    .environmentObject(customerManager)
             }
             .tabItem {
                 Label("Proposals", systemImage: "doc.text.fill")
@@ -33,6 +37,9 @@ struct MainTabView: View {
             NavigationView {
                 WorkOrderListView()
                     .environmentObject(workOrderManager)
+                    .environmentObject(proposalManager)
+                    .environmentObject(invoiceManager)
+                    .environmentObject(customerManager)
             }
             .tabItem {
                 Label("Work Orders", systemImage: "hammer.fill")
@@ -42,6 +49,8 @@ struct MainTabView: View {
             NavigationView {
                 InvoiceListView()
                     .environmentObject(invoiceManager)
+                    .environmentObject(workOrderManager)
+                    .environmentObject(customerManager)
             }
             .tabItem {
                 Label("Invoices", systemImage: "dollarsign.square.fill")
@@ -51,6 +60,10 @@ struct MainTabView: View {
             NavigationView {
                 CustomerListView()
                     .environmentObject(customerManager)
+                    .environmentObject(leadManager)
+                    .environmentObject(proposalManager)
+                    .environmentObject(workOrderManager)
+                    .environmentObject(invoiceManager)
             }
             .tabItem {
                 Label("Customers", systemImage: "person.2.fill")

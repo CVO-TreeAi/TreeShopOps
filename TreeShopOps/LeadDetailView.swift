@@ -2,6 +2,8 @@ import SwiftUI
 
 struct LeadDetailView: View {
     @EnvironmentObject var leadManager: LeadManager
+    @EnvironmentObject var proposalManager: ProposalManager
+    @EnvironmentObject var customerManager: CustomerManager
     @Environment(\.presentationMode) var presentationMode
     
     @State var lead: Lead
@@ -310,10 +312,57 @@ struct LeadDetailView: View {
     }
     
     private func convertToProposal() {
-        // This will be implemented when we integrate with ProposalManager
+        // 1. Create customer from lead
+        let customer = Customer(
+            firstName: lead.customerFirstName,
+            lastName: lead.customerLastName,
+            email: lead.customerEmail,
+            phone: lead.customerPhone,
+            address: lead.customerAddress,
+            city: lead.customerCity,
+            state: lead.customerState,
+            zipCode: lead.customerZipCode
+        )
+        customerManager.addCustomer(customer)
+        
+        // 2. Create proposal linked to customer and lead
+        let proposal = Proposal(
+            leadId: lead.id,
+            customerId: customer.id,
+            customerName: lead.fullName,
+            customerEmail: lead.customerEmail,
+            customerPhone: lead.customerPhone,
+            customerAddress: lead.fullAddress,
+            projectZipCode: lead.customerZipCode,
+            projectTitle: "Forestry Mulching - \(lead.projectLocation)",
+            projectDescription: lead.projectDescription,
+            landSize: lead.landSize,
+            packageType: "medium",
+            transportHours: 2.0,
+            debrisYards: 0.0,
+            subtotal: lead.estimatedValue,
+            taxAmount: 0.0,
+            totalAmount: lead.estimatedValue,
+            discount: 0.0,
+            notes: lead.notes
+        )
+        proposalManager.addProposal(proposal)
+        
+        // 3. Add project to customer record
+        customerManager.addProjectToCustomer(
+            customerId: customer.id,
+            projectName: proposal.projectTitle,
+            landSize: lead.landSize,
+            packageType: "medium",
+            finalPrice: lead.estimatedValue,
+            status: .quoted
+        )
+        
+        // 4. Update lead status to converted
         lead.status = .converted
         lead.dateUpdated = Date()
         leadManager.updateLead(lead)
+        
         presentationMode.wrappedValue.dismiss()
     }
 }

@@ -195,6 +195,27 @@ class CustomerManager: ObservableObject {
         saveCustomers()
     }
     
+    func addProjectToCustomer(customerId: UUID, projectName: String, projectId: UUID? = nil, landSize: Double = 0.0, packageType: String = "medium", finalPrice: Double = 0.0, status: ProjectStatus = .quoted) {
+        if let index = customers.firstIndex(where: { $0.id == customerId }) {
+            let project = CustomerProject(
+                projectName: projectName,
+                landSize: landSize,
+                finalPrice: finalPrice,
+                projectStatus: status
+            )
+            customers[index].projects.append(project)
+            customers[index].lastUpdated = Date()
+            saveCustomers()
+        }
+    }
+    
+    func findCustomerByContact(email: String, phone: String) -> Customer? {
+        return customers.first { customer in
+            (!customer.email.isEmpty && customer.email.lowercased() == email.lowercased()) ||
+            (!customer.phone.isEmpty && customer.phone == phone)
+        }
+    }
+    
     func addProjectToCustomer(_ customerId: UUID, project: CustomerProject) {
         if let index = customers.firstIndex(where: { $0.id == customerId }) {
             customers[index].projects.append(project)

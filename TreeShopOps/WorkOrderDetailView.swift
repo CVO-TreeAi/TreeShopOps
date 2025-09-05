@@ -2,6 +2,7 @@ import SwiftUI
 
 struct WorkOrderDetailView: View {
     @EnvironmentObject var workOrderManager: WorkOrderManager
+    @EnvironmentObject var invoiceManager: InvoiceManager
     @Environment(\.presentationMode) var presentationMode
     
     @State var workOrder: WorkOrder
@@ -354,7 +355,22 @@ struct WorkOrderDetailView: View {
     }
     
     private func convertToInvoice() {
-        // This will be implemented when we integrate with InvoiceManager
+        // Create invoice from completed work order
+        let invoice = Invoice(
+            workOrderId: workOrder.id,
+            customerName: workOrder.customerName,
+            customerEmail: workOrder.customerEmail,
+            customerPhone: workOrder.customerPhone,
+            customerAddress: workOrder.customerAddress,
+            billingAddress: workOrder.customerAddress,
+            projectTitle: workOrder.projectTitle,
+            projectDescription: workOrder.projectDescription,
+            landSize: workOrder.landSize,
+            packageType: workOrder.packageType,
+            originalAmount: workOrder.finalAmount
+        )
+        invoiceManager.addInvoice(invoice)
+        
         presentationMode.wrappedValue.dismiss()
     }
 }
