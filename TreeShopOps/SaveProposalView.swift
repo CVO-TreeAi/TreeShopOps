@@ -74,7 +74,7 @@ struct SaveProposalView: View {
     
     private var pricingSummarySection: some View {
         VStack(spacing: 8) {
-            Text("Total: $\(pricingModel.finalPrice, specifier: "%.2f")")
+            Text("Total: $\(String(format: "%.2f", pricingModel.finalPrice))")
                 .font(.title2)
                 .fontWeight(.bold)
                 .foregroundColor(Color("TreeShopGreen"))

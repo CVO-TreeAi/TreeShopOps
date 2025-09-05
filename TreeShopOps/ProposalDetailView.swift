@@ -138,7 +138,7 @@ struct ProposalDetailView: View {
                     )
                     
                     // Total amount
-                    Text("$\(proposal.totalAmount, specifier: "%.2f")")
+                    Text("$\(String(format: "%.2f", proposal.totalAmount))")
                         .font(.title3)
                         .fontWeight(.bold)
                         .foregroundColor(Color("TreeShopGreen"))
@@ -219,28 +219,24 @@ struct ProposalDetailView: View {
     }
     
     private var servicesCard: some View {
-        DetailCard(title: "Services", icon: "list.bullet") {
+        DetailCard(title: "Project Details", icon: "leaf.fill") {
             VStack(spacing: 8) {
-                if proposal.treeRemovalCount > 0 {
-                    ServiceRow(service: "Tree Removal", count: proposal.treeRemovalCount)
+                if proposal.landSize > 0 {
+                    ServiceRow(service: "Land Size", value: String(format: "%.1f acres", proposal.landSize))
                 }
-                if proposal.stumpRemovalCount > 0 {
-                    ServiceRow(service: "Stump Removal", count: proposal.stumpRemovalCount)
+                if !proposal.packageType.isEmpty {
+                    ServiceRow(service: "Package Type", value: proposal.packageType.capitalized)
                 }
-                if proposal.treePruningCount > 0 {
-                    ServiceRow(service: "Tree Pruning", count: proposal.treePruningCount)
+                if proposal.transportHours > 0 {
+                    ServiceRow(service: "Transport Time", value: String(format: "%.1f hours", proposal.transportHours))
                 }
-                if proposal.emergencyServiceCount > 0 {
-                    ServiceRow(service: "Emergency Service", count: proposal.emergencyServiceCount)
-                }
-                if proposal.consultationCount > 0 {
-                    ServiceRow(service: "Consultation", count: proposal.consultationCount)
+                if proposal.debrisYards > 0 {
+                    ServiceRow(service: "Debris Removal", value: String(format: "%.1f yards", proposal.debrisYards))
                 }
                 
-                if proposal.treeRemovalCount == 0 && proposal.stumpRemovalCount == 0 &&
-                   proposal.treePruningCount == 0 && proposal.emergencyServiceCount == 0 &&
-                   proposal.consultationCount == 0 {
-                    Text("No services specified")
+                if proposal.landSize == 0 && proposal.packageType.isEmpty &&
+                   proposal.transportHours == 0 && proposal.debrisYards == 0 {
+                    Text("No project details specified")
                         .font(.body)
                         .foregroundColor(.gray)
                         .italic()
@@ -390,7 +386,7 @@ struct DetailRow: View {
 
 struct ServiceRow: View {
     let service: String
-    let count: Int
+    let value: String
     
     var body: some View {
         HStack {
@@ -400,7 +396,7 @@ struct ServiceRow: View {
             
             Spacer()
             
-            Text("\(count)")
+            Text(value)
                 .font(.body)
                 .fontWeight(.semibold)
                 .foregroundColor(Color("TreeShopGreen"))
@@ -430,7 +426,7 @@ struct PricingRow: View {
             
             Spacer()
             
-            Text("$\(abs(amount), specifier: "%.2f")")
+            Text("$\(String(format: "%.2f", abs(amount)))")
                 .font(isTotal ? .headline : .body)
                 .fontWeight(isTotal ? .bold : .semibold)
                 .foregroundColor(isTotal ? Color("TreeShopGreen") : 
@@ -466,8 +462,9 @@ extension View {
     ProposalDetailView(proposal: Proposal(
         customerName: "John Doe",
         customerEmail: "john@example.com",
-        projectTitle: "Backyard Tree Removal",
-        treeRemovalCount: 3,
+        projectTitle: "Land Clearing Project",
+        landSize: 5.0,
+        packageType: "medium",
         totalAmount: 1500.0
     ))
     .environmentObject(ProposalManager())

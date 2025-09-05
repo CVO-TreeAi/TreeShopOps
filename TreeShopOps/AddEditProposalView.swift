@@ -157,13 +157,12 @@ struct AddEditProposalView: View {
     
     private var servicesSection: some View {
         VStack(spacing: 20) {
-            FormSection(title: "Services") {
+            FormSection(title: "Project Details") {
                 VStack(spacing: 16) {
-                    ServiceCountField(title: "Tree Removal", count: $proposal.treeRemovalCount)
-                    ServiceCountField(title: "Stump Removal", count: $proposal.stumpRemovalCount)
-                    ServiceCountField(title: "Tree Pruning", count: $proposal.treePruningCount)
-                    ServiceCountField(title: "Emergency Service", count: $proposal.emergencyServiceCount)
-                    ServiceCountField(title: "Consultation", count: $proposal.consultationCount)
+                    LandClearingField(title: "Land Size (Acres)", value: $proposal.landSize)
+                    FormField(title: "Package Type", text: $proposal.packageType, placeholder: "e.g., medium, large, max-heavy")
+                    LandClearingField(title: "Transport Hours", value: $proposal.transportHours)
+                    LandClearingField(title: "Debris Yards", value: $proposal.debrisYards)
                 }
             }
         }
@@ -311,52 +310,28 @@ struct FormField: View {
     }
 }
 
-struct ServiceCountField: View {
+struct LandClearingField: View {
     let title: String
-    @Binding var count: Int
+    @Binding var value: Double
     
     var body: some View {
-        HStack {
+        VStack(alignment: .leading, spacing: 8) {
             Text(title)
                 .font(.subheadline)
                 .fontWeight(.medium)
                 .foregroundColor(.white)
             
-            Spacer()
-            
-            HStack(spacing: 12) {
-                Button(action: {
-                    if count > 0 {
-                        count -= 1
-                    }
-                }) {
-                    Image(systemName: "minus.circle.fill")
-                        .font(.title2)
-                        .foregroundColor(count > 0 ? Color("TreeShopGreen") : .gray)
-                }
-                .disabled(count <= 0)
-                
-                Text("\(count)")
-                    .font(.headline)
-                    .fontWeight(.semibold)
-                    .foregroundColor(.white)
-                    .frame(minWidth: 30)
-                
-                Button(action: {
-                    count += 1
-                }) {
-                    Image(systemName: "plus.circle.fill")
-                        .font(.title2)
-                        .foregroundColor(Color("TreeShopGreen"))
-                }
-            }
+            TextField("0.0", value: $value, format: .number)
+                .textFieldStyle(PlainTextFieldStyle())
+                .foregroundColor(.white)
+                .keyboardType(.decimalPad)
+                .padding(12)
+                .background(
+                    RoundedRectangle(cornerRadius: 8)
+                        .fill(Color.white.opacity(0.1))
+                        .stroke(Color.white.opacity(0.2), lineWidth: 1)
+                )
         }
-        .padding(12)
-        .background(
-            RoundedRectangle(cornerRadius: 8)
-                .fill(Color.white.opacity(0.1))
-                .stroke(Color.white.opacity(0.2), lineWidth: 1)
-        )
     }
 }
 

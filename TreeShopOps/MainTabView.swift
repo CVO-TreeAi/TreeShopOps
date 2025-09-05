@@ -1,26 +1,49 @@
 import SwiftUI
 
 struct MainTabView: View {
-    @StateObject private var customerManager = CustomerManager()
+    @StateObject private var leadManager = LeadManager()
     @StateObject private var proposalManager = ProposalManager()
+    @StateObject private var workOrderManager = WorkOrderManager()
+    @StateObject private var invoiceManager = InvoiceManager()
+    @StateObject private var customerManager = CustomerManager()
     
     var body: some View {
         TabView {
-            // Pricing Tab
-            ContentView()
-                .environmentObject(customerManager)
-                .environmentObject(proposalManager)
-                .tabItem {
-                    Label("Pricing", systemImage: "dollarsign.circle.fill")
-                }
+            // Leads Tab
+            NavigationView {
+                LeadListView()
+                    .environmentObject(leadManager)
+            }
+            .tabItem {
+                Label("Leads", systemImage: "person.crop.circle.badge.plus")
+            }
             
             // Proposals Tab
             NavigationView {
                 ProposalListView()
                     .environmentObject(proposalManager)
+                    .environmentObject(leadManager)
             }
             .tabItem {
                 Label("Proposals", systemImage: "doc.text.fill")
+            }
+            
+            // Work Orders Tab
+            NavigationView {
+                WorkOrderListView()
+                    .environmentObject(workOrderManager)
+            }
+            .tabItem {
+                Label("Work Orders", systemImage: "hammer.fill")
+            }
+            
+            // Invoices Tab
+            NavigationView {
+                InvoiceListView()
+                    .environmentObject(invoiceManager)
+            }
+            .tabItem {
+                Label("Invoices", systemImage: "dollarsign.square.fill")
             }
             
             // Customers Tab

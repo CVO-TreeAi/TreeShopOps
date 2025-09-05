@@ -16,12 +16,11 @@ struct Proposal: Identifiable, Codable {
     var dateUpdated: Date
     var status: ProposalStatus
     
-    // Tree Services
-    var treeRemovalCount: Int
-    var stumpRemovalCount: Int
-    var treePruningCount: Int
-    var emergencyServiceCount: Int
-    var consultationCount: Int
+    // Forestry Mulching & Land Clearing Details
+    var landSize: Double
+    var packageType: String
+    var transportHours: Double
+    var debrisYards: Double
     
     // Pricing Details
     var subtotal: Double
@@ -42,11 +41,10 @@ struct Proposal: Identifiable, Codable {
         projectZipCode: String = "",
         projectTitle: String = "",
         projectDescription: String = "",
-        treeRemovalCount: Int = 0,
-        stumpRemovalCount: Int = 0,
-        treePruningCount: Int = 0,
-        emergencyServiceCount: Int = 0,
-        consultationCount: Int = 0,
+        landSize: Double = 0.0,
+        packageType: String = "medium",
+        transportHours: Double = 2.0,
+        debrisYards: Double = 0.0,
         subtotal: Double = 0.0,
         taxAmount: Double = 0.0,
         totalAmount: Double = 0.0,
@@ -64,11 +62,10 @@ struct Proposal: Identifiable, Codable {
         self.dateCreated = Date()
         self.dateUpdated = Date()
         self.status = .draft
-        self.treeRemovalCount = treeRemovalCount
-        self.stumpRemovalCount = stumpRemovalCount
-        self.treePruningCount = treePruningCount
-        self.emergencyServiceCount = emergencyServiceCount
-        self.consultationCount = consultationCount
+        self.landSize = landSize
+        self.packageType = packageType
+        self.transportHours = transportHours
+        self.debrisYards = debrisYards
         self.subtotal = subtotal
         self.taxAmount = taxAmount
         self.totalAmount = totalAmount
@@ -192,11 +189,10 @@ class ProposalManager: ObservableObject {
             projectZipCode: pricingModel.projectZipCode,
             projectTitle: projectTitle,
             projectDescription: projectDescription,
-            treeRemovalCount: 0,
-            stumpRemovalCount: 0,
-            treePruningCount: 0,
-            emergencyServiceCount: 0,
-            consultationCount: 0,
+            landSize: 0.0,
+            packageType: "medium",
+            transportHours: 2.0,
+            debrisYards: 0.0,
             subtotal: pricingModel.subtotal,
             taxAmount: 0.0,
             totalAmount: pricingModel.finalPrice,
