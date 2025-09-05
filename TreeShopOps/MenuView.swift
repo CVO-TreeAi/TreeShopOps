@@ -7,6 +7,7 @@ struct MenuView: View {
     
     @State private var showingUserProfile = false
     @State private var showingBusinessProfile = false
+    @State private var showingBusinessConfig = false
     @State private var showingPricingSettings = false
     @State private var showingServiceItems = false
     
@@ -49,11 +50,23 @@ struct MenuView: View {
                     .environmentObject(serviceItemManager)
             }
         }
+        .sheet(isPresented: $showingBusinessConfig) {
+            BusinessConfigView()
+        }
     }
     
     private var businessManagementSection: some View {
         SettingsSection(title: "Business Management", icon: "building.2") {
             VStack(spacing: 8) {
+                MenuRowButton(
+                    title: "Business Configuration",
+                    subtitle: "Company branding, website integration",
+                    icon: "gear.circle",
+                    color: Color("TreeShopGreen")
+                ) {
+                    showingBusinessConfig = true
+                }
+                
                 MenuRowButton(
                     title: "Business Profile",
                     subtitle: "Company info, contact details",
@@ -67,7 +80,7 @@ struct MenuView: View {
                     title: "Service Items",
                     subtitle: "Manage forestry mulching and land clearing services",
                     icon: "list.bullet.rectangle",
-                    color: Color("TreeShopGreen")
+                    color: .orange
                 ) {
                     showingServiceItems = true
                 }

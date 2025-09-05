@@ -7,7 +7,7 @@ struct PipelineView: View {
     @EnvironmentObject var customerManager: CustomerManager
     
     @State private var selectedPipelineTab = 0
-    private let pipelineTabs = ["Leads", "Proposals", "Work Orders"]
+    private let pipelineTabs = ["Website", "Leads", "Proposals", "Work Orders"]
     
     var body: some View {
         VStack(spacing: 0) {
@@ -18,17 +18,22 @@ struct PipelineView: View {
             Group {
                 switch selectedPipelineTab {
                 case 0:
-                    LeadListView()
+                    WebsiteLeadListView()
                         .environmentObject(leadManager)
                         .environmentObject(proposalManager)
                         .environmentObject(customerManager)
                 case 1:
+                    LeadListView()
+                        .environmentObject(leadManager)
+                        .environmentObject(proposalManager)
+                        .environmentObject(customerManager)
+                case 2:
                     ProposalListView()
                         .environmentObject(proposalManager)
                         .environmentObject(leadManager)
                         .environmentObject(workOrderManager)
                         .environmentObject(customerManager)
-                case 2:
+                case 3:
                     WorkOrderListView()
                         .environmentObject(workOrderManager)
                         .environmentObject(proposalManager)

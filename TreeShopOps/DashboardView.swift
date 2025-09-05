@@ -5,7 +5,14 @@ struct DashboardView: View {
     @EnvironmentObject var proposalManager: ProposalManager
     @EnvironmentObject var workOrderManager: WorkOrderManager
     @EnvironmentObject var invoiceManager: InvoiceManager
+    @EnvironmentObject var customerManager: CustomerManager
     @StateObject private var userProfile = UserProfileManager()
+    @StateObject private var businessConfig = BusinessConfigManager()
+    
+    @State private var showingAddLead = false
+    @State private var showingAddProposal = false
+    @State private var showingAddWorkOrder = false
+    @State private var showingAddInvoice = false
     
     var body: some View {
         ZStack {
@@ -31,6 +38,29 @@ struct DashboardView: View {
         }
         .navigationTitle("Dashboard")
         .navigationBarTitleDisplayMode(.large)
+        .sheet(isPresented: $showingAddLead) {
+            AddEditLeadView()
+                .environmentObject(leadManager)
+                .environmentObject(customerManager)
+        }
+        .sheet(isPresented: $showingAddProposal) {
+            AddEditProposalView()
+                .environmentObject(proposalManager)
+                .environmentObject(leadManager)
+                .environmentObject(customerManager)
+        }
+        .sheet(isPresented: $showingAddWorkOrder) {
+            AddEditWorkOrderView()
+                .environmentObject(workOrderManager)
+                .environmentObject(proposalManager)
+                .environmentObject(customerManager)
+        }
+        .sheet(isPresented: $showingAddInvoice) {
+            AddEditInvoiceView()
+                .environmentObject(invoiceManager)
+                .environmentObject(workOrderManager)
+                .environmentObject(customerManager)
+        }
     }
     
     private var welcomeHeader: some View {
@@ -47,12 +77,12 @@ struct DashboardView: View {
                 )
             
             VStack(alignment: .leading, spacing: 4) {
-                Text(userProfile.fullName.isEmpty ? "Welcome to TreeShop Ops" : "Welcome, \(userProfile.firstName)")
+                Text(userProfile.fullName.isEmpty ? "Welcome to \(businessConfig.displayName)" : "Welcome, \(userProfile.firstName)")
                     .font(.title2)
                     .fontWeight(.semibold)
                     .foregroundColor(.white)
                 
-                Text("Forestry Mulching & Land Clearing")
+                Text(businessConfig.businessDescription)
                     .font(.subheadline)
                     .foregroundColor(.gray)
             }
@@ -151,7 +181,7 @@ struct DashboardView: View {
                     icon: "person.crop.circle.badge.plus",
                     color: Color("TreeShopBlue")
                 ) {
-                    // Navigate to add lead
+                    showingAddLead = true
                 }
                 
                 QuickActionButton(
@@ -159,7 +189,7 @@ struct DashboardView: View {
                     icon: "doc.badge.plus",
                     color: .purple
                 ) {
-                    // Navigate to add proposal
+                    showingAddProposal = true
                 }
                 
                 QuickActionButton(
@@ -167,7 +197,7 @@ struct DashboardView: View {
                     icon: "calendar.badge.plus",
                     color: .orange
                 ) {
-                    // Navigate to add work order
+                    showingAddWorkOrder = true
                 }
                 
                 QuickActionButton(
@@ -175,7 +205,7 @@ struct DashboardView: View {
                     icon: "dollarsign.square",
                     color: Color("TreeShopGreen")
                 ) {
-                    // Navigate to add invoice
+                    showingAddInvoice = true
                 }
             }
         }

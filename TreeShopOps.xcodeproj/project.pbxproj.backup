@@ -44,12 +44,6 @@
 		2A069 /* ServiceItemListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A070 /* ServiceItemListView.swift */; };
 		2A071 /* AddEditServiceItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A072 /* AddEditServiceItemView.swift */; };
 		2A073 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A074 /* DashboardView.swift */; };
-		2A075 /* PipelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A076 /* PipelineView.swift */; };
-		2A077 /* TreeShopAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A078 /* TreeShopAPIService.swift */; };
-		2A079 /* WebsiteLeadListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A080 /* WebsiteLeadListView.swift */; };
-		2A081 /* WebsiteLeadDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A082 /* WebsiteLeadDetailView.swift */; };
-		2A083 /* BusinessConfigModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A084 /* BusinessConfigModel.swift */; };
-		2A085 /* BusinessConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A086 /* BusinessConfigView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,12 +85,6 @@
 		2A070 /* ServiceItemListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceItemListView.swift; sourceTree = "<group>"; };
 		2A072 /* AddEditServiceItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditServiceItemView.swift; sourceTree = "<group>"; };
 		2A074 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
-		2A076 /* PipelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipelineView.swift; sourceTree = "<group>"; };
-		2A078 /* TreeShopAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeShopAPIService.swift; sourceTree = "<group>"; };
-		2A080 /* WebsiteLeadListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebsiteLeadListView.swift; sourceTree = "<group>"; };
-		2A082 /* WebsiteLeadDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebsiteLeadDetailView.swift; sourceTree = "<group>"; };
-		2A084 /* BusinessConfigModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessConfigModel.swift; sourceTree = "<group>"; };
-		2A086 /* BusinessConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessConfigView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,7 +119,6 @@
 			children = (
 				2A002 /* TreeShopOpsApp.swift */,
 				2A014 /* MainTabView.swift */,
-				2A076 /* PipelineView.swift */,
 				2A004 /* ContentView.swift */,
 				2A022 /* SettingsView.swift */,
 				2A010 /* CustomerModel.swift */,
@@ -165,11 +152,6 @@
 				2A070 /* ServiceItemListView.swift */,
 				2A072 /* AddEditServiceItemView.swift */,
 				2A074 /* DashboardView.swift */,
-				2A078 /* TreeShopAPIService.swift */,
-				2A080 /* WebsiteLeadListView.swift */,
-				2A082 /* WebsiteLeadDetailView.swift */,
-				2A084 /* BusinessConfigModel.swift */,
-				2A086 /* BusinessConfigView.swift */,
 				2A006 /* Assets.xcassets */,
 				2A995 /* Preview Content */,
 			);
@@ -258,7 +240,6 @@
 				2A009 /* CustomerModel.swift in Sources */,
 				2A011 /* PricingModel.swift in Sources */,
 				2A013 /* MainTabView.swift in Sources */,
-				2A075 /* PipelineView.swift in Sources */,
 				2A015 /* CustomerListView.swift in Sources */,
 				2A017 /* AddEditCustomerView.swift in Sources */,
 				2A019 /* CustomerDetailView.swift in Sources */,
@@ -290,11 +271,6 @@
 				2A069 /* ServiceItemListView.swift in Sources */,
 				2A071 /* AddEditServiceItemView.swift in Sources */,
 				2A073 /* DashboardView.swift in Sources */,
-				2A077 /* TreeShopAPIService.swift in Sources */,
-				2A079 /* WebsiteLeadListView.swift in Sources */,
-				2A081 /* WebsiteLeadDetailView.swift in Sources */,
-				2A083 /* BusinessConfigModel.swift in Sources */,
-				2A085 /* BusinessConfigView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
