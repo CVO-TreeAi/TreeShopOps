@@ -10,6 +10,18 @@ struct MainTabView: View {
     
     var body: some View {
         TabView {
+            // Dashboard Tab (Home)
+            NavigationView {
+                DashboardView()
+                    .environmentObject(leadManager)
+                    .environmentObject(proposalManager)
+                    .environmentObject(workOrderManager)
+                    .environmentObject(invoiceManager)
+            }
+            .tabItem {
+                Label("Dashboard", systemImage: "house")
+            }
+            
             // Leads Tab
             NavigationView {
                 LeadListView()

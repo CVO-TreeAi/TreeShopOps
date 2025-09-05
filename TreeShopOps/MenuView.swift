@@ -2,10 +2,6 @@ import SwiftUI
 
 struct MenuView: View {
     @ObservedObject var pricingModel: PricingModel
-    @EnvironmentObject var leadManager: LeadManager
-    @EnvironmentObject var proposalManager: ProposalManager
-    @EnvironmentObject var workOrderManager: WorkOrderManager
-    @EnvironmentObject var invoiceManager: InvoiceManager
     @StateObject private var serviceItemManager = ServiceItemManager()
     @StateObject private var userProfile = UserProfileManager()
     
@@ -20,20 +16,17 @@ struct MenuView: View {
             
             ScrollView {
                 VStack(spacing: 24) {
-                    // User header
-                    userHeaderSection
-                    
-                    // Pipeline overview dashboard
-                    pipelineOverview
-                    
-                    // Quick actions
-                    quickActionsSection
-                    
-                    // Business management
+                    // Business management at top
                     businessManagementSection
                     
-                    // System and app info
-                    systemSection
+                    // App settings
+                    appSettingsSection
+                    
+                    // User profile at bottom  
+                    userProfileSection
+                    
+                    // About section
+                    aboutSection
                 }
                 .padding(.horizontal, 20)
                 .padding(.bottom, 100)
@@ -58,49 +51,114 @@ struct MenuView: View {
         }
     }
     
-    private var userHeaderSection: some View {
-        HStack(spacing: 16) {
-            // Profile picture
-            Circle()
-                .fill(Color("TreeShopGreen"))
-                .frame(width: 60, height: 60)
-                .overlay(
-                    Text(userProfile.initials.isEmpty ? "U" : userProfile.initials)
-                        .font(.title2)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                )
-            
-            VStack(alignment: .leading, spacing: 4) {
-                Text(userProfile.fullName.isEmpty ? "Welcome to TreeShop Ops" : "Welcome, \(userProfile.firstName)")
-                    .font(.title2)
-                    .fontWeight(.semibold)
-                    .foregroundColor(.white)
-                
-                Text(userProfile.role.isEmpty ? "Tap profile to configure" : userProfile.role)
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
-            }
-            
-            Spacer()
-            
-            Button(action: {
-                showingUserProfile = true
-            }) {
-                Image(systemName: "person.circle")
-                    .font(.title2)
-                    .foregroundColor(Color("TreeShopGreen"))
+    private var userProfileSection: some View {
+        SettingsSection(title: "User Profile", icon: "person.circle") {
+            VStack(spacing: 12) {
+                // User profile card
+                Button(action: {
+                    showingUserProfile = true
+                }) {
+                    HStack(spacing: 16) {
+                        Circle()
+                            .fill(Color("TreeShopGreen"))
+                            .frame(width: 50, height: 50)
+                            .overlay(
+                                Text(userProfile.initials.isEmpty ? "U" : userProfile.initials)
+                                    .font(.headline)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.black)
+                            )
+                        
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text(userProfile.fullName.isEmpty ? "Set up your profile" : userProfile.fullName)
+                                .font(.headline)
+                                .fontWeight(.semibold)
+                                .foregroundColor(.white)
+                            
+                            Text(userProfile.role.isEmpty ? "Tap to configure" : userProfile.role)
+                                .font(.subheadline)
+                                .foregroundColor(.gray)
+                        }
+                        
+                        Spacer()
+                        
+                        Image(systemName: "chevron.right")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                    }
+                    .padding(16)
+                    .background(
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color.white.opacity(0.05))
+                            .stroke(Color.white.opacity(0.1), lineWidth: 1)
+                    )
+                }
+                .buttonStyle(PlainButtonStyle())
             }
         }
-        .padding(20)
-        .background(
-            RoundedRectangle(cornerRadius: 16)
-                .fill(Color.white.opacity(0.05))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 16)
+    }
+    
+    private var appSettingsSection: some View {
+        SettingsSection(title: "App Settings", icon: "gearshape") {
+            VStack(spacing: 12) {
+                SettingsToggleRow(
+                    title: "Dark Mode",
+                    subtitle: "Always enabled for TreeShop Ops",
+                    icon: "moon",
+                    isOn: .constant(true)
+                )
+                .disabled(true)
+                
+                SettingsToggleRow(
+                    title: "Notifications",
+                    subtitle: "Follow-ups and overdue alerts",
+                    icon: "bell",
+                    isOn: $userProfile.notificationsEnabled
+                )
+                
+                SettingsToggleRow(
+                    title: "Auto-save Drafts",
+                    subtitle: "Automatically save work in progress",
+                    icon: "doc.badge.plus",
+                    isOn: $userProfile.autoSaveDrafts
+                )
+            }
+        }
+    }
+    
+    private var aboutSection: some View {
+        SettingsSection(title: "About", icon: "info.circle") {
+            VStack(spacing: 12) {
+                HStack {
+                    Image(systemName: "tree")
+                        .font(.title2)
+                        .foregroundColor(Color("TreeShopGreen"))
+                    
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("TreeShop Ops")
+                            .font(.headline)
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                        
+                        Text("Forestry Mulching & Land Clearing Operations")
+                            .font(.subheadline)
+                            .foregroundColor(.gray)
+                        
+                        Text("Version 1.0.0")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                    }
+                    
+                    Spacer()
+                }
+                .padding(16)
+                .background(
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(Color.white.opacity(0.05))
                         .stroke(Color.white.opacity(0.1), lineWidth: 1)
                 )
-        )
+            }
+        }
     }
     
     private var pipelineOverview: some View {

@@ -43,6 +43,7 @@
 		2A067 /* ServiceItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A068 /* ServiceItemModel.swift */; };
 		2A069 /* ServiceItemListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A070 /* ServiceItemListView.swift */; };
 		2A071 /* AddEditServiceItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A072 /* AddEditServiceItemView.swift */; };
+		2A073 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A074 /* DashboardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +84,7 @@
 		2A068 /* ServiceItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceItemModel.swift; sourceTree = "<group>"; };
 		2A070 /* ServiceItemListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceItemListView.swift; sourceTree = "<group>"; };
 		2A072 /* AddEditServiceItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditServiceItemView.swift; sourceTree = "<group>"; };
+		2A074 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 				2A068 /* ServiceItemModel.swift */,
 				2A070 /* ServiceItemListView.swift */,
 				2A072 /* AddEditServiceItemView.swift */,
+				2A074 /* DashboardView.swift */,
 				2A006 /* Assets.xcassets */,
 				2A995 /* Preview Content */,
 			);
@@ -267,6 +270,7 @@
 				2A067 /* ServiceItemModel.swift in Sources */,
 				2A069 /* ServiceItemListView.swift in Sources */,
 				2A071 /* AddEditServiceItemView.swift in Sources */,
+				2A073 /* DashboardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
