@@ -22,39 +22,16 @@ struct MainTabView: View {
                 Label("Dashboard", systemImage: "house")
             }
             
-            // Leads Tab
+            // Pipeline Tab (combines Leads, Proposals, Work Orders)
             NavigationView {
-                LeadListView()
+                PipelineView()
                     .environmentObject(leadManager)
                     .environmentObject(proposalManager)
-                    .environmentObject(customerManager)
-            }
-            .tabItem {
-                Label("Leads", systemImage: "person.crop.circle.badge.plus")
-            }
-            
-            // Proposals Tab
-            NavigationView {
-                ProposalListView()
-                    .environmentObject(proposalManager)
-                    .environmentObject(leadManager)
                     .environmentObject(workOrderManager)
                     .environmentObject(customerManager)
             }
             .tabItem {
-                Label("Proposals", systemImage: "doc.text.fill")
-            }
-            
-            // Work Orders Tab
-            NavigationView {
-                WorkOrderListView()
-                    .environmentObject(workOrderManager)
-                    .environmentObject(proposalManager)
-                    .environmentObject(invoiceManager)
-                    .environmentObject(customerManager)
-            }
-            .tabItem {
-                Label("Work Orders", systemImage: "hammer.fill")
+                Label("Pipeline", systemImage: "arrow.right.circle")
             }
             
             // Invoices Tab
@@ -84,13 +61,9 @@ struct MainTabView: View {
             // Menu Tab
             NavigationView {
                 MenuView(pricingModel: pricingModel)
-                    .environmentObject(leadManager)
-                    .environmentObject(proposalManager)
-                    .environmentObject(workOrderManager)
-                    .environmentObject(invoiceManager)
             }
             .tabItem {
-                Label("Menu", systemImage: "line.3.horizontal.circle.fill")
+                Label("Menu", systemImage: "ellipsis")
             }
         }
         .accentColor(Color("TreeShopGreen"))

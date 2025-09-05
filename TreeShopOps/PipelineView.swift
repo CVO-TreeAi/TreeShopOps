@@ -1,0 +1,88 @@
+import SwiftUI
+
+struct PipelineView: View {
+    @EnvironmentObject var leadManager: LeadManager
+    @EnvironmentObject var proposalManager: ProposalManager
+    @EnvironmentObject var workOrderManager: WorkOrderManager
+    @EnvironmentObject var customerManager: CustomerManager
+    
+    @State private var selectedPipelineTab = 0
+    private let pipelineTabs = ["Leads", "Proposals", "Work Orders"]
+    
+    var body: some View {
+        VStack(spacing: 0) {
+            // Pipeline tab picker
+            pipelineTabPicker
+            
+            // Content based on selected tab
+            Group {
+                switch selectedPipelineTab {
+                case 0:
+                    LeadListView()
+                        .environmentObject(leadManager)
+                        .environmentObject(proposalManager)
+                        .environmentObject(customerManager)
+                case 1:
+                    ProposalListView()
+                        .environmentObject(proposalManager)
+                        .environmentObject(leadManager)
+                        .environmentObject(workOrderManager)
+                        .environmentObject(customerManager)
+                case 2:
+                    WorkOrderListView()
+                        .environmentObject(workOrderManager)
+                        .environmentObject(proposalManager)
+                        .environmentObject(customerManager)
+                default:
+                    EmptyView()
+                }
+            }
+            .navigationBarHidden(true)
+        }
+        .navigationTitle("Pipeline")
+        .navigationBarTitleDisplayMode(.large)
+    }
+    
+    private var pipelineTabPicker: some View {
+        VStack(spacing: 0) {
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 0) {
+                    ForEach(0..<pipelineTabs.count, id: \.self) { index in
+                        Button(action: {
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                selectedPipelineTab = index
+                            }
+                        }) {
+                            VStack(spacing: 8) {
+                                Text(pipelineTabs[index])
+                                    .font(.headline)
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(selectedPipelineTab == index ? Color("TreeShopGreen") : .gray)
+                                
+                                Rectangle()
+                                    .fill(selectedPipelineTab == index ? Color("TreeShopGreen") : Color.clear)
+                                    .frame(height: 3)
+                            }
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 16)
+                    }
+                }
+            }
+            .background(Color("TreeShopBlack"))
+            
+            Divider()
+                .background(Color.white.opacity(0.1))
+        }
+    }
+}
+
+#Preview {
+    NavigationView {
+        PipelineView()
+            .environmentObject(LeadManager())
+            .environmentObject(ProposalManager())
+            .environmentObject(WorkOrderManager())
+            .environmentObject(CustomerManager())
+    }
+}
