@@ -14,7 +14,7 @@ struct ServiceItem: Identifiable, Codable {
     var maximumQuantity: Double?
     
     // Pricing Rules
-    var pricingModel: PricingModel
+    var pricingModel: ServicePricingModel
     var discountEligible: Bool
     var taxable: Bool
     var taxCategory: TaxCategory
@@ -40,7 +40,7 @@ struct ServiceItem: Identifiable, Codable {
         basePrice: Double = 0.0,
         minimumQuantity: Double = 0.1,
         maximumQuantity: Double? = nil,
-        pricingModel: PricingModel = .fixed,
+        pricingModel: ServicePricingModel = .fixed,
         discountEligible: Bool = true,
         taxable: Bool = true,
         taxCategory: TaxCategory = .services,
@@ -216,7 +216,7 @@ enum UnitType: String, CaseIterable, Codable {
     }
 }
 
-enum PricingModel: String, CaseIterable, Codable {
+enum ServicePricingModel: String, CaseIterable, Codable {
     case fixed = "Fixed Price"
     case tiered = "Tiered Pricing"
     case volumeDiscount = "Volume Discount"

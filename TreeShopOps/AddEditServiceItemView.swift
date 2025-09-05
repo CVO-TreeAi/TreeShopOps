@@ -177,7 +177,7 @@ struct AddEditServiceItemView: View {
                             .foregroundColor(.white)
                         
                         Picker("Pricing Model", selection: $serviceItem.pricingModel) {
-                            ForEach(PricingModel.allCases, id: \.self) { model in
+                            ForEach(ServicePricingModel.allCases, id: \.self) { model in
                                 VStack(alignment: .leading) {
                                     Text(model.rawValue)
                                     Text(model.description)
