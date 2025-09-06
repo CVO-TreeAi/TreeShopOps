@@ -64,18 +64,28 @@ class TreeShopAPIService: ObservableObject {
         print("📥 Response status: \((response as? HTTPURLResponse)?.statusCode ?? -1)")
         print("📥 Response data: \(String(data: data, encoding: .utf8) ?? "nil")")
         
-        guard let httpResponse = response as? HTTPURLResponse,
-              httpResponse.statusCode == 200 else {
-            print("❌ Invalid response: \(response)")
+        guard let httpResponse = response as? HTTPURLResponse else {
+            print("❌ Not HTTP response: \(response)")
             throw APIError.invalidResponse
         }
         
-        let apiResponse = try JSONDecoder().decode(ConvexResponse<[WebsiteLead]>.self, from: data)
-        lastSyncTime = Date()
-        isConnected = true
+        guard httpResponse.statusCode == 200 else {
+            print("❌ HTTP Status \(httpResponse.statusCode)")
+            print("❌ Response body: \(String(data: data, encoding: .utf8) ?? "nil")")
+            throw APIError.invalidResponse
+        }
         
-        print("✅ Decoded \(apiResponse.result.count) leads successfully")
-        return apiResponse.result
+        do {
+            let apiResponse = try JSONDecoder().decode(ConvexResponse<[WebsiteLead]>.self, from: data)
+            lastSyncTime = Date()
+            isConnected = true
+            print("✅ Decoded \(apiResponse.result.count) leads successfully")
+            return apiResponse.result
+        } catch {
+            print("❌ JSON Decode Error: \(error)")
+            print("❌ Raw JSON: \(String(data: data, encoding: .utf8) ?? "nil")")
+            throw error
+        }
     }
     
     func updateLeadStatus(leadId: String, status: WebsiteLeadStatus, notes: String? = nil) async throws {
@@ -342,6 +352,7 @@ class WebsiteLeadSyncManager: ObservableObject {
         }
         
         syncCancellable = apiService.startLeadSync()
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] leads in
                 self?.websiteLeads = leads
                 self?.isSyncing = false
