@@ -49,7 +49,7 @@ class TreeShopAPIService: ObservableObject {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         let queryBody: [String: Any] = [
-            "query": "leads.list",
+            "path": "leads.list",
             "args": [:]
         ]
         
@@ -94,7 +94,7 @@ class TreeShopAPIService: ObservableObject {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         let mutationBody: [String: Any] = [
-            "mutation": "leads.updateStatus",
+            "path": "leads.updateStatus",
             "args": [
                 "id": leadId,
                 "status": status.rawValue,
@@ -119,7 +119,7 @@ class TreeShopAPIService: ObservableObject {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         let mutationBody: [String: Any] = [
-            "mutation": "leads.validate",
+            "path": "leads.validate",
             "args": [
                 "id": leadId,
                 "wetlandsChecked": wetlandsChecked,
@@ -384,9 +384,64 @@ class WebsiteLeadSyncManager: ObservableObject {
             self.isSyncing = false
         } catch {
             print("❌ Sync error: \(error)")
-            self.syncError = error.localizedDescription
-            self.isSyncing = false
+            // For now, load mock data if Convex functions don't exist
+            if error.localizedDescription.contains("Could not find public function") {
+                print("🔧 Loading mock data for testing...")
+                self.websiteLeads = createMockWebsiteLeads()
+                self.syncError = "Using mock data - Deploy Convex functions for live sync"
+                self.isSyncing = false
+            } else {
+                self.syncError = error.localizedDescription
+                self.isSyncing = false
+            }
         }
+    }
+    
+    private func createMockWebsiteLeads() -> [WebsiteLead] {
+        return [
+            WebsiteLead(
+                id: "mock-1",
+                name: "John Smith", 
+                email: "john@example.com",
+                phone: "555-123-4567",
+                propertyAddress: "123 Forest Lane, Orlando, FL",
+                source: .fltreeshopCom,
+                status: .new,
+                createdAt: Date().timeIntervalSince1970 * 1000,
+                updatedAt: Date().timeIntervalSince1970 * 1000,
+                packageType: .medium,
+                instantQuote: 4500.0,
+                estimatedAcreage: 2.5,
+                additionalDetails: "Need land clearing for new construction",
+                assignedTo: nil,
+                followedUpAt: nil,
+                validatedAt: nil,
+                wetlandsChecked: nil,
+                siteMapUrl: nil,
+                parcelId: nil
+            ),
+            WebsiteLead(
+                id: "mock-2",
+                name: "Sarah Johnson",
+                email: "sarah@example.com", 
+                phone: "555-987-6543",
+                propertyAddress: "456 Pine Street, Tampa, FL",
+                source: .fltreeshopCom,
+                status: .contacted,
+                createdAt: (Date().timeIntervalSince1970 - 86400) * 1000,
+                updatedAt: Date().timeIntervalSince1970 * 1000,
+                packageType: .large,
+                instantQuote: 8750.0,
+                estimatedAcreage: 5.2,
+                additionalDetails: "Overgrown lot needs full clearing",
+                assignedTo: "TreeShop Team",
+                followedUpAt: Date().timeIntervalSince1970 * 1000,
+                validatedAt: nil,
+                wetlandsChecked: false,
+                siteMapUrl: nil,
+                parcelId: nil
+            )
+        ]
     }
     
     func updateLeadStatus(_ leadId: String, status: WebsiteLeadStatus, notes: String = "") async {
