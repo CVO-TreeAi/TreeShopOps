@@ -122,8 +122,8 @@ struct CreateLoadoutView: View {
                         RoundedRectangle(cornerRadius: 8)
                             .fill(Color.white.opacity(0.05))
                     )
-                    .onChange(of: selectedCategory) { newCategory in
-                        markupMultiplier = newCategory.typicalMarkup
+                    .onChange(of: selectedCategory) {
+                        markupMultiplier = selectedCategory.typicalMarkup
                     }
                 }
                 

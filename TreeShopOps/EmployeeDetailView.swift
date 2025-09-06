@@ -135,8 +135,8 @@ struct EmployeeDetailView: View {
                     .foregroundColor(.gray)
                 
                 Text(employee.qualificationCode)
-                    .font(.title3)
-                    .fontWeight(.monospaced(.semibold))
+                    .font(.system(.title3, design: .monospaced))
+                    .fontWeight(.semibold)
                     .foregroundColor(Color("TreeShopGreen"))
                     .padding(12)
                     .background(

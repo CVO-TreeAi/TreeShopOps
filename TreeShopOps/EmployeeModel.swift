@@ -25,11 +25,17 @@ struct Employee: Codable, Identifiable, Hashable {
         )
         self.metadata = EmployeeMetadata(
             dateHired: Date(),
+            lastModified: Date(),
             status: .active,
             availability: .available,
             performanceRating: 0,
             hoursThisMonth: 0,
-            totalHoursWorked: 0
+            totalHoursWorked: 0,
+            lastPromotion: nil,
+            nextReviewDate: nil,
+            disciplinaryActions: 0,
+            safetyRecord: 0,
+            customerRating: nil
         )
     }
     
@@ -127,6 +133,7 @@ struct EmployeeCalculation: Codable, Hashable {
 
 struct EmployeeMetadata: Codable, Hashable {
     var dateHired: Date
+    var lastModified: Date
     var status: EmployeeStatus
     var availability: EmployeeAvailability
     var performanceRating: Double // 0-5 scale

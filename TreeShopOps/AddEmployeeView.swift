@@ -528,8 +528,8 @@ struct AddEmployeeView: View {
                         .foregroundColor(.white)
                     
                     Text(qualCode)
-                        .font(.title3)
-                        .fontWeight(.monospaced(.medium))
+                        .font(.system(.title3, design: .monospaced))
+                        .fontWeight(.medium)
                         .foregroundColor(Color("TreeShopGreen"))
                         .padding(12)
                         .background(

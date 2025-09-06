@@ -278,7 +278,13 @@ struct EmployeeRowView: View {
     
     var body: some View {
         Button(action: onTap) {
-            VStack(alignment: .leading, spacing: 12) {
+            employeeCardContent
+        }
+        .buttonStyle(PlainButtonStyle())
+    }
+    
+    private var employeeCardContent: some View {
+        VStack(alignment: .leading, spacing: 12) {
                 // Header row
                 HStack {
                     VStack(alignment: .leading, spacing: 4) {
@@ -331,8 +337,8 @@ struct EmployeeRowView: View {
                         .foregroundColor(.gray)
                     
                     Text(employee.qualificationCode)
-                        .font(.caption)
-                        .fontWeight(.monospaced(.medium))
+                        .font(.system(.caption, design: .monospaced))
+                        .fontWeight(.medium)
                         .foregroundColor(Color("TreeShopGreen"))
                         .padding(.horizontal, 8)
                         .padding(.vertical, 2)
@@ -397,8 +403,6 @@ struct EmployeeRowView: View {
                     )
             )
         }
-        .buttonStyle(PlainButtonStyle())
-    }
 }
 
 #Preview {
