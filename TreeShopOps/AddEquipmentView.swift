@@ -83,10 +83,8 @@ struct AddEquipmentView: View {
                         // Usage Pattern Section
                         usagePatternSection
                         
-                        // Financial Details Section (Simplified)
-                        Text("Financial Details - Coming Soon")
-                            .padding()
-                            .background(Color.secondary.opacity(0.2))
+                        // Financial Details Section
+                        financialDetailsSection
                         
                         // Calculation Preview
                         if showingCalculation, let calculated = calculatedCosts {
