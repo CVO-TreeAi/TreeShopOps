@@ -10,6 +10,7 @@ struct MenuView: View {
     @State private var showingBusinessConfig = false
     @State private var showingPricingSettings = false
     @State private var showingServiceItems = false
+    @State private var showingEquipment = false
     
     var body: some View {
         ZStack {
@@ -53,6 +54,12 @@ struct MenuView: View {
         .sheet(isPresented: $showingBusinessConfig) {
             BusinessConfigView()
         }
+        .sheet(isPresented: $showingEquipment) {
+            NavigationView {
+                EquipmentListView()
+                    .environmentObject(EquipmentManager())
+            }
+        }
     }
     
     private var businessManagementSection: some View {
@@ -83,6 +90,15 @@ struct MenuView: View {
                     color: .orange
                 ) {
                     showingServiceItems = true
+                }
+                
+                MenuRowButton(
+                    title: "Equipment Directory",
+                    subtitle: "Equipment inventory and cost tracking",
+                    icon: "gear.circle",
+                    color: Color("TreeShopGreen")
+                ) {
+                    showingEquipment = true
                 }
                 
                 MenuRowButton(

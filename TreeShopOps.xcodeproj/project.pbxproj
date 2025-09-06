@@ -50,6 +50,11 @@
 		2A081 /* WebsiteLeadDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A082 /* WebsiteLeadDetailView.swift */; };
 		2A083 /* BusinessConfigModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A084 /* BusinessConfigModel.swift */; };
 		2A085 /* BusinessConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A086 /* BusinessConfigView.swift */; };
+		2A087 /* EquipmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A088 /* EquipmentModel.swift */; };
+		2A089 /* EquipmentCalculationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A090 /* EquipmentCalculationEngine.swift */; };
+		2A091 /* EquipmentListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A092 /* EquipmentListView.swift */; };
+		2A093 /* AddEquipmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A094 /* AddEquipmentView.swift */; };
+		2A095 /* EquipmentDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A096 /* EquipmentDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -97,6 +102,11 @@
 		2A082 /* WebsiteLeadDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebsiteLeadDetailView.swift; sourceTree = "<group>"; };
 		2A084 /* BusinessConfigModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessConfigModel.swift; sourceTree = "<group>"; };
 		2A086 /* BusinessConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessConfigView.swift; sourceTree = "<group>"; };
+		2A088 /* EquipmentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentModel.swift; sourceTree = "<group>"; };
+		2A090 /* EquipmentCalculationEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentCalculationEngine.swift; sourceTree = "<group>"; };
+		2A092 /* EquipmentListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentListView.swift; sourceTree = "<group>"; };
+		2A094 /* AddEquipmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEquipmentView.swift; sourceTree = "<group>"; };
+		2A096 /* EquipmentDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +180,11 @@
 				2A082 /* WebsiteLeadDetailView.swift */,
 				2A084 /* BusinessConfigModel.swift */,
 				2A086 /* BusinessConfigView.swift */,
+				2A088 /* EquipmentModel.swift */,
+				2A090 /* EquipmentCalculationEngine.swift */,
+				2A092 /* EquipmentListView.swift */,
+				2A094 /* AddEquipmentView.swift */,
+				2A096 /* EquipmentDetailView.swift */,
 				2A006 /* Assets.xcassets */,
 				2A995 /* Preview Content */,
 			);
@@ -295,6 +310,11 @@
 				2A081 /* WebsiteLeadDetailView.swift in Sources */,
 				2A083 /* BusinessConfigModel.swift in Sources */,
 				2A085 /* BusinessConfigView.swift in Sources */,
+				2A087 /* EquipmentModel.swift in Sources */,
+				2A089 /* EquipmentCalculationEngine.swift in Sources */,
+				2A091 /* EquipmentListView.swift in Sources */,
+				2A093 /* AddEquipmentView.swift in Sources */,
+				2A095 /* EquipmentDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
