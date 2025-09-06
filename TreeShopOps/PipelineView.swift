@@ -1,10 +1,13 @@
 import SwiftUI
 
 struct PipelineView: View {
-    @EnvironmentObject var leadManager: LeadManager
-    @EnvironmentObject var proposalManager: ProposalManager
-    @EnvironmentObject var workOrderManager: WorkOrderManager
-    @EnvironmentObject var customerManager: CustomerManager
+    @EnvironmentObject var appState: AppStateManager
+    
+    // Computed properties for better performance  
+    private var leadManager: LeadManager { appState.leadManager }
+    private var proposalManager: ProposalManager { appState.proposalManager }
+    private var workOrderManager: WorkOrderManager { appState.workOrderManager }
+    private var customerManager: CustomerManager { appState.customerManager }
     
     @State private var selectedPipelineTab = 0
     private let pipelineTabs = ["Website", "Leads", "Proposals", "Work Orders"]
@@ -19,25 +22,16 @@ struct PipelineView: View {
                 switch selectedPipelineTab {
                 case 0:
                     WebsiteLeadListView()
-                        .environmentObject(leadManager)
-                        .environmentObject(proposalManager)
-                        .environmentObject(customerManager)
+                        .environmentObject(appState)
                 case 1:
                     LeadListView()
-                        .environmentObject(leadManager)
-                        .environmentObject(proposalManager)
-                        .environmentObject(customerManager)
+                        .environmentObject(appState)
                 case 2:
                     ProposalListView()
-                        .environmentObject(proposalManager)
-                        .environmentObject(leadManager)
-                        .environmentObject(workOrderManager)
-                        .environmentObject(customerManager)
+                        .environmentObject(appState)
                 case 3:
                     WorkOrderListView()
-                        .environmentObject(workOrderManager)
-                        .environmentObject(proposalManager)
-                        .environmentObject(customerManager)
+                        .environmentObject(appState)
                 default:
                     EmptyView()
                 }

@@ -184,9 +184,17 @@ class LeadManager: ObservableObject {
     @Published var leads: [Lead] = []
     
     private let leadsKey = "SavedLeads"
+    private var dataLoadingTask: Task<Void, Never>?
     
     init() {
-        loadLeads()
+        // Load data asynchronously to prevent UI blocking
+        dataLoadingTask = Task { @MainActor in
+            await loadLeadsAsync()
+        }
+    }
+    
+    deinit {
+        dataLoadingTask?.cancel()
     }
     
     func addLead(_ lead: Lead) {
@@ -231,6 +239,30 @@ class LeadManager: ObservableObject {
             lead.projectDescription.localizedCaseInsensitiveContains(searchText) ||
             lead.customerPhone.localizedCaseInsensitiveContains(searchText)
         }
+    }
+    
+    // MARK: - Async Data Loading for Performance
+    
+    @MainActor
+    private func loadLeadsAsync() async {
+        await Task { @MainActor in
+            // Perform data loading on background queue
+            await withCheckedContinuation { continuation in
+                DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+                    if let data = UserDefaults.standard.data(forKey: self?.leadsKey ?? "SavedLeads"),
+                       let decoded = try? JSONDecoder().decode([Lead].self, from: data) {
+                        DispatchQueue.main.async {
+                            self?.leads = decoded
+                            continuation.resume()
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            continuation.resume()
+                        }
+                    }
+                }
+            }
+        }.value
     }
     
     func convertLeadToProposal(_ lead: Lead) -> Proposal {

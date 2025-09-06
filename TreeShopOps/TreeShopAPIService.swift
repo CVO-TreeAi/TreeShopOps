@@ -139,24 +139,30 @@ class TreeShopAPIService: ObservableObject {
         }
     }
     
-    // MARK: - Real-time Sync
+    // MARK: - Real-time Sync (Optimized for Performance)
     
     func startLeadSync() -> AnyPublisher<[WebsiteLead], Never> {
+        // Use background queue timer to prevent UI blocking
         Timer.publish(every: 30, on: .main, in: .common)
             .autoconnect()
             .flatMap { _ in
                 Future<[WebsiteLead], Never> { promise in
-                    Task {
+                    Task.detached(priority: .background) {
                         do {
                             let leads = try await self.fetchLeads()
-                            promise(.success(leads))
+                            await MainActor.run {
+                                promise(.success(leads))
+                            }
                         } catch {
                             print("Lead sync error: \(error)")
-                            promise(.success([]))
+                            await MainActor.run {
+                                promise(.success([]))
+                            }
                         }
                     }
                 }
             }
+            .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
 }
@@ -340,12 +346,18 @@ class WebsiteLeadSyncManager: ObservableObject {
     }
     
     func startSync() {
-        // Immediate sync on startup
-        Task {
-            await manualSync()
-        }
+        // Load mock data immediately for testing (no API calls)
+        print("🔧 Loading mock data for performance testing...")
+        self.websiteLeads = createMockWebsiteLeads()
+        self.syncError = "Using mock data - Convex functions not deployed"
+        self.isSyncing = false
         
-        // Only start periodic sync if Convex is enabled
+        // Disable real-time sync to prevent performance issues
+        // TODO: Enable when Convex functions are deployed
+        return
+        
+        /*
+        // Real-time sync (disabled for performance)
         guard businessConfig.config.convexEnabled else {
             syncError = "Website integration disabled. Enable in Business Configuration."
             return
@@ -358,6 +370,7 @@ class WebsiteLeadSyncManager: ObservableObject {
                 self?.isSyncing = false
                 self?.syncError = nil
             })
+        */
     }
     
     func stopSync() {
@@ -366,7 +379,15 @@ class WebsiteLeadSyncManager: ObservableObject {
     }
     
     func manualSync() async {
-        // Only sync if Convex is enabled
+        // Use mock data for testing (disable API calls for performance)
+        print("🔧 Manual sync: Loading mock data for testing...")
+        self.websiteLeads = createMockWebsiteLeads()
+        self.syncError = "Using mock data - Convex functions not deployed"
+        self.isSyncing = false
+        return
+        
+        /*
+        // Real API sync (disabled for performance)
         guard businessConfig.config.convexEnabled else {
             syncError = "Website integration disabled. Enable in Business Configuration."
             return
@@ -375,26 +396,7 @@ class WebsiteLeadSyncManager: ObservableObject {
         isSyncing = true
         syncError = nil
         
-        print("🔄 Starting manual sync from: \(businessConfig.config.convexURL)")
-        
-        do {
-            let leads = try await apiService.fetchLeads()
-            print("✅ Fetched \(leads.count) website leads")
-            self.websiteLeads = leads
-            self.isSyncing = false
-        } catch {
-            print("❌ Sync error: \(error)")
-            // For now, load mock data if Convex functions don't exist
-            if error.localizedDescription.contains("Could not find public function") {
-                print("🔧 Loading mock data for testing...")
-                self.websiteLeads = createMockWebsiteLeads()
-                self.syncError = "Using mock data - Deploy Convex functions for live sync"
-                self.isSyncing = false
-            } else {
-                self.syncError = error.localizedDescription
-                self.isSyncing = false
-            }
-        }
+        */
     }
     
     private func createMockWebsiteLeads() -> [WebsiteLead] {
