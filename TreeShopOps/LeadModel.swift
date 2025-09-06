@@ -245,24 +245,10 @@ class LeadManager: ObservableObject {
     
     @MainActor
     private func loadLeadsAsync() async {
-        await Task { @MainActor in
-            // Perform data loading on background queue
-            await withCheckedContinuation { continuation in
-                DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-                    if let data = UserDefaults.standard.data(forKey: self?.leadsKey ?? "SavedLeads"),
-                       let decoded = try? JSONDecoder().decode([Lead].self, from: data) {
-                        DispatchQueue.main.async {
-                            self?.leads = decoded
-                            continuation.resume()
-                        }
-                    } else {
-                        DispatchQueue.main.async {
-                            continuation.resume()
-                        }
-                    }
-                }
-            }
-        }.value
+        if let data = UserDefaults.standard.data(forKey: leadsKey),
+           let decoded = try? JSONDecoder().decode([Lead].self, from: data) {
+            leads = decoded
+        }
     }
     
     func convertLeadToProposal(_ lead: Lead) -> Proposal {

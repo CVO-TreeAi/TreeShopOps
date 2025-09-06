@@ -9,41 +9,7 @@ class AppStateManager: ObservableObject {
     @Published var customerManager = CustomerManager()
     @Published var pricingModel = PricingModel()
     
-    private var dataLoadTask: Task<Void, Never>?
     
-    init() {
-        // Initialize in background to prevent UI blocking
-        dataLoadTask = Task.detached(priority: .userInitiated) { [weak self] in
-            await self?.preloadData()
-        }
-    }
-    
-    deinit {
-        dataLoadTask?.cancel()
-    }
-    
-    @MainActor
-    private func preloadData() async {
-        // Pre-load data in background to improve initial performance
-        // This ensures data is available when views first appear
-        await withTaskGroup(of: Void.self) { group in
-            group.addTask { [weak self] in
-                _ = await self?.leadManager.leads
-            }
-            group.addTask { [weak self] in
-                _ = await self?.proposalManager.proposals
-            }
-            group.addTask { [weak self] in
-                _ = await self?.workOrderManager.workOrders
-            }
-            group.addTask { [weak self] in
-                _ = await self?.invoiceManager.invoices
-            }
-            group.addTask { [weak self] in
-                _ = await self?.customerManager.customers
-            }
-        }
-    }
 }
 
 struct MainTabView: View {
