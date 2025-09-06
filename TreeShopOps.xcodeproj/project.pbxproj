@@ -55,6 +55,9 @@
 		2A091 /* EquipmentListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A092 /* EquipmentListView.swift */; };
 		2A093 /* AddEquipmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A094 /* AddEquipmentView.swift */; };
 		2A095 /* EquipmentDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A096 /* EquipmentDetailView.swift */; };
+		2A097 /* EmployeeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A098 /* EmployeeModel.swift */; };
+		2A099 /* EmployeeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A100 /* EmployeeListView.swift */; };
+		2A101 /* AddEmployeeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A102 /* AddEmployeeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -107,6 +110,9 @@
 		2A092 /* EquipmentListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentListView.swift; sourceTree = "<group>"; };
 		2A094 /* AddEquipmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEquipmentView.swift; sourceTree = "<group>"; };
 		2A096 /* EquipmentDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentDetailView.swift; sourceTree = "<group>"; };
+		2A098 /* EmployeeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeModel.swift; sourceTree = "<group>"; };
+		2A100 /* EmployeeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeListView.swift; sourceTree = "<group>"; };
+		2A102 /* AddEmployeeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEmployeeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +191,9 @@
 				2A092 /* EquipmentListView.swift */,
 				2A094 /* AddEquipmentView.swift */,
 				2A096 /* EquipmentDetailView.swift */,
+				2A098 /* EmployeeModel.swift */,
+				2A100 /* EmployeeListView.swift */,
+				2A102 /* AddEmployeeView.swift */,
 				2A006 /* Assets.xcassets */,
 				2A995 /* Preview Content */,
 			);
@@ -315,6 +324,9 @@
 				2A091 /* EquipmentListView.swift in Sources */,
 				2A093 /* AddEquipmentView.swift in Sources */,
 				2A095 /* EquipmentDetailView.swift in Sources */,
+				2A097 /* EmployeeModel.swift in Sources */,
+				2A099 /* EmployeeListView.swift in Sources */,
+				2A101 /* AddEmployeeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
