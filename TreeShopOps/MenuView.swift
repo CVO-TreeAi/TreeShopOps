@@ -11,6 +11,7 @@ struct MenuView: View {
     @State private var showingPricingSettings = false
     @State private var showingServiceItems = false
     @State private var showingEquipment = false
+    @State private var showingEmployees = false
     
     var body: some View {
         ZStack {
@@ -60,6 +61,12 @@ struct MenuView: View {
                     .environmentObject(EquipmentManager())
             }
         }
+        .sheet(isPresented: $showingEmployees) {
+            NavigationView {
+                EmployeeListView()
+                    .environmentObject(EmployeeManager())
+            }
+        }
     }
     
     private var businessManagementSection: some View {
@@ -99,6 +106,15 @@ struct MenuView: View {
                     color: Color("TreeShopGreen")
                 ) {
                     showingEquipment = true
+                }
+                
+                MenuRowButton(
+                    title: "Employee Directory",
+                    subtitle: "Workforce management and qualification tracking",
+                    icon: "person.3.sequence",
+                    color: Color("TreeShopBlue")
+                ) {
+                    showingEmployees = true
                 }
                 
                 MenuRowButton(

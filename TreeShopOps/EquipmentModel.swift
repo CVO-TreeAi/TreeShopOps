@@ -79,7 +79,7 @@ struct EquipmentFinancial: Codable, Hashable {
         if let custom = customMaintenanceCost, custom > 0 {
             return custom
         }
-        return maintenanceLevel.annualCost
+        return maintenanceLevel.annualCost(purchasePrice: purchasePrice)
     }
 }
 
@@ -140,33 +140,148 @@ struct EquipmentMetadata: Codable, Hashable {
 // MARK: - Enums
 
 enum EquipmentCategory: String, CaseIterable, Codable {
-    case forestryMulcher = "Forestry Mulcher"
-    case skidSteer = "Skid Steer"
-    case pickupTruck = "Pickup Truck"
-    case dumpTruck = "Dump Truck"
+    // Tree Care Equipment
+    case aerialLift = "Aerial Lift"
+    case bucketTruck = "Bucket Truck"
     case chipper = "Chipper"
     case stumpGrinder = "Stump Grinder"
+    case craneService = "Crane Service"
+    case grappleTruck = "Grapple Truck"
+    
+    // Forestry Equipment
+    case forestryMulcher = "Forestry Mulcher"
+    case brushCutter = "Brush Cutter"
+    case logLoader = "Log Loader"
+    case forwarder = "Forwarder"
+    case harvester = "Harvester"
+    case tractor = "Tractor"
+    
+    // Construction/Earthmoving
+    case skidSteer = "Skid Steer"
+    case miniExcavator = "Mini Excavator"
+    case excavator = "Excavator"
+    case bulldozer = "Bulldozer"
+    case trackLoader = "Track Loader"
+    case wheelLoader = "Wheel Loader"
+    
+    // Trucks & Transport
+    case pickupTruck = "Pickup Truck"
+    case dumpTruck = "Dump Truck"
+    case flatbedTruck = "Flatbed Truck"
+    case serviceBody = "Service Body"
+    case trailer = "Trailer"
+    case equipmentTrailer = "Equipment Trailer"
+    
+    // Specialized Equipment
+    case sprayRig = "Spray Rig"
+    case stumpCutter = "Stump Cutter"
+    case logSplitter = "Log Splitter"
+    case sawmill = "Sawmill"
+    case firewood = "Firewood Equipment"
+    
+    // Support Equipment
+    case compressor = "Air Compressor"
+    case generator = "Generator"
+    case toolBox = "Tool Box"
+    case safetyEquipment = "Safety Equipment"
     case other = "Other"
     
     var systemImage: String {
         switch self {
+        // Tree Care Equipment
+        case .aerialLift: return "arrow.up.circle.fill"
+        case .bucketTruck: return "truck.box.fill"
+        case .chipper: return "leaf.circle.fill"
+        case .stumpGrinder: return "hammer.circle.fill"
+        case .craneService: return "crane.fill"
+        case .grappleTruck: return "hand.raised.fill"
+        
+        // Forestry Equipment
         case .forestryMulcher: return "tree.fill"
-        case .skidSteer: return "car.fill"
+        case .brushCutter: return "scissors.circle.fill"
+        case .logLoader: return "arrow.up.and.down.circle"
+        case .forwarder: return "truck.pickup.side.fill"
+        case .harvester: return "tree.circle.fill"
+        case .tractor: return "car.side.fill"
+        
+        // Construction/Earthmoving
+        case .skidSteer: return "car.circle.fill"
+        case .miniExcavator: return "gear.circle.fill"
+        case .excavator: return "gear.badge.xmark"
+        case .bulldozer: return "car.front.waves.up.fill"
+        case .trackLoader: return "gear.badge"
+        case .wheelLoader: return "car.fill"
+        
+        // Trucks & Transport
         case .pickupTruck: return "car.side.fill"
         case .dumpTruck: return "truck.box.fill"
-        case .chipper: return "leaf.fill"
-        case .stumpGrinder: return "hammer.fill"
+        case .flatbedTruck: return "truck.box"
+        case .serviceBody: return "toolbox.fill"
+        case .trailer: return "truck.box.badge.plus"
+        case .equipmentTrailer: return "truck.pickup.side.fill"
+        
+        // Specialized Equipment
+        case .sprayRig: return "drop.circle.fill"
+        case .stumpCutter: return "scissors.badge.ellipsis"
+        case .logSplitter: return "triangle.fill"
+        case .sawmill: return "building.2.crop.circle"
+        case .firewood: return "flame.circle.fill"
+        
+        // Support Equipment
+        case .compressor: return "wind.circle.fill"
+        case .generator: return "bolt.circle.fill"
+        case .toolBox: return "toolbox.fill"
+        case .safetyEquipment: return "shield.checkerboard"
         case .other: return "gear"
         }
     }
     
     var color: String {
         switch self {
-        case .forestryMulcher: return "TreeShopGreen"
-        case .skidSteer: return "TreeShopBlue"
-        case .pickupTruck, .dumpTruck: return "orange"
+        // Tree Care Equipment - Green tones
+        case .aerialLift: return "TreeShopGreen"
+        case .bucketTruck: return "TreeShopGreen"
         case .chipper: return "green"
-        case .stumpGrinder: return "brown"
+        case .stumpGrinder: return "TreeShopGreen"
+        case .craneService: return "TreeShopGreen"
+        case .grappleTruck: return "green"
+        
+        // Forestry Equipment - Forest tones
+        case .forestryMulcher: return "TreeShopGreen"
+        case .brushCutter: return "green"
+        case .logLoader: return "brown"
+        case .forwarder: return "brown"
+        case .harvester: return "TreeShopGreen"
+        case .tractor: return "green"
+        
+        // Construction/Earthmoving - Blue/Orange tones
+        case .skidSteer: return "TreeShopBlue"
+        case .miniExcavator: return "orange"
+        case .excavator: return "orange"
+        case .bulldozer: return "yellow"
+        case .trackLoader: return "TreeShopBlue"
+        case .wheelLoader: return "yellow"
+        
+        // Trucks & Transport - Orange/Red tones
+        case .pickupTruck: return "orange"
+        case .dumpTruck: return "orange"
+        case .flatbedTruck: return "red"
+        case .serviceBody: return "orange"
+        case .trailer: return "gray"
+        case .equipmentTrailer: return "gray"
+        
+        // Specialized Equipment - Purple/Pink tones
+        case .sprayRig: return "blue"
+        case .stumpCutter: return "purple"
+        case .logSplitter: return "brown"
+        case .sawmill: return "brown"
+        case .firewood: return "red"
+        
+        // Support Equipment - Gray tones
+        case .compressor: return "blue"
+        case .generator: return "yellow"
+        case .toolBox: return "gray"
+        case .safetyEquipment: return "red"
         case .other: return "gray"
         }
     }
@@ -207,27 +322,37 @@ enum UsagePattern: String, CaseIterable, Codable {
 }
 
 enum MaintenanceLevel: String, CaseIterable, Codable {
-    case minimal = "Minimal"
-    case standard = "Standard"
-    case intense = "Intense"
+    case basic = "Basic (2%)"
+    case preventive = "Preventive (4%)"
+    case standard = "Standard (6%)"
+    case intensive = "Intensive (8%)"
+    case extreme = "Extreme (12%)"
     case custom = "Custom"
     
     var description: String {
         switch self {
-        case .minimal: return "Basic oil changes, filters"
-        case .standard: return "Regular service schedule"
-        case .intense: return "Heavy-duty operations, frequent repairs"
+        case .basic: return "Basic oil changes, filters only"
+        case .preventive: return "Preventive maintenance schedule"
+        case .standard: return "Manufacturer recommended service"
+        case .intensive: return "Heavy-duty operations maintenance"
+        case .extreme: return "Maximum preventive maintenance"
         case .custom: return "Custom maintenance plan"
         }
     }
     
-    var annualCost: Double {
+    var percentageOfPurchasePrice: Double {
         switch self {
-        case .minimal: return 1300
-        case .standard: return 2600
-        case .intense: return 4550
-        case .custom: return 0 // Will use custom cost
+        case .basic: return 0.02      // 2%
+        case .preventive: return 0.04 // 4%
+        case .standard: return 0.06   // 6%
+        case .intensive: return 0.08  // 8%
+        case .extreme: return 0.12    // 12%
+        case .custom: return 0        // Will use custom cost
         }
+    }
+    
+    func annualCost(purchasePrice: Double) -> Double {
+        return purchasePrice * percentageOfPurchasePrice
     }
 }
 
