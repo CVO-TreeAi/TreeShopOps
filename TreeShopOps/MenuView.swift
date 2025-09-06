@@ -12,6 +12,7 @@ struct MenuView: View {
     @State private var showingServiceItems = false
     @State private var showingEquipment = false
     @State private var showingEmployees = false
+    @State private var showingLoadouts = false
     
     var body: some View {
         ZStack {
@@ -67,6 +68,12 @@ struct MenuView: View {
                     .environmentObject(EmployeeManager())
             }
         }
+        .sheet(isPresented: $showingLoadouts) {
+            NavigationView {
+                LoadoutListView()
+                    .environmentObject(LoadoutManager())
+            }
+        }
     }
     
     private var businessManagementSection: some View {
@@ -115,6 +122,15 @@ struct MenuView: View {
                     color: Color("TreeShopBlue")
                 ) {
                     showingEmployees = true
+                }
+                
+                MenuRowButton(
+                    title: "Loadout Builder",
+                    subtitle: "Crew and equipment combinations with pricing",
+                    icon: "rectangle.3.group",
+                    color: .orange
+                ) {
+                    showingLoadouts = true
                 }
                 
                 MenuRowButton(

@@ -9,6 +9,8 @@ class AppStateManager: ObservableObject {
     @Published var customerManager = CustomerManager()
     @Published var pricingModel = PricingModel()
     @Published var equipmentManager = EquipmentManager()
+    @Published var employeeManager = EmployeeManager()
+    @Published var loadoutManager = LoadoutManager()
     
     
 }

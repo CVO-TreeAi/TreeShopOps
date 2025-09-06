@@ -58,6 +58,11 @@
 		2A097 /* EmployeeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A098 /* EmployeeModel.swift */; };
 		2A099 /* EmployeeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A100 /* EmployeeListView.swift */; };
 		2A101 /* AddEmployeeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A102 /* AddEmployeeView.swift */; };
+		2A103 /* EmployeeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A104 /* EmployeeDetailView.swift */; };
+		2A105 /* LoadoutModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A106 /* LoadoutModel.swift */; };
+		2A107 /* LoadoutListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A108 /* LoadoutListView.swift */; };
+		2A109 /* CreateLoadoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A110 /* CreateLoadoutView.swift */; };
+		2A111 /* LoadoutDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A112 /* LoadoutDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -113,6 +118,11 @@
 		2A098 /* EmployeeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeModel.swift; sourceTree = "<group>"; };
 		2A100 /* EmployeeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeListView.swift; sourceTree = "<group>"; };
 		2A102 /* AddEmployeeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEmployeeView.swift; sourceTree = "<group>"; };
+		2A104 /* EmployeeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeDetailView.swift; sourceTree = "<group>"; };
+		2A106 /* LoadoutModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadoutModel.swift; sourceTree = "<group>"; };
+		2A108 /* LoadoutListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadoutListView.swift; sourceTree = "<group>"; };
+		2A110 /* CreateLoadoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateLoadoutView.swift; sourceTree = "<group>"; };
+		2A112 /* LoadoutDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadoutDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +204,11 @@
 				2A098 /* EmployeeModel.swift */,
 				2A100 /* EmployeeListView.swift */,
 				2A102 /* AddEmployeeView.swift */,
+				2A104 /* EmployeeDetailView.swift */,
+				2A106 /* LoadoutModel.swift */,
+				2A108 /* LoadoutListView.swift */,
+				2A110 /* CreateLoadoutView.swift */,
+				2A112 /* LoadoutDetailView.swift */,
 				2A006 /* Assets.xcassets */,
 				2A995 /* Preview Content */,
 			);
@@ -327,6 +342,11 @@
 				2A097 /* EmployeeModel.swift in Sources */,
 				2A099 /* EmployeeListView.swift in Sources */,
 				2A101 /* AddEmployeeView.swift in Sources */,
+				2A103 /* EmployeeDetailView.swift in Sources */,
+				2A105 /* LoadoutModel.swift in Sources */,
+				2A107 /* LoadoutListView.swift in Sources */,
+				2A109 /* CreateLoadoutView.swift in Sources */,
+				2A111 /* LoadoutDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
