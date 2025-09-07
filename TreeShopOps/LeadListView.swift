@@ -39,15 +39,17 @@ struct LeadListView: View {
         }
         .navigationTitle("Leads")
         .navigationBarTitleDisplayMode(.large)
-        .navigationBarItems(
-            trailing: Button(action: {
-                showingAddLead = true
-            }) {
-                Image(systemName: "plus.circle.fill")
-                    .font(.title2)
-                    .foregroundColor(Color("TreeShopGreen"))
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    showingAddLead = true
+                }) {
+                    Image(systemName: "plus.circle.fill")
+                        .font(.title2)
+                        .foregroundColor(Color("TreeShopGreen"))
+                }
             }
-        )
+        }
         .sheet(isPresented: $showingAddLead) {
             AddEditLeadView()
                 .environmentObject(leadManager)

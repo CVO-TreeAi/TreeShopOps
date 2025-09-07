@@ -36,7 +36,6 @@ struct PipelineView: View {
                     EmptyView()
                 }
             }
-            .navigationBarHidden(true)
         }
         .navigationTitle("Pipeline")
         .navigationBarTitleDisplayMode(.large)
