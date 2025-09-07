@@ -11,6 +11,7 @@ struct LeadListView: View {
     @State private var showingAddLead = false
     @State private var selectedLead: Lead? = nil
     @State private var showingLeadDetail = false
+    @State private var refreshTrigger = UUID()
     
     var filteredLeads: [Lead] {
         var leads = leadManager.searchLeads(searchText)
@@ -35,6 +36,7 @@ struct LeadListView: View {
                 
                 // Leads list
                 leadsList
+                    .id(refreshTrigger)
             }
         }
         .navigationTitle("Leads")
@@ -54,6 +56,12 @@ struct LeadListView: View {
             AddEditLeadView()
                 .environmentObject(leadManager)
                 .environmentObject(customerManager)
+        }
+        .onChange(of: showingAddLead) {
+            if !showingAddLead {
+                // Refresh the list when add sheet closes
+                refreshTrigger = UUID()
+            }
         }
         .sheet(isPresented: $showingLeadDetail) {
             if let lead = selectedLead {
