@@ -128,13 +128,40 @@ struct DashboardView: View {
                     .foregroundColor(.white)
             }
             
-            // Pipeline stats grid - Using computed values for better performance
-            OptimizedStatsGrid(
-                leadManager: leadManager,
-                proposalManager: proposalManager, 
-                workOrderManager: workOrderManager,
-                invoiceManager: invoiceManager
-            )
+            // Pipeline stats grid - Real data
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 2), spacing: 12) {
+                DashboardStatCard(
+                    title: "Leads",
+                    value: "\(leadManager.leads.count)",
+                    subtitle: "\(leadManager.getLeadsByStatus(.new).count) new",
+                    icon: "person.crop.circle.badge.plus",
+                    color: Color("TreeShopBlue")
+                )
+                
+                DashboardStatCard(
+                    title: "Proposals",
+                    value: "\(proposalManager.proposals.count)",
+                    subtitle: "\(proposalManager.getProposalsByStatus(.sent).count) sent",
+                    icon: "doc.text",
+                    color: .purple
+                )
+                
+                DashboardStatCard(
+                    title: "Work Orders",
+                    value: "\(workOrderManager.workOrders.count)",
+                    subtitle: "\(workOrderManager.getWorkOrdersByStatus(.inProgress).count) active",
+                    icon: "hammer",
+                    color: .orange
+                )
+                
+                DashboardStatCard(
+                    title: "Revenue",
+                    value: "$\(String(format: "%.0f", invoiceManager.getTotalRevenue()))",
+                    subtitle: "$\(String(format: "%.0f", invoiceManager.getOutstandingAmount())) pending",
+                    icon: "dollarsign.circle",
+                    color: Color("TreeShopGreen")
+                )
+            }
         }
         .padding(20)
         .background(

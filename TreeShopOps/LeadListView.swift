@@ -1,7 +1,11 @@
 import SwiftUI
 
 struct LeadListView: View {
-    @EnvironmentObject var leadManager: LeadManager
+    @EnvironmentObject var appState: AppStateManager
+    
+    private var leadManager: LeadManager { appState.leadManager }
+    private var proposalManager: ProposalManager { appState.proposalManager }
+    private var customerManager: CustomerManager { appState.customerManager }
     @State private var searchText = ""
     @State private var selectedStatus: LeadStatus? = nil
     @State private var showingAddLead = false
@@ -47,11 +51,14 @@ struct LeadListView: View {
         .sheet(isPresented: $showingAddLead) {
             AddEditLeadView()
                 .environmentObject(leadManager)
+                .environmentObject(customerManager)
         }
         .sheet(isPresented: $showingLeadDetail) {
             if let lead = selectedLead {
                 LeadDetailView(lead: lead)
                     .environmentObject(leadManager)
+                    .environmentObject(proposalManager)
+                    .environmentObject(customerManager)
             }
         }
         .searchable(text: $searchText, prompt: "Search leads...")
