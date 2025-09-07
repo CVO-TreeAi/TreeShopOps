@@ -63,7 +63,8 @@ struct PipelineView: View {
                                     .frame(height: 3)
                             }
                         }
-                        .frame(maxWidth: .infinity)
+                        .frame(maxWidth: .infinity, minHeight: 44)
+                        .padding(.horizontal, 8)
                         .padding(.vertical, 16)
                     }
                 }

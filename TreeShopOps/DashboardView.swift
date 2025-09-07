@@ -1,16 +1,13 @@
 import SwiftUI
 
 struct DashboardView: View {
-    @EnvironmentObject var appState: AppStateManager
+    @EnvironmentObject var leadManager: LeadManager
+    @EnvironmentObject var proposalManager: ProposalManager
+    @EnvironmentObject var workOrderManager: WorkOrderManager
+    @EnvironmentObject var invoiceManager: InvoiceManager
+    @EnvironmentObject var customerManager: CustomerManager
     @StateObject private var userProfile = UserProfileManager()
     @StateObject private var businessConfig = BusinessConfigManager()
-    
-    // Computed properties for better performance
-    private var leadManager: LeadManager { appState.leadManager }
-    private var proposalManager: ProposalManager { appState.proposalManager }
-    private var workOrderManager: WorkOrderManager { appState.workOrderManager }
-    private var invoiceManager: InvoiceManager { appState.invoiceManager }
-    private var customerManager: CustomerManager { appState.customerManager }
     
     @State private var showingAddLead = false
     @State private var showingAddProposal = false
@@ -44,32 +41,32 @@ struct DashboardView: View {
         .sheet(isPresented: $showingAddLead) {
             NavigationView {
                 AddEditLeadView()
-                    .environmentObject(appState.leadManager)
-                    .environmentObject(appState.customerManager)
+                    .environmentObject(leadManager)
+                    .environmentObject(customerManager)
             }
         }
         .sheet(isPresented: $showingAddProposal) {
             NavigationView {
                 AddEditProposalView()
-                    .environmentObject(appState.proposalManager)
-                    .environmentObject(appState.leadManager)
-                    .environmentObject(appState.customerManager)
+                    .environmentObject(proposalManager)
+                    .environmentObject(leadManager)
+                    .environmentObject(customerManager)
             }
         }
         .sheet(isPresented: $showingAddWorkOrder) {
             NavigationView {
                 AddEditWorkOrderView()
-                    .environmentObject(appState.workOrderManager)
-                    .environmentObject(appState.proposalManager)
-                    .environmentObject(appState.customerManager)
+                    .environmentObject(workOrderManager)
+                    .environmentObject(proposalManager)
+                    .environmentObject(customerManager)
             }
         }
         .sheet(isPresented: $showingAddInvoice) {
             NavigationView {
                 AddEditInvoiceView()
-                    .environmentObject(appState.invoiceManager)
-                    .environmentObject(appState.workOrderManager)
-                    .environmentObject(appState.customerManager)
+                    .environmentObject(invoiceManager)
+                    .environmentObject(workOrderManager)
+                    .environmentObject(customerManager)
             }
         }
     }
