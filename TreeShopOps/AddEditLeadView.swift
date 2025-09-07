@@ -60,8 +60,14 @@ struct AddEditLeadView: View {
                 }
                 .foregroundColor(.white),
                 
-                trailing: Button("Save") {
-                    saveLead()
+                trailing: Button(selectedSection < 2 ? "Next" : "Save") {
+                    if selectedSection < 2 {
+                        withAnimation(.easeInOut(duration: 0.3)) {
+                            selectedSection += 1
+                        }
+                    } else {
+                        saveLead()
+                    }
                 }
                 .foregroundColor(Color("TreeShopGreen"))
                 .fontWeight(.semibold)
