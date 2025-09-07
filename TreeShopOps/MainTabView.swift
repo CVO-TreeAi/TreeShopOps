@@ -20,9 +20,14 @@ struct MainTabView: View {
     
     var body: some View {
         TabView {
-            // Dashboard Tab (Home) - Minimal environment objects
+            // Dashboard Tab (Home)
             NavigationView {
                 DashboardView()
+                    .environmentObject(appState.leadManager)
+                    .environmentObject(appState.proposalManager)
+                    .environmentObject(appState.workOrderManager)
+                    .environmentObject(appState.invoiceManager)
+                    .environmentObject(appState.customerManager)
             }
             .tabItem {
                 Label("Dashboard", systemImage: "house")
@@ -31,6 +36,10 @@ struct MainTabView: View {
             // Pipeline Tab
             NavigationView {
                 PipelineView()
+                    .environmentObject(appState.leadManager)
+                    .environmentObject(appState.proposalManager)
+                    .environmentObject(appState.workOrderManager)
+                    .environmentObject(appState.customerManager)
             }
             .tabItem {
                 Label("Pipeline", systemImage: "arrow.right.circle")
@@ -39,6 +48,9 @@ struct MainTabView: View {
             // Invoices Tab
             NavigationView {
                 InvoiceListView()
+                    .environmentObject(appState.invoiceManager)
+                    .environmentObject(appState.workOrderManager)
+                    .environmentObject(appState.customerManager)
             }
             .tabItem {
                 Label("Invoices", systemImage: "dollarsign.square.fill")
@@ -47,6 +59,7 @@ struct MainTabView: View {
             // Customers Tab
             NavigationView {
                 CustomerListView()
+                    .environmentObject(appState.customerManager)
             }
             .tabItem {
                 Label("Customers", systemImage: "person.2.fill")
@@ -55,6 +68,9 @@ struct MainTabView: View {
             // Menu Tab
             NavigationView {
                 MenuView(pricingModel: appState.pricingModel)
+                    .environmentObject(appState.equipmentManager)
+                    .environmentObject(appState.employeeManager)
+                    .environmentObject(appState.loadoutManager)
             }
             .tabItem {
                 Label("Menu", systemImage: "ellipsis")
