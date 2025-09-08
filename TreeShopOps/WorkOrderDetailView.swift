@@ -3,6 +3,8 @@ import SwiftUI
 struct WorkOrderDetailView: View {
     @EnvironmentObject var workOrderManager: WorkOrderManager
     @EnvironmentObject var invoiceManager: InvoiceManager
+    @EnvironmentObject var employeeManager: EmployeeManager
+    @StateObject private var timeTrackingManager = TimeTrackingManager()
     @Environment(\.presentationMode) var presentationMode
     
     @State var workOrder: WorkOrder
@@ -26,6 +28,9 @@ struct WorkOrderDetailView: View {
                         
                         // Schedule and crew
                         scheduleCard
+                        
+                        // Time tracking for this job
+                        timeTrackingCard
                         
                         // Progress tracking
                         if workOrder.status == .inProgress || workOrder.status == .completed {
@@ -196,6 +201,74 @@ struct WorkOrderDetailView: View {
                 WorkOrderDetailRow(title: "Package Type", value: workOrder.packageType.capitalized)
             }
         }
+    }
+    
+    private var timeTrackingCard: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            HStack {
+                Image(systemName: "timer")
+                    .foregroundColor(Color("TreeShopGreen"))
+                
+                Text("Time Tracking")
+                    .font(.headline)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.white)
+                
+                Spacer()
+                
+                let jobHours = timeTrackingManager.getTimeEntriesForWorkOrder(workOrder.id).reduce(0) { $0 + $1.durationHours }
+                Text("\(jobHours.formatted(.number.precision(.fractionLength(1))))h logged")
+                    .font(.subheadline)
+                    .foregroundColor(Color("TreeShopGreen"))
+            }
+            
+            let activeEntries = timeTrackingManager.activeEntries.filter { $0.workOrderId == workOrder.id }
+            
+            if !activeEntries.isEmpty {
+                VStack(spacing: 8) {
+                    ForEach(activeEntries, id: \.id) { entry in
+                        HStack {
+                            Text(entry.employeeName)
+                                .font(.subheadline)
+                                .foregroundColor(.white)
+                            
+                            Spacer()
+                            
+                            Text("Active")
+                                .font(.caption)
+                                .fontWeight(.bold)
+                                .foregroundColor(Color("TreeShopGreen"))
+                                .padding(.horizontal, 8)
+                                .padding(.vertical, 2)
+                                .background(Color("TreeShopGreen").opacity(0.2))
+                                .cornerRadius(4)
+                        }
+                        .padding(8)
+                        .background(Color.white.opacity(0.05))
+                        .cornerRadius(6)
+                    }
+                }
+            } else {
+                Text("No active time tracking for this job")
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+                    .padding(.vertical, 8)
+            }
+            
+            Text("💡 Employees can track time to this work order from the Equipment tab")
+                .font(.caption)
+                .foregroundColor(.gray)
+                .padding(.top, 8)
+        }
+        .padding(20)
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color.white.opacity(0.03))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(Color.white.opacity(0.1), lineWidth: 1)
+                )
+        )
     }
     
     private var scheduleCard: some View {

@@ -18,23 +18,15 @@ struct LeadDetailView: View {
                 Color("TreeShopBlack").ignoresSafeArea()
                 
                 ScrollView {
-                    VStack(spacing: 20) {
-                        // Header card
+                    VStack(spacing: 16) {
                         headerCard
-                        
-                        // Customer information
                         customerCard
-                        
-                        // Project details
                         projectCard
-                        
-                        // Lead tracking
                         trackingCard
-                        
-                        // Action buttons
                         actionButtons
                     }
                     .padding(.horizontal, 20)
+                    .padding(.top, 4)
                     .padding(.bottom, 100)
                 }
             }

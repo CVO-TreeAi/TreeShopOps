@@ -40,7 +40,7 @@ struct AddressAutocompleteField: View {
                 TextField(placeholder, text: $searchText)
                     .textFieldStyle(PlainTextFieldStyle())
                     .foregroundColor(.white)
-                    .onChange(of: searchText) { newValue in
+                    .onChange(of: searchText) { _, newValue in
                         searchCompleter.search(newValue)
                     }
                 

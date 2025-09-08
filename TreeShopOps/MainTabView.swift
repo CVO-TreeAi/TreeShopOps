@@ -11,6 +11,7 @@ class AppStateManager: ObservableObject {
     @Published var equipmentManager = EquipmentManager()
     @Published var employeeManager = EmployeeManager()
     @Published var loadoutManager = LoadoutManager()
+    @Published var timeTrackingManager = TimeTrackingManager()
     
     
 }
@@ -46,15 +47,14 @@ struct MainTabView: View {
                 Label("Pipeline", systemImage: "arrow.right.circle")
             }
             
-            // Pricing Tab
+            // Equipment Tab
             NavigationView {
-                ContentView()
-                    .environmentObject(appState.pricingModel)
-                    .environmentObject(appState.proposalManager)
-                    .environmentObject(appState.customerManager)
+                EquipmentListView()
+                    .environmentObject(appState.equipmentManager)
+                    .environmentObject(appState.employeeManager)
             }
             .tabItem {
-                Label("Pricing", systemImage: "calculator")
+                Label("Equipment", systemImage: "gear")
             }
             
             // Customers Tab

@@ -27,6 +27,10 @@
 		2A035 /* LeadListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A036 /* LeadListView.swift */; };
 		2A037 /* AddEditLeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A038 /* AddEditLeadView.swift */; };
 		2A200 /* AddressAutocompleteField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A201 /* AddressAutocompleteField.swift */; };
+		2A202 /* TimeTrackingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A203 /* TimeTrackingModel.swift */; };
+		2A204 /* TimeTrackingActivityEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A205 /* TimeTrackingActivityEngine.swift */; };
+		2A208 /* TimeTrackingPickerViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A209 /* TimeTrackingPickerViews.swift */; };
+		2A212 /* BasicTimeTrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A213 /* BasicTimeTrackingView.swift */; };
 		2A039 /* LeadDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A040 /* LeadDetailView.swift */; };
 		2A041 /* WorkOrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A042 /* WorkOrderModel.swift */; };
 		2A043 /* InvoiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A044 /* InvoiceModel.swift */; };
@@ -85,6 +89,10 @@
 		2A036 /* LeadListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeadListView.swift; sourceTree = "<group>"; };
 		2A038 /* AddEditLeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditLeadView.swift; sourceTree = "<group>"; };
 		2A201 /* AddressAutocompleteField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressAutocompleteField.swift; sourceTree = "<group>"; };
+		2A203 /* TimeTrackingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTrackingModel.swift; sourceTree = "<group>"; };
+		2A205 /* TimeTrackingActivityEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTrackingActivityEngine.swift; sourceTree = "<group>"; };
+		2A209 /* TimeTrackingPickerViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTrackingPickerViews.swift; sourceTree = "<group>"; };
+		2A213 /* BasicTimeTrackingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicTimeTrackingView.swift; sourceTree = "<group>"; };
 		2A040 /* LeadDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeadDetailView.swift; sourceTree = "<group>"; };
 		2A042 /* WorkOrderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkOrderModel.swift; sourceTree = "<group>"; };
 		2A044 /* InvoiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceModel.swift; sourceTree = "<group>"; };
@@ -170,6 +178,10 @@
 				2A036 /* LeadListView.swift */,
 				2A038 /* AddEditLeadView.swift */,
 				2A201 /* AddressAutocompleteField.swift */,
+				2A203 /* TimeTrackingModel.swift */,
+				2A205 /* TimeTrackingActivityEngine.swift */,
+				2A209 /* TimeTrackingPickerViews.swift */,
+				2A213 /* BasicTimeTrackingView.swift */,
 				2A040 /* LeadDetailView.swift */,
 				2A042 /* WorkOrderModel.swift */,
 				2A044 /* InvoiceModel.swift */,
@@ -306,6 +318,11 @@
 				2A035 /* LeadListView.swift in Sources */,
 				2A037 /* AddEditLeadView.swift in Sources */,
 				2A200 /* AddressAutocompleteField.swift in Sources */,
+				2A202 /* TimeTrackingModel.swift in Sources */,
+				2A204 /* TimeTrackingActivityEngine.swift in Sources */,
+				2A208 /* TimeTrackingPickerViews.swift in Sources */,
+				2A210 /* SimpleTimeTrackingView.swift in Sources */,
+				2A212 /* BasicTimeTrackingView.swift in Sources */,
 				2A039 /* LeadDetailView.swift in Sources */,
 				2A041 /* WorkOrderModel.swift in Sources */,
 				2A043 /* InvoiceModel.swift in Sources */,
