@@ -6,10 +6,8 @@ struct AddEditLeadView: View {
     
     @State private var lead: Lead
     @State private var isEditing: Bool
-    
-    // Form sections
-    @State private var selectedSection = 0
-    private let sections = ["Contact", "Project", "Details"]
+    @State private var customerAddressResult: AddressResult?
+    @State private var projectAddressResult: AddressResult?
     
     init(lead: Lead? = nil) {
         if let existingLead = lead {
@@ -26,30 +24,144 @@ struct AddEditLeadView: View {
             ZStack {
                 Color("TreeShopBlack").ignoresSafeArea()
                 
-                VStack(spacing: 0) {
-                    // Section picker
-                    sectionPicker
-                    
-                    // Form content
-                    ScrollView {
-                        VStack(spacing: 20) {
-                            switch selectedSection {
-                            case 0:
-                                contactSection
-                            case 1:
-                                projectSection
-                            case 2:
-                                detailsSection
-                            default:
-                                EmptyView()
+                ScrollView {
+                    VStack(spacing: 24) {
+                        // Customer info section
+                        QuickFormSection(title: "Customer Info", icon: "person.circle.fill") {
+                            VStack(spacing: 16) {
+                                HStack(spacing: 12) {
+                                    QuickTextField(title: "First Name", text: $lead.customerFirstName, placeholder: "John")
+                                    QuickTextField(title: "Last Name", text: $lead.customerLastName, placeholder: "Smith")
+                                }
+                                
+                                QuickTextField(title: "Email", text: $lead.customerEmail, placeholder: "john@email.com")
+                                QuickTextField(title: "Phone", text: $lead.customerPhone, placeholder: "(555) 123-4567")
+                                
+                                VStack(alignment: .leading, spacing: 8) {
+                                    Text("Customer Address")
+                                        .font(.subheadline)
+                                        .fontWeight(.medium)
+                                        .foregroundColor(.white)
+                                    
+                                    AddressAutocompleteField(
+                                        result: $customerAddressResult,
+                                        placeholder: "Search customer address..."
+                                    ) { result in
+                                        lead.customerAddress = result.street
+                                        lead.customerCity = result.city
+                                        lead.customerState = result.state
+                                        lead.customerZipCode = result.zipCode
+                                    }
+                                }
                             }
                         }
-                        .padding(.horizontal, 20)
-                        .padding(.bottom, 100)
+                        
+                        // Project info section
+                        QuickFormSection(title: "Project Details", icon: "hammer.fill") {
+                            VStack(spacing: 16) {
+                                VStack(alignment: .leading, spacing: 8) {
+                                    Text("Project Location")
+                                        .font(.subheadline)
+                                        .fontWeight(.medium)
+                                        .foregroundColor(.white)
+                                    
+                                    AddressAutocompleteField(
+                                        result: $projectAddressResult,
+                                        placeholder: "Search project location..."
+                                    ) { result in
+                                        lead.projectLocation = result.fullAddress
+                                    }
+                                }
+                                
+                                QuickTextField(
+                                    title: "Project Description", 
+                                    text: $lead.projectDescription, 
+                                    placeholder: "Land clearing, mulching, etc...",
+                                    multiline: true
+                                )
+                                
+                                HStack(spacing: 12) {
+                                    VStack(alignment: .leading, spacing: 8) {
+                                        Text("Acres")
+                                            .font(.subheadline)
+                                            .fontWeight(.medium)
+                                            .foregroundColor(.white)
+                                        
+                                        TextField("0.0", value: $lead.landSize, format: .number)
+                                            .foregroundColor(.white)
+                                            .keyboardType(.decimalPad)
+                                            .padding(12)
+                                            .background(
+                                                RoundedRectangle(cornerRadius: 8)
+                                                    .fill(Color.white.opacity(0.05))
+                                                    .stroke(Color.white.opacity(0.1), lineWidth: 1)
+                                            )
+                                    }
+                                    
+                                    VStack(alignment: .leading, spacing: 8) {
+                                        Text("Est. Value")
+                                            .font(.subheadline)
+                                            .fontWeight(.medium)
+                                            .foregroundColor(.white)
+                                        
+                                        TextField("$0", value: $lead.estimatedValue, format: .currency(code: "USD"))
+                                            .foregroundColor(.white)
+                                            .keyboardType(.decimalPad)
+                                            .padding(12)
+                                            .background(
+                                                RoundedRectangle(cornerRadius: 8)
+                                                    .fill(Color.white.opacity(0.05))
+                                                    .stroke(Color.white.opacity(0.1), lineWidth: 1)
+                                            )
+                                    }
+                                }
+                            }
+                        }
+                        
+                        // Lead details section
+                        QuickFormSection(title: "Lead Details", icon: "info.circle.fill") {
+                            VStack(spacing: 16) {
+                                HStack(spacing: 12) {
+                                    QuickPicker(title: "Status", selection: $lead.status, options: LeadStatus.allCases)
+                                    QuickPicker(title: "Urgency", selection: $lead.urgency, options: LeadUrgency.allCases)
+                                }
+                                
+                                QuickPicker(title: "Lead Source", selection: $lead.leadSource, options: LeadSource.allCases)
+                                
+                                if lead.status == .contacted || lead.status == .quoted {
+                                    VStack(alignment: .leading, spacing: 8) {
+                                        Text("Follow Up Date")
+                                            .font(.subheadline)
+                                            .fontWeight(.medium)
+                                            .foregroundColor(.white)
+                                        
+                                        DatePicker("Follow Up", 
+                                                  selection: Binding(
+                                                    get: { lead.followUpDate ?? Date() },
+                                                    set: { lead.followUpDate = $0 }
+                                                  ), 
+                                                  displayedComponents: .date)
+                                            .foregroundColor(.white)
+                                            .padding(12)
+                                            .background(
+                                                RoundedRectangle(cornerRadius: 8)
+                                                    .fill(Color.white.opacity(0.05))
+                                                    .stroke(Color.white.opacity(0.1), lineWidth: 1)
+                                            )
+                                    }
+                                }
+                                
+                                QuickTextField(
+                                    title: "Notes", 
+                                    text: $lead.notes, 
+                                    placeholder: "Additional notes...",
+                                    multiline: true
+                                )
+                            }
+                        }
                     }
-                    .onTapGesture {
-                        hideKeyboard()
-                    }
+                    .padding(20)
+                    .padding(.bottom, 100)
                 }
             }
             .navigationTitle(isEditing ? "Edit Lead" : "New Lead")
@@ -60,223 +172,42 @@ struct AddEditLeadView: View {
                 }
                 .foregroundColor(.white),
                 
-                trailing: Button(selectedSection < 2 ? "Next" : "Save") {
-                    if selectedSection < 2 {
-                        withAnimation(.easeInOut(duration: 0.3)) {
-                            selectedSection += 1
-                        }
-                    } else {
-                        saveLead()
-                    }
+                trailing: Button("Save") {
+                    saveLead()
                 }
                 .foregroundColor(Color("TreeShopGreen"))
                 .fontWeight(.semibold)
+                .disabled(lead.customerFirstName.isEmpty || lead.customerLastName.isEmpty)
             )
         }
-    }
-    
-    private var sectionPicker: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 16) {
-                ForEach(0..<sections.count, id: \.self) { index in
-                    Button(action: {
-                        withAnimation(.easeInOut(duration: 0.3)) {
-                            selectedSection = index
-                        }
-                    }) {
-                        VStack(spacing: 4) {
-                            Text(sections[index])
-                                .font(.subheadline)
-                                .fontWeight(.medium)
-                                .foregroundColor(selectedSection == index ? Color("TreeShopGreen") : .gray)
-                            
-                            Rectangle()
-                                .fill(selectedSection == index ? Color("TreeShopGreen") : Color.clear)
-                                .frame(height: 2)
-                        }
-                    }
-                }
-            }
-            .padding(.horizontal, 20)
-        }
-        .padding(.vertical, 16)
-        .background(Color.white.opacity(0.05))
-    }
-    
-    private var contactSection: some View {
-        VStack(spacing: 20) {
-            LeadFormSection(title: "Customer Contact") {
-                VStack(spacing: 16) {
-                    HStack(spacing: 12) {
-                        LeadFormField(title: "First Name", text: $lead.customerFirstName, placeholder: "First name")
-                        LeadFormField(title: "Last Name", text: $lead.customerLastName, placeholder: "Last name")
-                    }
-                    LeadFormField(title: "Email", text: $lead.customerEmail, placeholder: "customer@email.com")
-                    LeadFormField(title: "Phone", text: $lead.customerPhone, placeholder: "(555) 123-4567")
-                    LeadFormField(title: "Address", text: $lead.customerAddress, placeholder: "Street address")
-                    HStack(spacing: 12) {
-                        LeadFormField(title: "City", text: $lead.customerCity, placeholder: "City")
-                        LeadFormField(title: "State", text: $lead.customerState, placeholder: "State")
-                        LeadFormField(title: "Zip", text: $lead.customerZipCode, placeholder: "12345")
-                    }
-                }
-            }
+        .onAppear {
+            setupExistingAddresses()
         }
     }
     
-    private var projectSection: some View {
-        VStack(spacing: 20) {
-            LeadFormSection(title: "Project Information") {
-                VStack(spacing: 16) {
-                    LeadFormField(title: "Project Location", text: $lead.projectLocation, placeholder: "Property address or description")
-                    LeadFormField(title: "Project Description", text: $lead.projectDescription, placeholder: "Describe the land clearing or forestry mulching needed...", axis: .vertical)
-                    
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Land Size (Acres)")
-                            .font(.subheadline)
-                            .fontWeight(.medium)
-                            .foregroundColor(.white)
-                        
-                        TextField("0.0", value: $lead.landSize, format: .number)
-                            .foregroundColor(.white)
-                            .keyboardType(.decimalPad)
-                            .padding(12)
-                            .background(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .fill(Color.white.opacity(0.1))
-                                    .stroke(Color.white.opacity(0.2), lineWidth: 1)
-                            )
-                    }
-                    
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Estimated Value")
-                            .font(.subheadline)
-                            .fontWeight(.medium)
-                            .foregroundColor(.white)
-                        
-                        TextField("$0.00", value: $lead.estimatedValue, format: .currency(code: "USD"))
-                            .foregroundColor(.white)
-                            .keyboardType(.decimalPad)
-                            .padding(12)
-                            .background(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .fill(Color.white.opacity(0.1))
-                                    .stroke(Color.white.opacity(0.2), lineWidth: 1)
-                            )
-                    }
-                }
+    private func setupExistingAddresses() {
+        // Setup existing address data if editing
+        if isEditing {
+            if !lead.customerAddress.isEmpty {
+                customerAddressResult = AddressResult(
+                    fullAddress: lead.fullAddress,
+                    street: lead.customerAddress,
+                    city: lead.customerCity,
+                    state: lead.customerState,
+                    zipCode: lead.customerZipCode,
+                    coordinate: nil
+                )
             }
-        }
-    }
-    
-    private var detailsSection: some View {
-        VStack(spacing: 20) {
-            LeadFormSection(title: "Lead Details") {
-                VStack(spacing: 16) {
-                    // Status picker
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Status")
-                            .font(.subheadline)
-                            .fontWeight(.medium)
-                            .foregroundColor(.white)
-                        
-                        Picker("Status", selection: $lead.status) {
-                            ForEach(LeadStatus.allCases, id: \.self) { status in
-                                HStack {
-                                    Image(systemName: status.systemImage)
-                                    Text(status.rawValue)
-                                }
-                                .tag(status)
-                            }
-                        }
-                        .pickerStyle(MenuPickerStyle())
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 10)
-                        .background(
-                            RoundedRectangle(cornerRadius: 8)
-                                .fill(Color.white.opacity(0.1))
-                                .stroke(Color.white.opacity(0.2), lineWidth: 1)
-                        )
-                    }
-                    
-                    // Urgency picker
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Urgency")
-                            .font(.subheadline)
-                            .fontWeight(.medium)
-                            .foregroundColor(.white)
-                        
-                        Picker("Urgency", selection: $lead.urgency) {
-                            ForEach(LeadUrgency.allCases, id: \.self) { urgency in
-                                HStack {
-                                    Image(systemName: urgency.systemImage)
-                                    Text(urgency.rawValue)
-                                }
-                                .tag(urgency)
-                            }
-                        }
-                        .pickerStyle(MenuPickerStyle())
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 10)
-                        .background(
-                            RoundedRectangle(cornerRadius: 8)
-                                .fill(Color.white.opacity(0.1))
-                                .stroke(Color.white.opacity(0.2), lineWidth: 1)
-                        )
-                    }
-                    
-                    // Lead source picker
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Lead Source")
-                            .font(.subheadline)
-                            .fontWeight(.medium)
-                            .foregroundColor(.white)
-                        
-                        Picker("Lead Source", selection: $lead.leadSource) {
-                            ForEach(LeadSource.allCases, id: \.self) { source in
-                                HStack {
-                                    Image(systemName: source.systemImage)
-                                    Text(source.rawValue)
-                                }
-                                .tag(source)
-                            }
-                        }
-                        .pickerStyle(MenuPickerStyle())
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 10)
-                        .background(
-                            RoundedRectangle(cornerRadius: 8)
-                                .fill(Color.white.opacity(0.1))
-                                .stroke(Color.white.opacity(0.2), lineWidth: 1)
-                        )
-                    }
-                    
-                    // Follow up date picker
-                    if lead.status == .contacted || lead.status == .quoted {
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text("Follow Up Date")
-                                .font(.subheadline)
-                                .fontWeight(.medium)
-                                .foregroundColor(.white)
-                            
-                            DatePicker("Follow Up", 
-                                      selection: Binding(
-                                        get: { lead.followUpDate ?? Date() },
-                                        set: { lead.followUpDate = $0 }
-                                      ), 
-                                      displayedComponents: .date)
-                                .foregroundColor(.white)
-                                .padding(12)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 8)
-                                        .fill(Color.white.opacity(0.1))
-                                        .stroke(Color.white.opacity(0.2), lineWidth: 1)
-                                )
-                        }
-                    }
-                    
-                    LeadFormField(title: "Notes", text: $lead.notes, placeholder: "Additional notes about this lead...", axis: .vertical)
-                }
+            
+            if !lead.projectLocation.isEmpty {
+                projectAddressResult = AddressResult(
+                    fullAddress: lead.projectLocation,
+                    street: lead.projectLocation,
+                    city: "",
+                    state: "",
+                    zipCode: "",
+                    coordinate: nil
+                )
             }
         }
     }
@@ -294,28 +225,38 @@ struct AddEditLeadView: View {
     }
 }
 
-struct LeadFormSection<Content: View>: View {
+// MARK: - Quick Form Components
+
+struct QuickFormSection<Content: View>: View {
     let title: String
+    let icon: String
     let content: Content
     
-    init(title: String, @ViewBuilder content: () -> Content) {
+    init(title: String, icon: String, @ViewBuilder content: () -> Content) {
         self.title = title
+        self.icon = icon
         self.content = content()
     }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text(title)
-                .font(.headline)
-                .fontWeight(.semibold)
-                .foregroundColor(.white)
+            HStack {
+                Image(systemName: icon)
+                    .foregroundColor(Color("TreeShopGreen"))
+                    .font(.title3)
+                
+                Text(title)
+                    .font(.headline)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.white)
+            }
             
             content
         }
         .padding(20)
         .background(
             RoundedRectangle(cornerRadius: 12)
-                .fill(Color.white.opacity(0.05))
+                .fill(Color.white.opacity(0.03))
                 .overlay(
                     RoundedRectangle(cornerRadius: 12)
                         .stroke(Color.white.opacity(0.1), lineWidth: 1)
@@ -324,17 +265,17 @@ struct LeadFormSection<Content: View>: View {
     }
 }
 
-struct LeadFormField: View {
+struct QuickTextField: View {
     let title: String
     @Binding var text: String
     let placeholder: String
-    let axis: Axis
+    let multiline: Bool
     
-    init(title: String, text: Binding<String>, placeholder: String, axis: Axis = .horizontal) {
+    init(title: String, text: Binding<String>, placeholder: String, multiline: Bool = false) {
         self.title = title
         self._text = text
         self.placeholder = placeholder
-        self.axis = axis
+        self.multiline = multiline
     }
     
     var body: some View {
@@ -344,16 +285,45 @@ struct LeadFormField: View {
                 .fontWeight(.medium)
                 .foregroundColor(.white)
             
-            TextField(placeholder, text: $text, axis: axis)
+            TextField(placeholder, text: $text, axis: multiline ? .vertical : .horizontal)
                 .textFieldStyle(PlainTextFieldStyle())
                 .foregroundColor(.white)
                 .padding(12)
                 .background(
                     RoundedRectangle(cornerRadius: 8)
-                        .fill(Color.white.opacity(0.1))
-                        .stroke(Color.white.opacity(0.2), lineWidth: 1)
+                        .fill(Color.white.opacity(0.05))
+                        .stroke(Color.white.opacity(0.1), lineWidth: 1)
                 )
-                .lineLimit(axis == .vertical ? 4 : 1)
+                .lineLimit(multiline ? 3 : 1)
+        }
+    }
+}
+
+struct QuickPicker<T: CaseIterable & RawRepresentable & Hashable>: View where T.RawValue == String {
+    let title: String
+    @Binding var selection: T
+    let options: [T]
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(title)
+                .font(.subheadline)
+                .fontWeight(.medium)
+                .foregroundColor(.white)
+            
+            Picker(title, selection: $selection) {
+                ForEach(options, id: \.self) { option in
+                    Text(option.rawValue).tag(option)
+                }
+            }
+            .pickerStyle(MenuPickerStyle())
+            .padding(.horizontal, 12)
+            .padding(.vertical, 10)
+            .background(
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(Color.white.opacity(0.05))
+                    .stroke(Color.white.opacity(0.1), lineWidth: 1)
+            )
         }
     }
 }

@@ -6,9 +6,6 @@ struct BusinessConfigView: View {
     
     @State private var tempCompanyName: String = ""
     @State private var tempBusinessType: String = ""
-    @State private var tempConvexURL: String = ""
-    @State private var tempConvexEnabled: Bool = false
-    @State private var tempConvexEnvironment: ConvexEnvironment = .development
     
     @State private var showingPresets = false
     
@@ -21,9 +18,6 @@ struct BusinessConfigView: View {
                     VStack(spacing: 24) {
                         // Company Branding Section
                         brandingSection
-                        
-                        // Convex Integration Section
-                        convexIntegrationSection
                         
                         // Preset Templates Section
                         presetTemplatesSection
@@ -76,41 +70,6 @@ struct BusinessConfigView: View {
         .sectionStyle()
     }
     
-    private var convexIntegrationSection: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            SectionHeader(title: "Website Integration", icon: "globe")
-            
-            VStack(spacing: 16) {
-                Toggle("Enable Website Lead Sync", isOn: $tempConvexEnabled)
-                    .foregroundColor(.white)
-                    .toggleStyle(SwitchToggleStyle(tint: Color("TreeShopGreen")))
-                
-                if tempConvexEnabled {
-                    CustomTextField(
-                        title: "Convex Backend URL",
-                        text: $tempConvexURL,
-                        placeholder: "https://your-convex-app.convex.cloud"
-                    )
-                    
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Environment")
-                            .font(.subheadline)
-                            .fontWeight(.medium)
-                            .foregroundColor(.gray)
-                        
-                        Picker("Environment", selection: $tempConvexEnvironment) {
-                            ForEach(ConvexEnvironment.allCases, id: \.self) { env in
-                                Text(env.displayName).tag(env)
-                            }
-                        }
-                        .pickerStyle(SegmentedPickerStyle())
-                        .colorMultiply(Color("TreeShopGreen"))
-                    }
-                }
-            }
-        }
-        .sectionStyle()
-    }
     
     private var presetTemplatesSection: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -169,19 +128,11 @@ struct BusinessConfigView: View {
     private func loadCurrentConfig() {
         tempCompanyName = businessConfig.config.companyName
         tempBusinessType = businessConfig.config.businessType
-        tempConvexURL = businessConfig.config.convexURL
-        tempConvexEnabled = businessConfig.config.convexEnabled
-        tempConvexEnvironment = businessConfig.config.convexEnvironment
     }
     
     private func saveConfiguration() {
         businessConfig.updateCompanyName(tempCompanyName)
         businessConfig.updateBusinessType(tempBusinessType)
-        businessConfig.updateConvexSettings(
-            enabled: tempConvexEnabled,
-            url: tempConvexURL,
-            environment: tempConvexEnvironment
-        )
     }
     
     private func applyPreset(_ preset: BusinessConfig) {

@@ -7,27 +7,9 @@ struct BusinessConfig: Codable {
     var businessType: String = "Forestry Mulching & Land Clearing"
     var primaryColor: String = "#00FF41" // TreeShopGreen
     var accentColor: String = "#1c4c9c" // TreeShopBlue
-    var logoIcon: String = "tree.fill"
-    
-    // Convex Integration Settings
-    var convexEnabled: Bool = true
-    var convexURL: String = "https://content-lynx-725.convex.cloud"
-    var convexEnvironment: ConvexEnvironment = .development
+    var logoIcon: String = "folder.fill"
 }
 
-enum ConvexEnvironment: String, CaseIterable, Codable {
-    case development = "development"
-    case production = "production"
-    
-    var displayName: String {
-        switch self {
-        case .development:
-            return "Development"
-        case .production:
-            return "Production"
-        }
-    }
-}
 
 // MARK: - Business Configuration Manager
 
@@ -70,12 +52,6 @@ class BusinessConfigManager: ObservableObject {
         saveConfig()
     }
     
-    func updateConvexSettings(enabled: Bool, url: String, environment: ConvexEnvironment) {
-        config.convexEnabled = enabled
-        config.convexURL = url
-        config.convexEnvironment = environment
-        saveConfig()
-    }
     
     // MARK: - Helper Properties
     

@@ -145,7 +145,7 @@ struct SettingsMainView: View {
         SettingsSection(title: "About", icon: "info.circle.fill") {
             VStack(spacing: 12) {
                 HStack {
-                    Image(systemName: "tree.fill")
+                    Image(systemName: "folder.fill")
                         .font(.title2)
                         .foregroundColor(Color("TreeShopGreen"))
                     

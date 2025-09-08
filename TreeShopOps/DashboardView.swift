@@ -20,9 +20,6 @@ struct DashboardView: View {
             
             ScrollView {
                 LazyVStack(spacing: 24) {
-                    // Welcome header
-                    welcomeHeader
-                    
                     // Pipeline overview dashboard
                     pipelineOverview
                     
@@ -98,7 +95,7 @@ struct DashboardView: View {
             Spacer()
             
             // TreeShop logo
-            Image(systemName: "tree.fill")
+            Image(systemName: "folder.fill")
                 .font(.title)
                 .foregroundColor(Color("TreeShopGreen"))
         }
