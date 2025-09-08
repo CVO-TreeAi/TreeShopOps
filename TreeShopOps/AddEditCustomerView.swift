@@ -467,57 +467,6 @@ struct AddEditCustomerView: View {
         .frame(maxWidth: .infinity)
     }
     
-    // MARK: - Modern Address Field with Maps Integration
-    private func modernAddressField(title: String, text: Binding<String>, placeholder: String, icon: String) -> some View {
-        VStack(spacing: 8) {
-            HStack(spacing: 6) {
-                Image(systemName: icon)
-                    .font(.system(size: 12, weight: .medium))
-                    .foregroundColor(Color("TreeShopGreen"))
-                    .frame(width: 16)
-                
-                Text(title)
-                    .font(.system(size: 11, weight: .medium))
-                    .foregroundColor(Color.white.opacity(0.7))
-                
-                Spacer()
-            }
-            
-            HStack {
-                TextField(placeholder, text: text)
-                    .font(.system(size: 15, weight: .medium))
-                    .foregroundColor(.white)
-                    .textContentType(.fullStreetAddress)
-                    .onSubmit {
-                        searchForAddress(text.wrappedValue)
-                    }
-                    .onChange(of: text.wrappedValue) { oldValue, newValue in
-                        if newValue.count > 5 {
-                            searchForAddress(newValue)
-                        }
-                    }
-                
-                Button(action: {
-                    searchForAddress(text.wrappedValue)
-                }) {
-                    Image(systemName: "magnifyingglass")
-                        .font(.system(size: 12, weight: .medium))
-                        .foregroundColor(Color("TreeShopGreen"))
-                }
-            }
-            .padding(.horizontal, 12)
-            .padding(.vertical, 10)
-            .background(
-                RoundedRectangle(cornerRadius: 8)
-                    .fill(Color.white.opacity(0.05))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 8)
-                            .stroke(Color.white.opacity(0.1), lineWidth: 1)
-                    )
-            )
-            
-        }
-    }
     
     // MARK: - Modern Text Editor
     private func modernTextEditor(title: String, text: Binding<String>, placeholder: String, icon: String) -> some View {
