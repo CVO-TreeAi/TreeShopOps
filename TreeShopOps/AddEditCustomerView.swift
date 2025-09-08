@@ -12,16 +12,12 @@ struct AddEditCustomerView: View {
     @State private var lastName: String = ""
     @State private var email: String = ""
     @State private var phone: String = ""
-    @State private var address: String = ""
-    @State private var city: String = ""
-    @State private var state: String = ""
-    @State private var zipCode: String = ""
     @State private var notes: String = ""
     @State private var selectedCustomerType: CustomerType = .residential
     @State private var selectedContactMethod: ContactMethod = .phone
     @State private var referralSource: String = ""
+    @State private var customerAddressResult: AddressResult?
     
-    @State private var addressSearchResults: [MKMapItem] = []
     @State private var showingValidationAlert = false
     @State private var validationMessage = ""
     
@@ -162,37 +158,11 @@ struct AddEditCustomerView: View {
         VStack(alignment: .leading, spacing: 15) {
             sectionHeader(title: "Address Information", icon: "location.fill")
             
-            VStack(spacing: 12) {
-                modernAddressField(
-                    title: "Street Address",
-                    text: $address,
-                    placeholder: "123 Main Street",
-                    icon: "house.fill"
-                )
-                
-                HStack(spacing: 12) {
-                    modernInputField(
-                        title: "City",
-                        text: $city,
-                        placeholder: "City",
-                        icon: "building.2.fill"
-                    )
-                    
-                    modernInputField(
-                        title: "State",
-                        text: $state,
-                        placeholder: "State",
-                        icon: "map.fill"
-                    )
-                }
-                
-                modernInputField(
-                    title: "Zip Code",
-                    text: $zipCode,
-                    placeholder: "12345",
-                    icon: "location.circle.fill",
-                    keyboardType: .numberPad
-                )
+            AddressAutocompleteField(
+                result: $customerAddressResult,
+                placeholder: "Search customer address..."
+            ) { result in
+                // Update individual fields for backwards compatibility
             }
         }
         .padding(24)
@@ -546,31 +516,6 @@ struct AddEditCustomerView: View {
                     )
             )
             
-            // Show search results
-            if !addressSearchResults.isEmpty {
-                VStack(spacing: 4) {
-                    ForEach(addressSearchResults.prefix(3), id: \.self) { mapItem in
-                        Button(action: {
-                            selectAddress(mapItem)
-                            addressSearchResults = []
-                        }) {
-                            HStack {
-                                Image(systemName: "mappin.circle.fill")
-                                    .foregroundColor(Color(red: 1.0, green: 0.76, blue: 0.03))
-                                Text(formatAddress(mapItem))
-                                    .font(.caption)
-                                    .foregroundColor(.white)
-                                Spacer()
-                            }
-                            .padding(.vertical, 6)
-                            .padding(.horizontal, 8)
-                            .background(Color(red: 0.2, green: 0.2, blue: 0.2))
-                            .cornerRadius(6)
-                        }
-                    }
-                }
-                .padding(.top, 4)
-            }
         }
     }
     
@@ -658,14 +603,22 @@ struct AddEditCustomerView: View {
             lastName = customer.lastName
             email = customer.email
             phone = customer.phone
-            address = customer.address
-            city = customer.city
-            state = customer.state
-            zipCode = customer.zipCode
             notes = customer.notes
             selectedCustomerType = customer.customerType
             selectedContactMethod = customer.preferredContactMethod
             referralSource = customer.referralSource
+            
+            // Setup address result for existing customer
+            if !customer.address.isEmpty {
+                customerAddressResult = AddressResult(
+                    fullAddress: "\(customer.address), \(customer.city), \(customer.state) \(customer.zipCode)",
+                    street: customer.address,
+                    city: customer.city,
+                    state: customer.state,
+                    zipCode: customer.zipCode,
+                    coordinate: nil
+                )
+            }
         }
     }
     
@@ -701,10 +654,10 @@ struct AddEditCustomerView: View {
             lastName: lastName.trimmingCharacters(in: .whitespaces),
             email: email.trimmingCharacters(in: .whitespaces),
             phone: phone.trimmingCharacters(in: .whitespaces),
-            address: address.trimmingCharacters(in: .whitespaces),
-            city: city.trimmingCharacters(in: .whitespaces),
-            state: state.trimmingCharacters(in: .whitespaces),
-            zipCode: zipCode.trimmingCharacters(in: .whitespaces),
+            address: customerAddressResult?.street ?? "",
+            city: customerAddressResult?.city ?? "",
+            state: customerAddressResult?.state ?? "",
+            zipCode: customerAddressResult?.zipCode ?? "",
             notes: notes.trimmingCharacters(in: .whitespaces),
             dateCreated: existingCustomer?.dateCreated ?? Date(),
             lastUpdated: Date(),
@@ -733,68 +686,7 @@ struct AddEditCustomerView: View {
         presentationMode.wrappedValue.dismiss()
     }
     
-    // MARK: - Address Search Functions
-    private func searchForAddress(_ query: String) {
-        guard !query.isEmpty else { return }
-        
-        let request = MKLocalSearch.Request()
-        request.naturalLanguageQuery = query
-        
-        let search = MKLocalSearch(request: request)
-        search.start { response, error in
-            if let response = response {
-                DispatchQueue.main.async {
-                    self.addressSearchResults = Array(response.mapItems.prefix(5))
-                }
-            }
-        }
-    }
     
-    private func selectAddress(_ mapItem: MKMapItem) {
-        let placemark = mapItem.placemark
-        
-        if let streetNumber = placemark.subThoroughfare,
-           let street = placemark.thoroughfare {
-            address = "\(streetNumber) \(street)"
-        } else if let street = placemark.thoroughfare {
-            address = street
-        }
-        
-        if let selectedCity = placemark.locality {
-            city = selectedCity
-        }
-        
-        if let selectedState = placemark.administrativeArea {
-            state = selectedState
-        }
-        
-        if let selectedZip = placemark.postalCode {
-            zipCode = selectedZip
-        }
-    }
-    
-    private func formatAddress(_ mapItem: MKMapItem) -> String {
-        let placemark = mapItem.placemark
-        var components: [String] = []
-        
-        if let streetNumber = placemark.subThoroughfare {
-            components.append(streetNumber)
-        }
-        if let street = placemark.thoroughfare {
-            components.append(street)
-        }
-        if let city = placemark.locality {
-            components.append(city)
-        }
-        if let state = placemark.administrativeArea {
-            components.append(state)
-        }
-        if let zipCode = placemark.postalCode {
-            components.append(zipCode)
-        }
-        
-        return components.joined(separator: " ")
-    }
     
     private func getTextContentType(for title: String) -> UITextContentType? {
         switch title.lowercased() {

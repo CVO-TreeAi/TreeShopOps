@@ -25,7 +25,7 @@ struct AddEditLeadView: View {
                 Color("TreeShopBlack").ignoresSafeArea()
                 
                 ScrollView {
-                    VStack(spacing: 24) {
+                    VStack(spacing: 16) {
                         // Customer info section
                         QuickFormSection(title: "Customer Info", icon: "person.circle.fill") {
                             VStack(spacing: 16) {
@@ -160,7 +160,8 @@ struct AddEditLeadView: View {
                             }
                         }
                     }
-                    .padding(20)
+                    .padding(.horizontal, 20)
+                    .padding(.top, 2)
                     .padding(.bottom, 100)
                 }
             }

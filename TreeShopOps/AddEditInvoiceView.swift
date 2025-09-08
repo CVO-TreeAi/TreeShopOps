@@ -26,32 +26,16 @@ struct AddEditInvoiceView: View {
             ZStack {
                 Color("TreeShopBlack").ignoresSafeArea()
                 
-                VStack(spacing: 0) {
-                    // Section picker
-                    sectionPicker
-                    
-                    // Form content
-                    ScrollView {
-                        VStack(spacing: 20) {
-                            switch selectedSection {
-                            case 0:
-                                customerSection
-                            case 1:
-                                projectSection
-                            case 2:
-                                financialSection
-                            case 3:
-                                paymentSection
-                            default:
-                                EmptyView()
-                            }
-                        }
-                        .padding(.horizontal, 20)
-                        .padding(.bottom, 100)
+                ScrollView {
+                    VStack(spacing: 16) {
+                        customerSection
+                        projectSection
+                        financialSection
+                        paymentSection
                     }
-                    .onTapGesture {
-                        hideKeyboard()
-                    }
+                    .padding(.horizontal, 20)
+                    .padding(.top, 2)
+                    .padding(.bottom, 100)
                 }
             }
             .navigationTitle(isEditing ? "Edit Invoice" : "New Invoice")

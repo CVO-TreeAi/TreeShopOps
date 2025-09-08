@@ -26,34 +26,17 @@ struct AddEditProposalView: View {
             ZStack {
                 Color("TreeShopBlack").ignoresSafeArea()
                 
-                VStack(spacing: 0) {
-                    // Section picker
-                    sectionPicker
-                    
-                    // Form content
-                    ScrollView {
-                        VStack(spacing: 20) {
-                            switch selectedSection {
-                            case 0:
-                                customerSection
-                            case 1:
-                                projectSection
-                            case 2:
-                                servicesSection
-                            case 3:
-                                pricingSection
-                            case 4:
-                                detailsSection
-                            default:
-                                EmptyView()
-                            }
-                        }
-                        .padding(.horizontal, 20)
-                        .padding(.bottom, 100)
+                ScrollView {
+                    VStack(spacing: 16) {
+                        customerSection
+                        projectSection  
+                        servicesSection
+                        pricingSection
+                        detailsSection
                     }
-                    .onTapGesture {
-                        hideKeyboard()
-                    }
+                    .padding(.horizontal, 20)
+                    .padding(.top, 2)
+                    .padding(.bottom, 100)
                 }
             }
             .navigationTitle(isEditing ? "Edit Proposal" : "New Proposal")

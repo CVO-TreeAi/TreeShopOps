@@ -39,21 +39,22 @@ struct MainTabView: View {
                     .environmentObject(appState.leadManager)
                     .environmentObject(appState.proposalManager)
                     .environmentObject(appState.workOrderManager)
+                    .environmentObject(appState.invoiceManager)
                     .environmentObject(appState.customerManager)
             }
             .tabItem {
                 Label("Pipeline", systemImage: "arrow.right.circle")
             }
             
-            // Invoices Tab
+            // Pricing Tab
             NavigationView {
-                InvoiceListView()
-                    .environmentObject(appState.invoiceManager)
-                    .environmentObject(appState.workOrderManager)
+                ContentView()
+                    .environmentObject(appState.pricingModel)
+                    .environmentObject(appState.proposalManager)
                     .environmentObject(appState.customerManager)
             }
             .tabItem {
-                Label("Invoices", systemImage: "dollarsign.square.fill")
+                Label("Pricing", systemImage: "calculator")
             }
             
             // Customers Tab

@@ -26,32 +26,16 @@ struct AddEditWorkOrderView: View {
             ZStack {
                 Color("TreeShopBlack").ignoresSafeArea()
                 
-                VStack(spacing: 0) {
-                    // Section picker
-                    sectionPicker
-                    
-                    // Form content
-                    ScrollView {
-                        VStack(spacing: 20) {
-                            switch selectedSection {
-                            case 0:
-                                projectSection
-                            case 1:
-                                scheduleSection
-                            case 2:
-                                crewSection
-                            case 3:
-                                progressSection
-                            default:
-                                EmptyView()
-                            }
-                        }
-                        .padding(.horizontal, 20)
-                        .padding(.bottom, 100)
+                ScrollView {
+                    VStack(spacing: 16) {
+                        projectSection
+                        scheduleSection
+                        crewSection
+                        progressSection
                     }
-                    .onTapGesture {
-                        hideKeyboard()
-                    }
+                    .padding(.horizontal, 20)
+                    .padding(.top, 2)
+                    .padding(.bottom, 100)
                 }
             }
             .navigationTitle(isEditing ? "Edit Work Order" : "New Work Order")

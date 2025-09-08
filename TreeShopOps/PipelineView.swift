@@ -7,10 +7,11 @@ struct PipelineView: View {
     private var leadManager: LeadManager { appState.leadManager }
     private var proposalManager: ProposalManager { appState.proposalManager }
     private var workOrderManager: WorkOrderManager { appState.workOrderManager }
+    private var invoiceManager: InvoiceManager { appState.invoiceManager }
     private var customerManager: CustomerManager { appState.customerManager }
     
     @State private var selectedPipelineTab = 0
-    private let pipelineTabs = ["Leads", "Proposals", "Work Orders"]
+    private let pipelineTabs = ["Leads", "Proposals", "Work Orders", "Invoices"]
     
     var body: some View {
         VStack(spacing: 0) {
@@ -28,6 +29,9 @@ struct PipelineView: View {
                         .environmentObject(appState)
                 case 2:
                     WorkOrderListView()
+                        .environmentObject(appState)
+                case 3:
+                    InvoiceListView()
                         .environmentObject(appState)
                 default:
                     EmptyView()
